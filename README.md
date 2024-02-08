@@ -1,15 +1,18 @@
 # 2024-group-2
 game idea
 
-prototype: ping pong game : https://openprocessing.org/sketch/821675
+## ping pong game 
+URL: https://openprocessing.org/sketch/821675
 
-twist: modify some attributes of baffle when game's on
+## twist: 
+Based on the games aboves, add some attributes of board when game's on, such as: expanding, shrinking, even inertia
 
-challenge:
-* the length of baffle will shrink when ping pong ball hits it
-* the movement of baffle has inertia which means it won't change its direction immediately
-* before game is on, player has three secs to press a certain key as much as possible, which 
-can expand the length of baffle
+## challenge:
+how to define the class board and add new features on it
+
+## demovideo:
+
+
 
 ## Tanks
 * Based on the tanks game
@@ -31,3 +34,5 @@ can expand the length of baffle
 * Physics of the projectile trajectory
 * Implementing damage to terrain
 * Endless map generation: maybe random wave form to determine terrain?
+
+PINGPONG
