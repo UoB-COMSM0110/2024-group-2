@@ -35,4 +35,8 @@ how to define the class board and add new features on it
 * Implementing damage to terrain
 * Endless map generation: maybe random wave form to determine terrain?
 
+### Paper Prototype:
+
+
+
 PINGPONG
