@@ -37,6 +37,14 @@ how to define the class board and add new features on it
 
 ### Paper Prototype:
 
-<video src="https://github.com/UoB-COMSM0110/2024-group-2/blob/main/videos/Tanks_Prototype.mp4"></video>
+
+https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90-8d83-29755e836485
+
 
 ## PINGPONG
+
+### Paper Prototype:
+
+
+https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
+
