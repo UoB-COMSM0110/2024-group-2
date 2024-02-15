@@ -69,6 +69,6 @@ https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813
 
 ### Use case diagram
 
-![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/.github/images/UML_digram.png)
+![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/UML_diagram.png)
 
 
