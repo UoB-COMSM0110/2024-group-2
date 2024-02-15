@@ -48,3 +48,27 @@ https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90
 
 https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
 
+## Requirements
+
+### 
+* Singler player
+* Multiplayer player
+* Markers
+* Us as developers
+
+### User stories
+* As a single player, I want a fun, challenging game that I can improve at over time .
+* As a single player, I would like to be able to set the difficulty level so that as improve I can keep the game interesting by playing against a more challenging AI opponent.
+* As multiplayer, I want to be able to play the game with my friends (online)
+* As a player, I would like the game to have lots of different maps to keep the game interesting the more I play.
+* As a player, I would like to be able to upgrade my tank and weapons as I earn points throughout the game
+* As a marker, I want a game that I can learn to play quickly that demonstrate what students have learned during the module
+* As developers, we want to create a game that is fun to play and satisfies the assignement requirements.
+* (As an online player, I would like to have skill-based matching so that I can player against players online who are of similar ability.)
+* As developers we want to engage with players to see what features are most important to them.
+
+### Use case diagram
+
+![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/.github/images/UML_digram.png)
+
+
