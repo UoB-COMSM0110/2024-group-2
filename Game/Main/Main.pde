@@ -1,8 +1,12 @@
 float yoff = 0.0;
 PShape terrain;
+PImage tank;
+float tankX = 0;
 
 void setup() {
  size(1500, 800);
+ 
+ tank = loadImage("tank.png");
  
  terrain = createShape();
  terrain.beginShape();
@@ -25,8 +29,31 @@ void setup() {
  
 }
 
+float getTankY(float tankX){
+  int index = int(tankX) + int(height - 1) * (int)width;
+  loadPixels();
+  while(pixels[index] != color(135, 206, 235)){
+    index -= width;
+  }
+  return index/width - 50;
+}
+
 void draw() {
+  
   background(135, 206, 235);
   shape(terrain);
+  
+  float tankY = getTankY(tankX);
+  pushMatrix();
+  image(tank, tankX, tankY, 50, 50);
+  popMatrix();
+  
+  if(keyPressed && keyCode == RIGHT && tankX < (width - 50)){
+    tankX += 1;
+  }
+  
+  if(keyPressed && keyCode == LEFT && tankX > 0){
+    tankX -= 1;
+  }
  
 }
