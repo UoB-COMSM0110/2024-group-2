@@ -1,3 +1,7 @@
+## group photo
+![groupphoto](https://p.ipic.vip/dquqn4.jpg)
+
+
 # 2024-group-2
 game idea
 
@@ -9,9 +13,6 @@ Based on the games aboves, add some attributes of board when game's on, such as:
 
 ## challenge:
 how to define the class board and add new features on it
-
-## demovideo:
-
 
 
 ## Tanks
