@@ -19,8 +19,13 @@ void draw() {
   if(keyPressed && keyCode == RIGHT){
     tank.moveTank(1);
   }
-  
   if(keyPressed && keyCode == LEFT){
     tank.moveTank(-1);
+  }
+  if(keyPressed && keyCode == DOWN){
+    tank.rotateTurret(true);
+  }
+  if(keyPressed && keyCode == UP){
+    tank.rotateTurret(false);
   }
 }
