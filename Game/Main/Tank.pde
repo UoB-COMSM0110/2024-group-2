@@ -20,13 +20,20 @@ public class Tank{
   }
   
   public void setTankY(){
-    int index = int(this.tankX) + int(height - 1) * (int)width;
+    int index1 = int(this.tankX) + int(height - 1) * (int)width;
+    int index2 = int(this.tankX) + 70 + int(height - 1) * (int)width;
     loadPixels();
-    while(pixels[index] != color(135, 206, 235)){
-      index -= width;
+    while(pixels[index1] != color(135, 206, 235) || pixels[index2] != color(135, 206, 235)){
+      index1 -= width;
+      index2 -= width;
     }
-    this.tankY = index/width - 40;
+    if(pixels[index1] == color(135, 206, 235)){
+      this.tankY = index1/width - 25;
+    }else{
+      this.tankY = index2/width - 25;
+    }
   }
+    
   
   public void renderTank(){
     shape(this.tankTurret, this.tankX + this.turretAdjustX, this.tankY + this.turretAdjustY, 40, 10);
@@ -35,7 +42,7 @@ public class Tank{
   
   public void moveTank(float moveDist){
     
-    if(moveDist > 0 && this.tankX < (width - 50)){
+    if(moveDist > 0 && this.tankX < (width - 70)){
       this.tankX += moveDist;
       setTankY();
       
