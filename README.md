@@ -1,5 +1,5 @@
 ## group photo
-![groupphoto](https://p.ipic.vip/dquqn4.jpg)
+![WechatIMG376](https://p.ipic.vip/q8x2br.jpg)
 
 
 # 2024-group-2
