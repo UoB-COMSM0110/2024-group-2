@@ -55,6 +55,9 @@ public class Tank{
   public float getTankX(){
     return this.tankX;
   }
+  public float getTankY(){
+    return this.tankY;
+  }
   public void rotateTurret(boolean clockwise){
     if(clockwise && this.turretAngle < 180){
       this.tankTurret.rotate(radians(1));
@@ -68,5 +71,11 @@ public class Tank{
       this.turretAdjustY += 0.053;
       this.turretAdjustX += 0.03;
     }
+  }
+  public int getTurretAngle(){
+    return this.turretAngle;
+  }
+  public PShape getTankTurret(){
+    return this.tankTurret;
   }
 }
