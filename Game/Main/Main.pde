@@ -10,7 +10,7 @@ void setup() {
  terrain = new Terrain(0.0);
  shape(terrain.getTerrainShape());
  tank = new Tank();
- smallMissile = new Weapon(0, 0, 3);
+ smallMissile = new Weapon(0, 0, 3, 0);
  smooth();
  frameRate(100);
 }
@@ -37,9 +37,11 @@ void draw() {
   if(keyPressed && keyCode == UP){
     tank.rotateTurret(false);
   }
-  if(keyPressed && keyCode == BACKSPACE){
+  if(keyPressed && key == ' '){
     smallMissile.setX(tank.getTankX());
     smallMissile.setY(tank.getTankY());
     smallMissile.setFire(true);
+    smallMissile.setTheta(tank.getTurretAngle());
+    print(tank.getTankTurret().getVertexCount());  
   }
 }
