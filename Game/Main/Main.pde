@@ -38,10 +38,9 @@ void draw() {
     tank.rotateTurret(false);
   }
   if(keyPressed && key == ' '){
-    smallMissile.setX(tank.getTankX());
-    smallMissile.setY(tank.getTankY());
+    smallMissile.setX(tank.getTurretX());
+    smallMissile.setY(tank.getTurretY());
     smallMissile.setFire(true);
-    smallMissile.setTheta(tank.getTurretAngle());
-    print(tank.getTankTurret().getVertexCount());  
+    smallMissile.setTheta(tank.getTurretAngle());  
   }
 }

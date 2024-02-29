@@ -11,7 +11,7 @@ public class Tank{
   public Tank(){
     this.tankBody = loadShape("tankBody.svg");
     this.tankTurret = loadShape("tankTurret.svg");
-    this.tankBody.setFill(color(255, 255, 0));
+    //this.tankBody.setFill(color(255, 255, 0));
     this.tankX = random(width - 50);
     this.turretAngle = 180;
     this.turretAdjustX = 30;
@@ -57,6 +57,13 @@ public class Tank{
   }
   public float getTankY(){
     return this.tankY;
+  }
+  public float getTurretX(){
+    return this.tankX + this.turretAdjustX;
+  }
+  
+  public float getTurretY(){
+    return this.tankY + this.turretAdjustY;
   }
   public void rotateTurret(boolean clockwise){
     if(clockwise && this.turretAngle < 180){

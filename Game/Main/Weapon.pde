@@ -1,25 +1,37 @@
 public class Weapon {
   
   //private int damage, type, count;
-  private float x, y, speed;
+  private float x, y, speedX, speedY;
   private int theta;
   private boolean fire = false;
   
-  public Weapon(float xi, float yi, float b_speed, int t){
+  public Weapon(float xi, float yi, float iSpeed, int t){
     this.x = xi;
     this.y = yi;
-    this.speed = b_speed;
+    this.speedX = iSpeed;
+    this.speedY = iSpeed;
     this.theta = t;
   }
   
   public void update(){
-      if(this.x <= 0 || this.x >= width || this.y <= 0 || this.y >= height){
+      if(dontUpdate(this.x, this.y)){
         this.fire = false;
+        this.speedY = this.speedX;
       }
       if(this.fire){
-        this.x -= cos(radians(this.theta)) * this.speed;  
-        this.y -= sin(radians(this.theta)) * this.speed;
+        this.x -= cos(radians(this.theta)) * this.speedX;  
+        this.y -= sin(radians(this.theta)) * this.speedY;
+        this.speedY -= 0.02;
       }
+  }
+  private boolean dontUpdate(float x, float y){
+    int index = int(x) + int(y - 1) * (int)width;
+    loadPixels();
+    boolean stop = (pixels[index] == color(0, 154, 23));
+    if(x <= 0 || x >= width || y <= 0 || y >= height || stop){
+      return true;
+    }
+    return false;
   }
   public void display(){
     fill(0,0,0);
