@@ -37,9 +37,9 @@ void draw() {
   if(keyPressed && keyCode == UP){
     tank.rotateTurret(false);
   }
-  if(keyPressed && key == ' '){
-    smallMissile.setX(tank.getTurretX());
-    smallMissile.setY(tank.getTurretY());
+  if(keyPressed && key == ' ' && !smallMissile.getFire()){
+    smallMissile.setX(tank.getTurretX() - cos(radians(tank.getTurretAngle())) * 20);
+    smallMissile.setY(tank.getTurretY()- sin(radians(tank.getTurretAngle())) * 20);
     smallMissile.setFire(true);
     smallMissile.setTheta(tank.getTurretAngle());  
   }

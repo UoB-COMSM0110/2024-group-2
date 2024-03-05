@@ -4,6 +4,7 @@ public class Weapon {
   private float x, y, speedX, speedY;
   private int theta;
   private boolean fire = false;
+  private ArrayList<Crater> craters = new ArrayList<Crater>();
   
   public Weapon(float xi, float yi, float iSpeed, int t){
     this.x = xi;
@@ -17,6 +18,8 @@ public class Weapon {
       if(dontUpdate(this.x, this.y)){
         this.fire = false;
         this.speedY = this.speedX;
+        fill(135, 206, 235);
+        this.craters.add(new Crater(this.x, this.y, 100));
       }
       if(this.fire){
         this.x -= cos(radians(this.theta)) * this.speedX;  
@@ -51,5 +54,12 @@ public class Weapon {
   }
   public void setTheta(int t){
     this.theta = t;
+  }
+    public int getTheta(){
+    return this.theta;
+  }
+  public void displayCraters(){
+    for(Crater c : craters){
+      
   }
 }
