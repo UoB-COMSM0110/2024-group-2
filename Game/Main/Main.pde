@@ -4,6 +4,7 @@ Weapon smallMissile;
 float time = 0;
 boolean stop;
 int tankIndex = 0;
+boolean gameOver = false;
 
 void setup() {
  size(1800, 960);
@@ -27,8 +28,22 @@ void draw() {
   tanks.get(0).renderTank();
   tanks.get(1).renderTank();
   frameRate(100);
+  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
+    textSize(128);
+    fill(255, 0, 0);
+    textAlign(CENTER, CENTER);
+    text("GAME OVER", width/2, height/2); 
+    return;
+  }
+  float strikePoint = 0;
   if(smallMissile.getFire()){
-    smallMissile.update();
+    strikePoint = smallMissile.update();
+    if(abs(strikePoint - tanks.get(0).getTankX()) < 100){
+      tanks.get(0).decreaseHealth(20);
+    }
+    if(abs(strikePoint - tanks.get(1).getTankX()) < 100){
+      tanks.get(1).decreaseHealth(20);
+    }
     smallMissile.display();
   }
   

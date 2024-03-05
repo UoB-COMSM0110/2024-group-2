@@ -14,7 +14,7 @@ public class Weapon {
     this.theta = t;
   }
   
-  public void update(){
+  public float update(){
       if(dontUpdate(this.x, this.y)){
         this.fire = false;
         this.speedY = this.speedX;
@@ -23,12 +23,14 @@ public class Weapon {
         frameRate(10);
         ellipse(this.x, this.y, 100, 100);
         this.craters.add(new Crater(this.x, this.y, 100));
+        return this.x;
       }
       if(this.fire){
         this.x -= cos(radians(this.theta)) * this.speedX;  
         this.y -= sin(radians(this.theta)) * this.speedY - 0.05;
         this.speedY -= 0.02;
       }
+      return 0;
   }
   private boolean dontUpdate(float x, float y){
     int index = int(x) + int(y - 10) * (int)width;

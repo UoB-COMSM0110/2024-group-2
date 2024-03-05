@@ -7,6 +7,8 @@ public class Tank{
   private int turretAngle;
   private float turretAdjustX;
   private float turretAdjustY;
+  private HealthBar health;
+  private boolean dead;
   
   public Tank(){
     this.tankBody = loadShape("tankBody.svg");
@@ -15,6 +17,8 @@ public class Tank{
     this.turretAngle = 180;
     this.turretAdjustX = 30;
     this.turretAdjustY = 5;
+    this.health = new HealthBar();
+    this.dead = false;
     setTankY();
   }
   
@@ -35,8 +39,14 @@ public class Tank{
     
   
   public void renderTank(){
+    if(this.dead){
+      return;
+    }
+    this.setTankY();
     shape(this.tankTurret, this.tankX + this.turretAdjustX, this.tankY + this.turretAdjustY, 40, 10);
     shape(this.tankBody, this.tankX, this.tankY, 70, 40);
+    this.health.update(this.tankX, this.tankY);
+    this.health.display();
   }
   
   public void moveTank(float moveDist){
@@ -83,5 +93,14 @@ public class Tank{
   }
   public PShape getTankTurret(){
     return this.tankTurret;
+  }
+  public void decreaseHealth(int amount){
+    this.health.decreaseHealth(amount);
+    if(this.health.getValue() <= 0){
+      this.dead = true;
+    }
+  }
+  public boolean getDead(){
+    return this.dead;
   }
 }
