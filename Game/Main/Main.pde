@@ -38,25 +38,25 @@ void draw() {
   float strikePoint = 0;
   if(smallMissile.getFire()){
     strikePoint = smallMissile.update();
-    if(abs(strikePoint - tanks.get(0).getTankX()) < 100){
+    if(abs(strikePoint - tanks.get(0).getTankX() - 35) < 50){
       tanks.get(0).decreaseHealth(20);
     }
-    if(abs(strikePoint - tanks.get(1).getTankX()) < 100){
+    if(abs(strikePoint - tanks.get(1).getTankX() - 35) < 50){
       tanks.get(1).decreaseHealth(20);
     }
     smallMissile.display();
   }
   
-  if(keyPressed && keyCode == RIGHT){
+  if(keyPressed && keyCode == RIGHT && !smallMissile.getFire()){
     tanks.get(tankIndex).moveTank(1);
   }
-  if(keyPressed && keyCode == LEFT){
+  if(keyPressed && keyCode == LEFT && !smallMissile.getFire()){
     tanks.get(tankIndex).moveTank(-1);
   }
-  if(keyPressed && keyCode == DOWN){
+  if(keyPressed && keyCode == DOWN && !smallMissile.getFire()){
     tanks.get(tankIndex).rotateTurret(true);
   }
-  if(keyPressed && keyCode == UP){
+  if(keyPressed && keyCode == UP && !smallMissile.getFire()){
     tanks.get(tankIndex).rotateTurret(false);
   }
   if(keyPressed && key == ' ' && !smallMissile.getFire()){

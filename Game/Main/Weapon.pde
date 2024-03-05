@@ -33,7 +33,7 @@ public class Weapon {
       return 0;
   }
   private boolean dontUpdate(float x, float y){
-    int index = int(x) + int(y - 10) * (int)width;
+    int index = int(x) + int(y - 8) * (int)width;
     loadPixels();
     boolean stop = (pixels[index] != color(135, 206, 235));
     if(x <= 0 || x >= width || y <= 0 || y >= height || stop){
