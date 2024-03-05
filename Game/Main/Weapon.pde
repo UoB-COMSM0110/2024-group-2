@@ -18,19 +18,22 @@ public class Weapon {
       if(dontUpdate(this.x, this.y)){
         this.fire = false;
         this.speedY = this.speedX;
-        fill(135, 206, 235);
+        fill(255, 255, 0);
+        noStroke();
+        frameRate(10);
+        ellipse(this.x, this.y, 100, 100);
         this.craters.add(new Crater(this.x, this.y, 100));
       }
       if(this.fire){
         this.x -= cos(radians(this.theta)) * this.speedX;  
-        this.y -= sin(radians(this.theta)) * this.speedY;
+        this.y -= sin(radians(this.theta)) * this.speedY - 0.05;
         this.speedY -= 0.02;
       }
   }
   private boolean dontUpdate(float x, float y){
-    int index = int(x) + int(y - 1) * (int)width;
+    int index = int(x) + int(y - 10) * (int)width;
     loadPixels();
-    boolean stop = (pixels[index] == color(0, 154, 23));
+    boolean stop = (pixels[index] != color(135, 206, 235));
     if(x <= 0 || x >= width || y <= 0 || y >= height || stop){
       return true;
     }
@@ -60,6 +63,9 @@ public class Weapon {
   }
   public void displayCraters(){
     for(Crater c : craters){
-      
+      fill(135, 206, 235);
+      noStroke();
+      ellipse(c.getX(), c.getY(), c.getSize(), c.getSize());
+    }
   }
 }

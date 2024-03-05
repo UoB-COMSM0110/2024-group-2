@@ -11,7 +11,6 @@ public class Tank{
   public Tank(){
     this.tankBody = loadShape("tankBody.svg");
     this.tankTurret = loadShape("tankTurret.svg");
-    //this.tankBody.setFill(color(255, 255, 0));
     this.tankX = random(width - 50);
     this.turretAngle = 180;
     this.turretAdjustX = 30;
