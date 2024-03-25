@@ -1,17 +1,14 @@
 public class Weapon {
   
   //private int damage, type, count;
-  private float x, y, speedX, speedY;
-  private int theta;
+  private float x, y, speedX, speedY, iSpeed, theta;
   private boolean fire = false;
   private ArrayList<Crater> craters = new ArrayList<Crater>();
+  private String type;
   
-  public Weapon(float xi, float yi, float iSpeed, int t){
-    this.x = xi;
-    this.y = yi;
-    this.speedX = iSpeed;
-    this.speedY = iSpeed;
-    this.theta = t;
+  public Weapon(String type){
+    this.type = type;
+    this.iSpeed = 4;
   }
   
   public float update(){
@@ -26,16 +23,20 @@ public class Weapon {
         return this.x;
       }
       if(this.fire){
-        this.x -= cos(radians(this.theta)) * this.speedX;  
-        this.y -= sin(radians(this.theta)) * this.speedY - 0.05;
+        this.x -= this.speedX;  
+        this.y -= this.speedY;
         this.speedY -= 0.02;
       }
       return 0;
   }
   private boolean dontUpdate(float x, float y){
-    int index = int(x) + int(y - 8) * (int)width;
+    int index = int(x) + int(y - 15) * (int)width;
+    // to allow projectile to go off the top of the screen and come back
+    if(index < 0 ) {
+      return false;
+    }
     loadPixels();
-    boolean stop = (pixels[index] != color(135, 206, 235));
+    boolean stop = (pixels[index] != color(135, 206, 235)) && (pixels[index] != color(0, 0, 0));
     if(x <= 0 || x >= width || y <= 0 || y >= height || stop){
       return true;
     }
@@ -58,9 +59,11 @@ public class Weapon {
     return this.fire;
   }
   public void setTheta(int t){
-    this.theta = t;
+    this.theta = radians(t);
+    this.speedX = this.iSpeed * cos(this.theta) ;
+    this.speedY = this.iSpeed * sin(this.theta);
   }
-    public int getTheta(){
+  public float getTheta(){
     return this.theta;
   }
   public void displayCraters(){
@@ -69,5 +72,8 @@ public class Weapon {
       noStroke();
       ellipse(c.getX(), c.getY(), c.getSize(), c.getSize());
     }
+  }
+  public void setISpeed(float value){
+    this.iSpeed = value;
   }
 }
