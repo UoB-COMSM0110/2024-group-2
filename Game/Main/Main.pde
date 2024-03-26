@@ -49,13 +49,15 @@ void draw() {
     text("GAME OVER", width/2, height/2); 
     return;
   }
-  float strikePoint = 0;
+  float strikeX = 0;
+  float strikeY = 0;
   if(isFiring){
-    strikePoint = this.currentWeapon.update();
-    if(abs(strikePoint - tanks.get(0).getTankX() - 35) < 50){
+    strikeX = this.currentWeapon.update();
+    strikeY = this.currentWeapon.getY();
+    if(abs(strikeX - tanks.get(0).getTankX() - 35) < 50 && abs(strikeY - tanks.get(0).getTankY()) < 50 ){
       tanks.get(0).decreaseHealth(20);
     }
-    if(abs(strikePoint - tanks.get(1).getTankX() - 35) < 50){
+    if(abs(strikeX - tanks.get(1).getTankX() - 35) < 50 && abs(strikeY - tanks.get(1).getTankY()) < 50){
       tanks.get(1).decreaseHealth(20);
     }
     shotBar.resetTime();

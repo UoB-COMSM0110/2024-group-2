@@ -76,4 +76,8 @@ public class Weapon {
   public void setISpeed(float value){
     this.iSpeed = value;
   }
+  
+  public float getY() {
+    return this.y;
+  }
 }
