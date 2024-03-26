@@ -2,13 +2,19 @@ class TimeBar{
   private float actualWidth;
   private float gapWidth;
   private float duration;
-  TimeBar(){
-    actualWidth = 200;
+  private float rectX;
+  private float rectWidth;
+  private String label;
+  TimeBar(float xPos, float actualWidth, String label){
+    this.actualWidth = actualWidth;
     gapWidth = 8;
     duration = 80;
+    this.rectX = xPos;
+    this.rectWidth = actualWidth;
+    this.label = label;
   }
-  void setTime(int width){
-    actualWidth = width;
+  void resetTime(){
+    actualWidth = rectWidth;
   }
   float getTime(){
     return this.actualWidth;
@@ -24,13 +30,17 @@ class TimeBar{
     fill(255, 0, 0);
     noStroke();
     
-    float rectWidth = 200;
     float rectHeight = 15;
     
-    float rectX = (width - rectWidth) / 2;
-    float rectY = 20;
+    //float rectX = (width - rectWidth) - 10;
+    float rectY = 900;
     
     rect(rectX, rectY, this.actualWidth, rectHeight);
+    
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    fill(0, 0, 0);
+    text(this.label, rectX + rectWidth/2, rectY-12);
     
     fill(0);
     
