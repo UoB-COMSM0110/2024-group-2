@@ -157,4 +157,9 @@ public class Tank{
   public Weapon getCurrentWeapon(){
     return this.weapons.get(this.currentWeapon);
   }
+  
+  public void shufflePosition() {
+    this.tankX = random(0, width - 70);
+    this.setTankY();
+  }
 }

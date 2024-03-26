@@ -3,14 +3,18 @@ class TimeBar{
   private float gapWidth;
   private float duration;
   private float rectX;
-  TimeBar(float xPos){
-    actualWidth = 200;
+  private float rectWidth;
+  private String label;
+  TimeBar(float xPos, float actualWidth, String label){
+    this.actualWidth = actualWidth;
     gapWidth = 8;
     duration = 80;
     this.rectX = xPos;
+    this.rectWidth = actualWidth;
+    this.label = label;
   }
-  void setTime(int width){
-    actualWidth = width;
+  void resetTime(){
+    actualWidth = rectWidth;
   }
   float getTime(){
     return this.actualWidth;
@@ -26,7 +30,6 @@ class TimeBar{
     fill(255, 0, 0);
     noStroke();
     
-    float rectWidth = 200;
     float rectHeight = 15;
     
     //float rectX = (width - rectWidth) - 10;
@@ -37,7 +40,7 @@ class TimeBar{
     textAlign(CENTER, CENTER);
     textSize(20);
     fill(0, 0, 0);
-    text("Shot clock", rectX + rectWidth/2, rectY-12);
+    text(this.label, rectX + rectWidth/2, rectY-12);
     
     fill(0);
     

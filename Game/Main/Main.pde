@@ -4,11 +4,11 @@ float time = 0;
 boolean stop;
 int tankIndex = 0;
 boolean gameOver = false;
-TimeBar shotBar = new TimeBar(1590);
+TimeBar shotBar;
+TimeBar mapBar;
 
 boolean isFiring = false;
 Weapon currentWeapon;
-Timer mapTimer;
 
 
 void setup() {
@@ -22,7 +22,8 @@ void setup() {
  tanks.add(new Tank(false));
  smooth();
  frameRate(100);
- mapTimer = new Timer(10);
+ shotBar = new TimeBar(1590, 200, "Shot clock");
+ mapBar = new TimeBar(10, 600, "Time to map shuffle");
 }
 
 
@@ -31,18 +32,19 @@ void draw() {
   shape(terrain.getTerrainShape());
 
   shotBar.display();
+  mapBar.display();
 
   tanks.get(0).renderCraters();
   tanks.get(1).renderCraters();
 
   tanks.get(0).renderTank();
   tanks.get(1).renderTank();
-  mapTimer.renderTimer();
   frameRate(100);
   if(tanks.get(0).getDead() || tanks.get(1).getDead()){
     textSize(128);
     fill(255, 0, 0);
-    shotBar.setTime(0);
+    shotBar.resetTime();
+    mapBar.resetTime();
     textAlign(CENTER, CENTER);
     text("GAME OVER", width/2, height/2); 
     return;
@@ -56,11 +58,8 @@ void draw() {
     if(abs(strikePoint - tanks.get(1).getTankX() - 35) < 50){
       tanks.get(1).decreaseHealth(20);
     }
-    shotBar.setTime(200);
-
-
+    shotBar.resetTime();
     this.currentWeapon.display();
-
   }
   
   if(this.currentWeapon != null){
@@ -99,8 +98,9 @@ void draw() {
     }else{
       tankIndex = 0;
     }
-    shotBar.setTime(200);
+    shotBar.resetTime();
   }
+  
   if(keyPressed && key == '=' && !isFiring){
     this.tanks.get(tankIndex).increasePower();
   }
@@ -108,10 +108,11 @@ void draw() {
     this.tanks.get(tankIndex).decreasePower();
   }
   //map change
-  if(mapTimer.getTimeLeft() <= 0) {
+  if(mapBar.getTime() < 1) {
     this.terrain.setTerrainShape(random(0, 5));
-    this.mapTimer.resetTimer();
+    this.mapBar.resetTime();
+    this.tanks.get(0).shufflePosition();
+    this.tanks.get(1).shufflePosition();
   }
-  
 }
  
