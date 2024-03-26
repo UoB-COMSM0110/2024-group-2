@@ -2,6 +2,13 @@ public class Terrain {
   private PShape terrainShape;  
   
   public Terrain(float yoff){
+      this.setTerrainShape(yoff);
+  }
+  public PShape getTerrainShape(){
+    return this.terrainShape;
+  }
+  
+  public void setTerrainShape(float yoff) {
     this.terrainShape = createShape();
     this.terrainShape.beginShape();
     this.terrainShape.fill(0, 154, 23);
@@ -20,7 +27,5 @@ public class Terrain {
     this.terrainShape.vertex(0, height);
     this.terrainShape.endShape(CLOSE);
   }
-  public PShape getTerrainShape(){
-    return this.terrainShape;
-  }
+    
 }

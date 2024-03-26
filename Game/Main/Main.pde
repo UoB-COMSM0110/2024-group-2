@@ -6,6 +6,8 @@ int tankIndex = 0;
 boolean gameOver = false;
 boolean isFiring = false;
 Weapon currentWeapon;
+Timer mapTimer;
+
 
 void setup() {
  size(1800, 960);
@@ -18,6 +20,7 @@ void setup() {
  tanks.add(new Tank(false));
  smooth();
  frameRate(100);
+ mapTimer = new Timer(10);
 }
 
 
@@ -28,6 +31,7 @@ void draw() {
   tanks.get(1).renderCraters();
   tanks.get(0).renderTank();
   tanks.get(1).renderTank();
+  mapTimer.renderTimer();
   frameRate(100);
   if(tanks.get(0).getDead() || tanks.get(1).getDead()){
     textSize(128);
@@ -84,4 +88,10 @@ void draw() {
   if(keyPressed && key == '-' && !isFiring){
     this.tanks.get(tankIndex).decreasePower();
   }
+  //map change
+  if(mapTimer.getTimeLeft() <= 0) {
+    this.terrain.setTerrainShape(random(0, 5));
+    this.mapTimer.resetTimer();
+  }
+  
 }
