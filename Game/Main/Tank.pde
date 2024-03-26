@@ -1,3 +1,4 @@
+
 public class Tank{
   
   private PShape tankBody;
@@ -9,8 +10,12 @@ public class Tank{
   private float turretAdjustY;
   private HealthBar health;
   private boolean dead;
+  private PowerBar power;
+  private boolean currentPlayer;
+  private ArrayList<Weapon> weapons;
+  private int currentWeapon;
   
-  public Tank(){
+  public Tank(boolean currentPlayer){
     this.tankBody = loadShape("tankBody.svg");
     this.tankTurret = loadShape("tankTurret.svg");
     this.tankX = random(width - 50);
@@ -19,6 +24,11 @@ public class Tank{
     this.turretAdjustY = 5;
     this.health = new HealthBar();
     this.dead = false;
+    this.power = new PowerBar();
+    this.currentPlayer = currentPlayer;
+    this.weapons = new ArrayList<>();
+    this.weapons.add(new Weapon("small missile"));
+    this.currentWeapon = 0;
     setTankY();
   }
   
@@ -47,9 +57,21 @@ public class Tank{
     shape(this.tankBody, this.tankX, this.tankY, 70, 40);
     this.health.update(this.tankX, this.tankY);
     this.health.display();
+    if(this.currentPlayer){
+      this.power.display();
+    }
+  }
+  
+  public void renderCraters() {
+    for(Weapon w : this.weapons) {
+      w.displayCraters();
+    }
   }
   
   public void moveTank(float moveDist){
+    
+    float oldTankX = this.tankX;
+    float oldTankY = this.tankY;
     
     if(moveDist > 0 && this.tankX < (width - 70)){
       this.tankX += moveDist;
@@ -60,6 +82,13 @@ public class Tank{
       this.tankX += moveDist;
       setTankY();
     }
+    float newTankY = this.tankY;
+    //reset if up slope is too steep
+    if((newTankY - oldTankY) < -2){
+      this.tankX = oldTankX;
+      this.tankY = oldTankY;
+    }
+    
   }
   public float getTankX(){
     return this.tankX;
@@ -102,5 +131,30 @@ public class Tank{
   }
   public boolean getDead(){
     return this.dead;
+  }
+  public void decreasePower() {
+    this.power.decrease();
+    float powerVal = this.power.getValue();
+    this.weapons.get(this.currentWeapon).setISpeed(powerVal);
+  }
+    public void increasePower() {
+    this.power.increase();
+    float powerVal = this.power.getValue();
+    this.weapons.get(this.currentWeapon).setISpeed(powerVal);
+  }
+  
+  public void setCurrentPlayer(boolean value) {
+    this.currentPlayer = value;
+  }
+  
+  public void fireWeapon() {
+    this.weapons.get(this.currentWeapon).setX(this.getTurretX() - cos(radians(this.getTurretAngle())) * 40);
+    this.weapons.get(this.currentWeapon).setY(this.getTurretY()- sin(radians(this.getTurretAngle())) * 40);
+    this.weapons.get(this.currentWeapon).setFire(true);
+    this.weapons.get(this.currentWeapon).setTheta(this.getTurretAngle());
+  }
+  
+  public Weapon getCurrentWeapon(){
+    return this.weapons.get(this.currentWeapon);
   }
 }
