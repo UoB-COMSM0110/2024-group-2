@@ -24,6 +24,8 @@ void setup() {
 void draw() {
   background(135, 206, 235);
   shape(terrain.getTerrainShape());
+  tanks.get(0).renderCraters();
+  tanks.get(1).renderCraters();
   tanks.get(0).renderTank();
   tanks.get(1).renderTank();
   frameRate(100);

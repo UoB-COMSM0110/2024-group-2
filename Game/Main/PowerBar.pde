@@ -4,9 +4,9 @@ public class PowerBar {
   float maxValue, minValue, value;
   
   public PowerBar(){
-    this.value = 4;
+    this.value = 3;
     this.maxValue = 5;
-    this.minValue = 3;
+    this.minValue = 1;
     this.width = 200;
     this.height = 50;
     this.x = 850;

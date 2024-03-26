@@ -60,6 +60,9 @@ public class Tank{
     if(this.currentPlayer){
       this.power.display();
     }
+  }
+  
+  public void renderCraters() {
     for(Weapon w : this.weapons) {
       w.displayCraters();
     }
