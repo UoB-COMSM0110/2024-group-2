@@ -70,6 +70,9 @@ public class Tank{
   
   public void moveTank(float moveDist){
     
+    float oldTankX = this.tankX;
+    float oldTankY = this.tankY;
+    
     if(moveDist > 0 && this.tankX < (width - 70)){
       this.tankX += moveDist;
       setTankY();
@@ -79,6 +82,13 @@ public class Tank{
       this.tankX += moveDist;
       setTankY();
     }
+    float newTankY = this.tankY;
+    //reset if up slope is too steep
+    if((newTankY - oldTankY) < -2){
+      this.tankX = oldTankX;
+      this.tankY = oldTankY;
+    }
+    
   }
   public float getTankX(){
     return this.tankX;
