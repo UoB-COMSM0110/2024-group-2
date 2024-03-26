@@ -115,6 +115,8 @@ void draw() {
     this.mapBar.resetTime();
     this.tanks.get(0).shufflePosition();
     this.tanks.get(1).shufflePosition();
+    this.tanks.get(0).removeAllCraters();
+    this.tanks.get(1).removeAllCraters();
   }
 }
  

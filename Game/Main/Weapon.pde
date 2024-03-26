@@ -80,4 +80,8 @@ public class Weapon {
   public float getY() {
     return this.y;
   }
+  
+  public void removeCraters(){
+    this.craters.clear();
+  }
 }

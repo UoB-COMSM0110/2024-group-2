@@ -162,4 +162,10 @@ public class Tank{
     this.tankX = random(0, width - 70);
     this.setTankY();
   }
+  
+  public void removeAllCraters(){
+    for(Weapon w : this.weapons) {
+      w.removeCraters();
+    }
+  }
 }
