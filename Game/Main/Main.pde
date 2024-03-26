@@ -27,7 +27,6 @@ void draw() {
   background(135, 206, 235);
   shape(terrain.getTerrainShape());
 
-  smallMissile.displayCraters();
   bar.display();
 
   tanks.get(0).renderCraters();
@@ -53,8 +52,6 @@ void draw() {
     if(abs(strikePoint - tanks.get(1).getTankX() - 35) < 50){
       tanks.get(1).decreaseHealth(20);
     }
-
-    smallMissile.display();
     bar.setTime(200);
 
 
@@ -106,3 +103,5 @@ void draw() {
     this.tanks.get(tankIndex).decreasePower();
   }
 }
+}
+ 
