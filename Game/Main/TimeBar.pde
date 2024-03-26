@@ -2,10 +2,12 @@ class TimeBar{
   private float actualWidth;
   private float gapWidth;
   private float duration;
-  TimeBar(){
+  private float rectX;
+  TimeBar(float xPos){
     actualWidth = 200;
     gapWidth = 8;
     duration = 80;
+    this.rectX = xPos;
   }
   void setTime(int width){
     actualWidth = width;
@@ -27,10 +29,15 @@ class TimeBar{
     float rectWidth = 200;
     float rectHeight = 15;
     
-    float rectX = (width - rectWidth) / 2;
-    float rectY = 20;
+    //float rectX = (width - rectWidth) - 10;
+    float rectY = 900;
     
     rect(rectX, rectY, this.actualWidth, rectHeight);
+    
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    fill(0, 0, 0);
+    text("Shot clock", rectX + rectWidth/2, rectY-12);
     
     fill(0);
     
