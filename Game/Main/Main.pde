@@ -84,26 +84,10 @@ void draw() {
     this.tanks.get(tankIndex).fireWeapon();
     this.isFiring = true;
     this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
-    if(tankIndex == 0){
-      this.tanks.get(tankIndex).setCurrentPlayer(false);
-      this.tankIndex = 1;
-      this.tanks.get(tankIndex).setCurrentPlayer(true);
-    }else{
-      this.tanks.get(tankIndex).setCurrentPlayer(false);
-      this.tankIndex = 0;
-      this.tanks.get(tankIndex).setCurrentPlayer(true);
-    }
+    switchPlayer();
   }
   if(shotBar.getTime() < 1){
-    if(tankIndex == 0){
-      this.tanks.get(tankIndex).setCurrentPlayer(false);
-      this.tankIndex = 1;
-      this.tanks.get(tankIndex).setCurrentPlayer(true);
-    }else{
-      this.tanks.get(tankIndex).setCurrentPlayer(false);
-      this.tankIndex = 0;
-      this.tanks.get(tankIndex).setCurrentPlayer(true);
-    }
+    switchPlayer();
     shotBar.resetTime();
   }
   
@@ -121,6 +105,18 @@ void draw() {
     this.tanks.get(1).shufflePosition();
     this.tanks.get(0).removeAllCraters();
     this.tanks.get(1).removeAllCraters();
+  }
+}
+
+void switchPlayer() {
+  if(tankIndex == 0){
+    this.tanks.get(tankIndex).setCurrentPlayer(false);
+    this.tankIndex = 1;
+    this.tanks.get(tankIndex).setCurrentPlayer(true);
+  }else{
+    this.tanks.get(tankIndex).setCurrentPlayer(false);
+    this.tankIndex = 0;
+    this.tanks.get(tankIndex).setCurrentPlayer(true);
   }
 }
  
