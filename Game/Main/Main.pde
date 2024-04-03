@@ -110,7 +110,7 @@ void draw() {
     this.tanks.get(tankIndex).decreasePower();
   }
   //map change
-  if(mapBar.getTime() < 1) {
+  if(mapBar.getTime() < 1 && !isFiring) {
     this.terrain.setTerrainShape(random(0, 5));
     this.mapBar.resetTime();
     this.tanks.get(0).shufflePosition();
