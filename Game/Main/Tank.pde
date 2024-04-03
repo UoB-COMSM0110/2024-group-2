@@ -170,4 +170,8 @@ public class Tank{
       w.removeCraters();
     }
   }
+  
+  public boolean getIsHumanControlled(){
+    return this.isHumanControlled;
+  }
 }

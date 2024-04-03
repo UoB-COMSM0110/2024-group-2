@@ -68,6 +68,14 @@ void draw() {
     this.isFiring = this.currentWeapon.getFire();
   }
   
+  //ai tank fire
+  if(!this.tanks.get(tankIndex).getIsHumanControlled() && !isFiring){
+    this.tanks.get(tankIndex).fireWeapon();
+    this.isFiring = true;
+    this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
+    switchPlayer();
+  }
+  
   if(keyPressed && keyCode == RIGHT && !isFiring){
     tanks.get(tankIndex).moveTank(1);
   }
@@ -109,6 +117,7 @@ void draw() {
 }
 
 void switchPlayer() {
+  
   if(tankIndex == 0){
     this.tanks.get(tankIndex).setCurrentPlayer(false);
     this.tankIndex = 1;
@@ -118,5 +127,52 @@ void switchPlayer() {
     this.tankIndex = 0;
     this.tanks.get(tankIndex).setCurrentPlayer(true);
   }
+  
+  if(!this.tanks.get(tankIndex).getIsHumanControlled()){
+    aiTurretAdjust();
+  }
+}
+
+void aiTurretAdjust() {
+  
+  int opIndex = (tankIndex - 1) * -1;
+  
+  float opX = this.tanks.get(opIndex).getTankX();
+  //float opY = this.tanks.get(opIndex).getTankY();
+  
+  
+  float xDist = this.tanks.get(tankIndex).getTankX() - opX;
+  int turretAdjust;
+  float iSpeed;
+  
+  if(xDist < 0) {
+    turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 135;
+    iSpeed = aiCalcISpeed(-xDist);
+  } else {
+    turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 45;
+    iSpeed = aiCalcISpeed(xDist);
+  }
+  
+  
+  if(turretAdjust < 0) {
+    for(int i = turretAdjust; i < 0; i++) {
+      tanks.get(tankIndex).rotateTurret(true);
+    }
+  } else {
+    for(int i = 0; i < turretAdjust; i++) {
+      tanks.get(tankIndex).rotateTurret(false);
+    }
+  }
+  tanks.get(tankIndex).getCurrentWeapon().setISpeed(iSpeed);
+}
+
+float aiCalcISpeed(float absXDist) {
+  
+  
+  float iSpeed = 0.5 * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
+  
+  print("Xdist = " + absXDist + ", iSpeed = " + iSpeed + "\n");
+  
+  return iSpeed;
 }
  
