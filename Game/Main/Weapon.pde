@@ -30,7 +30,7 @@ public class Weapon {
       return 0;
   }
   private boolean dontUpdate(float x, float y){
-    int index = int(x) + int(y - 15) * (int)width;
+    int index = int(x) + int(y) * (int)width;
     // to allow projectile to go off the top of the screen and come back
     if(index < 0 ) {
       return false;

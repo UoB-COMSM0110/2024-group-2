@@ -138,21 +138,22 @@ void aiTurretAdjust() {
   int opIndex = (tankIndex - 1) * -1;
   
   float opX = this.tanks.get(opIndex).getTankX();
-  //float opY = this.tanks.get(opIndex).getTankY();
+  float opY = this.tanks.get(opIndex).getTankY();
   
   
-  float xDist = this.tanks.get(tankIndex).getTankX() - opX;
+  float xDist = this.tanks.get(tankIndex).getTurretX() - opX;
+  float yDist = this.tanks.get(tankIndex).getTurretY() - opY;
   int turretAdjust;
   float iSpeed;
   
+  
   if(xDist < 0) {
     turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 135;
-    iSpeed = aiCalcISpeed(-xDist);
+    iSpeed = aiCalcISpeed(-xDist, yDist);
   } else {
     turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 45;
-    iSpeed = aiCalcISpeed(xDist);
+    iSpeed = aiCalcISpeed(xDist, yDist);
   }
-  
   
   if(turretAdjust < 0) {
     for(int i = turretAdjust; i < 0; i++) {
@@ -166,13 +167,14 @@ void aiTurretAdjust() {
   tanks.get(tankIndex).getCurrentWeapon().setISpeed(iSpeed);
 }
 
-float aiCalcISpeed(float absXDist) {
+float aiCalcISpeed(float absXDist, float yDist) {
   
-  
-  float iSpeed = 0.5 * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
-  
-  print("Xdist = " + absXDist + ", iSpeed = " + iSpeed + "\n");
-  
+  float iSpeed;
+  if(yDist > 0){
+    iSpeed = (0.5 + 0.25*yDist/absXDist) * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
+  }else{
+    iSpeed = 0.5 * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
+  }
   return iSpeed;
 }
  
