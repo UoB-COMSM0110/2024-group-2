@@ -14,8 +14,9 @@ public class Tank{
   private boolean currentPlayer;
   private ArrayList<Weapon> weapons;
   private int currentWeapon;
+  private boolean isHumanControlled;
   
-  public Tank(boolean currentPlayer){
+  public Tank(boolean currentPlayer, boolean isHuman){
     this.tankBody = loadShape("tankBody.svg");
     this.tankTurret = loadShape("tankTurret.svg");
     this.tankX = random(width - 50);
@@ -29,6 +30,7 @@ public class Tank{
     this.weapons = new ArrayList<>();
     this.weapons.add(new Weapon("small missile"));
     this.currentWeapon = 0;
+    this.isHumanControlled = isHuman;
     setTankY();
   }
   

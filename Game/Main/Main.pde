@@ -17,9 +17,9 @@ void setup() {
  terrain = new Terrain(0.0);
  shape(terrain.getTerrainShape());
  //p1
- tanks.add(new Tank(true));
+ tanks.add(new Tank(true, true));
  //p2
- tanks.add(new Tank(false));
+ tanks.add(new Tank(false, false));
  smooth();
  frameRate(100);
  shotBar = new TimeBar(1590, 200, "Shot clock");
@@ -96,9 +96,13 @@ void draw() {
   }
   if(shotBar.getTime() < 1){
     if(tankIndex == 0){
-      tankIndex = 1;
+      this.tanks.get(tankIndex).setCurrentPlayer(false);
+      this.tankIndex = 1;
+      this.tanks.get(tankIndex).setCurrentPlayer(true);
     }else{
-      tankIndex = 0;
+      this.tanks.get(tankIndex).setCurrentPlayer(false);
+      this.tankIndex = 0;
+      this.tanks.get(tankIndex).setCurrentPlayer(true);
     }
     shotBar.resetTime();
   }
