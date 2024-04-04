@@ -86,11 +86,6 @@ public class Shop {
       if(currentTextWidth > maxTextWidth){
         maxTextWidth = currentTextWidth;
       }
-      if(isMouseOverButton(x, y, textWidth(entry.getKey()), lineHeight)) {
-        p.fill(hoverColour);
-      } else {
-        p.fill(buttonColour);
-      }
       
       drawButton(entry.getKey(), x - buttonWidth/2, y - lineHeight/2, buttonWidth, buttonHeight);
       p.image(item.image, x + 300, y - lineHeight/2);
@@ -114,7 +109,7 @@ public class Shop {
     int lineHeight = 60;
   
     for(Map.Entry<String, Item> entry : this.map.entrySet()){
-      if(isMouseOverButton(x, y, textWidth(entry.getKey()), lineHeight)) {
+      if(isMouseOverButton(x - buttonWidth/2, y - lineHeight/2, buttonWidth, buttonHeight)) {
         Item item = entry.getValue();
         int price = this.extractPrice(entry.getKey());
         if(price <= totalMoney) {  
@@ -129,7 +124,7 @@ public class Shop {
       }
       y += lineHeight + entry.getValue().image.height + 10;
     }
-    if(mouseX > width/2 - 50 && mouseX < width/2 + 50 && mouseY > height - 100 && mouseY < height - 50) {
+    if(isMouseOverButton(this.p.width/2 - this.buttonWidth/2, this.p.height - 100, this.buttonWidth, this.buttonHeight)) {
       gameState = this.p.playingState;
       resetModeDefaults();
       this.p.endRound = millis() + 1000;
