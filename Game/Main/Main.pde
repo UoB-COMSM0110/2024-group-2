@@ -9,6 +9,9 @@ TimeBar mapBar;
 boolean isFiring = false;
 Weapon currentWeapon;
 PImage customCursor;
+int nRounds;
+int currentRound;
+int end;
 
 enum GameState {
   START_MENU,
@@ -17,7 +20,7 @@ enum GameState {
   GAME_OVER
 }
 
-GameState gameState = GameState.GAME_OVER;
+GameState gameState = GameState.START_MENU;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
 
@@ -31,6 +34,7 @@ void setup() {
  this.gameOverScreen = new GameOver(this);
  
  this.terrain = new Terrain(0.0);
+ this.currentRound = 1;
  shape(terrain.getTerrainShape());
  
  //for play again
@@ -49,6 +53,11 @@ void setup() {
 void draw() {
   background(135, 206, 235);
   frameRate(100);
+  
+  while(this.end > millis()) {
+    displayNextRoundScreen();
+    return;
+  }
   
   //game state switcher
   switch (gameState) {
@@ -132,13 +141,12 @@ float aiCalcISpeed(float absXDist, float yDist) {
   return iSpeed;
 }
 
-public void displayGameOverScreen() {
+public void displayNextRoundScreen() {
     textSize(128);
     fill(255, 0, 0);
-    shotBar.resetTime();
-    mapBar.resetTime();
     textAlign(CENTER, CENTER);
-    text("GAME OVER", width/2, height/2); 
+    text("Round " + this.currentRound + "/" + this.nRounds + "!", width/2, height/2); 
+    textAlign(LEFT, BASELINE);
 }
 
 public void gameEngine() {
@@ -151,7 +159,11 @@ public void gameEngine() {
   this.tanks.get(1).renderTank();
   
   if(tanks.get(0).getDead() || tanks.get(1).getDead()){
-    gameState = GameState.GAME_OVER;
+    if(this.currentRound == this.nRounds) {
+      gameState = GameState.GAME_OVER;
+    }else {
+      startNextRound();
+    }
     return;
   }
   
@@ -213,6 +225,11 @@ public void gameEngine() {
   }
   //map change
   if(mapBar.getTime() < 1 && !this.isFiring) {
+    textSize(128);
+    fill(255, 0, 0);
+    textAlign(CENTER, CENTER);
+    text("Map Shuffle!", width/2, height/2);
+    textAlign(LEFT, BASELINE);
     this.terrain.setTerrainShape(random(0, 5));
     this.mapBar.resetTime();
     this.tanks.get(0).shufflePosition();
@@ -228,4 +245,24 @@ public void mousePressed() {
     } else if(gameState == GameState.GAME_OVER) {
       gameOverScreen.mousePressed();
     }
+}
+
+public void setNRounds(int rounds){
+ this.nRounds = rounds; 
+}
+
+public void startNextRound() {
+    this.currentRound++;
+    this.tanks.get(0).restoreHealth();
+    this.tanks.get(1).restoreHealth();
+    this.tanks.get(0).setDead(false);
+    this.tanks.get(1).setDead(false);
+    this.terrain.setTerrainShape(random(0, 5));
+    this.mapBar.resetTime();
+    this.shotBar.resetTime();
+    this.tanks.get(0).shufflePosition();
+    this.tanks.get(1).shufflePosition();
+    this.tanks.get(0).removeAllCraters();
+    this.tanks.get(1).removeAllCraters();
+    this.end = millis() + 1000;
 }

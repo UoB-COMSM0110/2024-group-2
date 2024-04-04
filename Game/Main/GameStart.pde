@@ -8,11 +8,11 @@ public class GameStart {
     int buttonHeight = 60;
     PFont buttonFont;
     PFont titleFont;
-    PApplet p;
+    Main p;
     PImage backgroundImage;
     int baseY = 0;
     
-    public GameStart(PApplet p) {
+    public GameStart(Main p) {
         this.p = p;
         this.baseY = p.height / 2 - 150;
         
@@ -69,17 +69,19 @@ public class GameStart {
       int mouseX = p.mouseX;
       int mouseY = p.mouseY;
       
-      // 检查1 Player按钮是否被点击
+      // 1 Player
       if (overRect(p.width / 2 - buttonWidth / 2, baseY + 50, buttonWidth, buttonHeight, mouseX, mouseY)) {
+        p.setNRounds(setNumberOfRounds());
         resetModeDefaults();
         gameState = GameState.GAME_PLAY_1;
       } 
-      // 检查2 Players按钮是否被点击
+      // 2 Players
       else if (overRect(p.width / 2 - buttonWidth / 2, baseY + 130, buttonWidth, buttonHeight, mouseX, mouseY)) {
+        p.setNRounds(setNumberOfRounds());
         resetModeDefaults();
         gameState = GameState.GAME_PLAY_2;
       } 
-      // 检查Instructions按钮是否被点击
+      //Instructions
       else if (overRect(p.width / 2 - buttonWidth / 2, baseY + 210, buttonWidth, buttonHeight, mouseX, mouseY)) {
         String gameInstructions = "Welcome to Tank Battle!\n\n" +
                               "Gameplay:\n" +
@@ -90,7 +92,7 @@ public class GameStart {
                               "Good luck, and may the best tank win!";
         JOptionPane.showMessageDialog(null, gameInstructions, "Game Instructions", JOptionPane.INFORMATION_MESSAGE);
       } 
-      // 检查Exit按钮是否被点击
+      // Exit
       else if (overRect(p.width / 2 - buttonWidth / 2, baseY + 290, buttonWidth, buttonHeight, mouseX, mouseY)) {
         System.exit(0);
       }
@@ -107,4 +109,16 @@ public class GameStart {
     p.textAlign(PApplet.LEFT, PApplet.BASELINE);
   }
   
+  private int setNumberOfRounds() {
+    String input = JOptionPane.showInputDialog("How many rounds would you like to play?");
+    int nRounds;
+    try {
+      nRounds = Integer.parseInt(input);
+    } catch(NumberFormatException e) {
+      JOptionPane.showMessageDialog(null, "You must enter an integer", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+      nRounds = setNumberOfRounds();
+    }
+    return nRounds;
  }
+ 
+}

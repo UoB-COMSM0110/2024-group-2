@@ -37,7 +37,7 @@ public class Weapon {
     }
     loadPixels();
     boolean stop = (pixels[index] != color(135, 206, 235)) && (pixels[index] != color(0, 0, 0));
-    if(x <= 0 || x >= width || y <= 0 || y >= height || stop){
+    if(x <= 0 || x >= width || y >= height || stop){
       return true;
     }
     return false;

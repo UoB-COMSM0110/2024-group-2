@@ -8,12 +8,12 @@ public class GameOver {
     int buttonHeight = 60;
     PFont buttonFont;
     PFont titleFont;
-    PApplet p;
+    Main p;
     PImage backgroundImage;
     int baseY = 0;
     String winner;
     
-    public GameOver(PApplet p) {
+    public GameOver(Main p) {
         this.p = p;
         this.baseY = p.height / 2 - 150;
         

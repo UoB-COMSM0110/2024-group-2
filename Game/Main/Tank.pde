@@ -178,4 +178,12 @@ public class Tank{
   public void setIsHumanControlled(boolean humanControlled) {
     this.isHumanControlled = humanControlled;
   }
+  
+  public void restoreHealth(){
+    this.health.restore();
+  }
+  
+  public void setDead(boolean dead){
+    this.dead = dead;
+  }
 }
