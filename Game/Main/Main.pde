@@ -17,8 +17,9 @@ enum GameState {
   GAME_OVER
 }
 
-GameState gameState = GameState.START_MENU;
+GameState gameState = GameState.GAME_OVER;
 GameStart gameStartScreen;
+GameOver gameOverScreen;
 
 void setup() {
  size(1800, 960);
@@ -27,9 +28,13 @@ void setup() {
  cursor(this.customCursor, 5, 5);
  
  this.gameStartScreen = new GameStart(this);
+ this.gameOverScreen = new GameOver(this);
  
  this.terrain = new Terrain(0.0);
  shape(terrain.getTerrainShape());
+ 
+ //for play again
+ this.tanks.clear();
  //p1
  this.tanks.add(new Tank(true, true, "Blue"));
  //p2 - default cpu controlled
@@ -58,20 +63,11 @@ void draw() {
       gameEngine();
       break;
     case GAME_OVER:
-      displayGameOverScreen();
+      gameOverScreen.setWinner("Blue");
+      gameOverScreen.display();
       break;
   }
   
-  
-  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
-    textSize(128);
-    fill(255, 0, 0);
-    shotBar.resetTime();
-    mapBar.resetTime();
-    textAlign(CENTER, CENTER);
-    text("GAME OVER", width/2, height/2); 
-    return;
-  }
 }
 
 void switchPlayer() {
@@ -137,10 +133,12 @@ float aiCalcISpeed(float absXDist, float yDist) {
 }
 
 public void displayGameOverScreen() {
-  textSize(128);
-  fill(255, 0, 0);
-  textAlign(CENTER, CENTER);
-  text("GAME OVER", width/2, height/2);
+    textSize(128);
+    fill(255, 0, 0);
+    shotBar.resetTime();
+    mapBar.resetTime();
+    textAlign(CENTER, CENTER);
+    text("GAME OVER", width/2, height/2); 
 }
 
 public void gameEngine() {
@@ -151,6 +149,12 @@ public void gameEngine() {
   this.tanks.get(1).renderCraters();
   this.tanks.get(0).renderTank();
   this.tanks.get(1).renderTank();
+  
+  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
+    gameState = GameState.GAME_OVER;
+    return;
+  }
+  
   float strikeX = 0;
   float strikeY = 0;
   if(isFiring){
@@ -219,13 +223,9 @@ public void gameEngine() {
 }
 
 public void mousePressed() {
-    // 只有在开始菜单状态下才处理鼠标点击
     if (gameState == GameState.START_MENU) {
       gameStartScreen.mousePressed();
+    } else if(gameState == GameState.GAME_OVER) {
+      gameOverScreen.mousePressed();
     }
-    // 检查是否准备好开始游戏
-    //if (gameStartScreen.isStartGameRequested()) {
-      //gameState = GameState.GAME_PLAY; // 更新游戏状态
-      //gameStartScreen.startGameRequested = false; // 重置请求开始游戏的标志
-    //}
 }
