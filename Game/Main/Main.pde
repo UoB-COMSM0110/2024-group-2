@@ -6,114 +6,87 @@ int tankIndex = 0;
 boolean gameOver = false;
 TimeBar shotBar;
 TimeBar mapBar;
-
 boolean isFiring = false;
 Weapon currentWeapon;
+PImage customCursor;
+int nRounds;
+int currentRound;
+int endRound;
+int shuffleDelay;
 
+enum GameState {
+  START_MENU,
+  GAME_PLAY_1,
+  GAME_PLAY_2,
+  GAME_OVER
+}
+
+GameState gameState = GameState.START_MENU;
+GameStart gameStartScreen;
+GameOver gameOverScreen;
 
 void setup() {
  size(1800, 960);
  background(135, 206, 235);
- terrain = new Terrain(0.0);
+ this.customCursor = loadImage("custom_cursor.png");
+ cursor(this.customCursor, 5, 5);
+ 
+ this.gameStartScreen = new GameStart(this);
+ this.gameOverScreen = new GameOver(this);
+ 
+ this.terrain = new Terrain(0.0);
+ this.currentRound = 1;
  shape(terrain.getTerrainShape());
+ 
+ //for play again
+ this.tanks.clear();
  //p1
- tanks.add(new Tank(true, true));
- //p2
- tanks.add(new Tank(false, false));
+ this.tanks.add(new Tank(true, true, "Blue"));
+ //p2 - default cpu controlled
+ this.tanks.add(new Tank(false, false, "Red"));
  smooth();
  frameRate(100);
- shotBar = new TimeBar(1590, 200, "Shot clock");
- mapBar = new TimeBar(10, 600, "Time to map shuffle");
+ this.shotBar = new TimeBar(1590, 200, "Shot clock");
+ this.mapBar = new TimeBar(10, 600, "Time to map shuffle");
 }
 
 
 void draw() {
   background(135, 206, 235);
-  shape(terrain.getTerrainShape());
-
-  shotBar.display();
-  mapBar.display();
-
-  tanks.get(0).renderCraters();
-  tanks.get(1).renderCraters();
-
-  tanks.get(0).renderTank();
-  tanks.get(1).renderTank();
   frameRate(100);
-  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
-    textSize(128);
-    fill(255, 0, 0);
-    shotBar.resetTime();
-    mapBar.resetTime();
-    textAlign(CENTER, CENTER);
-    text("GAME OVER", width/2, height/2); 
+  
+  while(this.endRound > millis()) {
+    displayNextRoundScreen();
     return;
   }
-  float strikeX = 0;
-  float strikeY = 0;
-  if(isFiring){
-    strikeX = this.currentWeapon.update();
-    strikeY = this.currentWeapon.getY();
-    if(abs(strikeX - tanks.get(0).getTankX() - 35) < 50 && abs(strikeY - tanks.get(0).getTankY()) < 50 ){
-      tanks.get(0).decreaseHealth(20);
-    }
-    if(abs(strikeX - tanks.get(1).getTankX() - 35) < 50 && abs(strikeY - tanks.get(1).getTankY()) < 50){
-      tanks.get(1).decreaseHealth(20);
-    }
-    shotBar.resetTime();
-    this.currentWeapon.display();
+  
+  while(this.shuffleDelay > millis()) {
+    textSize(128);
+    fill(255, 0, 0);
+    textAlign(CENTER, CENTER);
+    text("Map Shuffle!", width/2, height/2);
+    textAlign(LEFT, BASELINE);
+    return;
   }
   
-  if(this.currentWeapon != null){
-    this.isFiring = this.currentWeapon.getFire();
+  //game state switcher
+  switch (gameState) {
+    case START_MENU:
+      gameStartScreen.display();
+      break;
+    case GAME_PLAY_1:
+      gameEngine();
+      break;
+    case GAME_PLAY_2:
+      this.tanks.get(1).setIsHumanControlled(true);
+      gameEngine();
+      break;
+    case GAME_OVER:
+      gameOverScreen.setWinner("Blue");
+      gameOverScreen.display();
+      break;
   }
   
-  //ai tank fire
-  if(!this.tanks.get(tankIndex).getIsHumanControlled() && !isFiring){
-    this.tanks.get(tankIndex).fireWeapon();
-    this.isFiring = true;
-    this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
-    switchPlayer();
-  }
-  
-  if(keyPressed && keyCode == RIGHT && !isFiring){
-    tanks.get(tankIndex).moveTank(1);
-  }
-  if(keyPressed && keyCode == LEFT && !isFiring){
-    tanks.get(tankIndex).moveTank(-1);
-  }
-  if(keyPressed && keyCode == DOWN && !isFiring){
-    tanks.get(tankIndex).rotateTurret(true);
-  }
-  if(keyPressed && keyCode == UP && !isFiring){
-    tanks.get(tankIndex).rotateTurret(false);
-  }
-  if(keyPressed && key == ' ' && !isFiring){
-    this.tanks.get(tankIndex).fireWeapon();
-    this.isFiring = true;
-    this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
-    switchPlayer();
-  }
-  if(shotBar.getTime() < 1){
-    switchPlayer();
-    shotBar.resetTime();
-  }
-  
-  if(keyPressed && key == '=' && !isFiring){
-    this.tanks.get(tankIndex).increasePower();
-  }
-  if(keyPressed && key == '-' && !isFiring){
-    this.tanks.get(tankIndex).decreasePower();
-  }
-  //map change
-  if(mapBar.getTime() < 1 && !isFiring) {
-    this.terrain.setTerrainShape(random(0, 5));
-    this.mapBar.resetTime();
-    this.tanks.get(0).shufflePosition();
-    this.tanks.get(1).shufflePosition();
-    this.tanks.get(0).removeAllCraters();
-    this.tanks.get(1).removeAllCraters();
-  }
 }
 
 void switchPlayer() {
@@ -126,10 +99,6 @@ void switchPlayer() {
     this.tanks.get(tankIndex).setCurrentPlayer(false);
     this.tankIndex = 0;
     this.tanks.get(tankIndex).setCurrentPlayer(true);
-  }
-  
-  if(!this.tanks.get(tankIndex).getIsHumanControlled()){
-    aiTurretAdjust();
   }
 }
 
@@ -177,4 +146,126 @@ float aiCalcISpeed(float absXDist, float yDist) {
   }
   return iSpeed;
 }
- 
+
+public void displayNextRoundScreen() {
+    textSize(128);
+    fill(255, 0, 0);
+    textAlign(CENTER, CENTER);
+    text("Round " + this.currentRound + "/" + this.nRounds + "!", width/2, height/2); 
+    textAlign(LEFT, BASELINE);
+}
+
+public void gameEngine() {
+  shape(this.terrain.getTerrainShape());
+  this.shotBar.display();
+  this.mapBar.display();
+  this.tanks.get(0).renderCraters();
+  this.tanks.get(1).renderCraters();
+  this.tanks.get(0).renderTank();
+  this.tanks.get(1).renderTank();
+  
+  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
+    if(this.currentRound == this.nRounds) {
+      gameState = GameState.GAME_OVER;
+    }else {
+      startNextRound();
+    }
+    return;
+  }
+  
+  float strikeX = 0;
+  float strikeY = 0;
+  if(isFiring){
+    strikeX = this.currentWeapon.update();
+    strikeY = this.currentWeapon.getY();
+    if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(0).getTankY()) < 50 ){
+      this.tanks.get(0).decreaseHealth(20);
+    }
+    if(abs(strikeX - this.tanks.get(1).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(1).getTankY()) < 50){
+      this.tanks.get(1).decreaseHealth(20);
+    }
+    shotBar.resetTime();
+    this.currentWeapon.display();
+  }
+  
+  if(this.currentWeapon != null){
+    this.isFiring = this.currentWeapon.getFire();
+  }
+  
+  //ai tank fire
+  if(!this.tanks.get(tankIndex).getIsHumanControlled() && !this.isFiring){
+    aiTurretAdjust();
+    this.tanks.get(tankIndex).fireWeapon();
+    this.isFiring = true;
+    this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
+    switchPlayer();
+  }
+  
+  if(keyPressed && keyCode == RIGHT && !this.isFiring){
+    this.tanks.get(tankIndex).moveTank(1);
+  }
+  if(keyPressed && keyCode == LEFT && !this.isFiring){
+    this.tanks.get(tankIndex).moveTank(-1);
+  }
+  if(keyPressed && keyCode == DOWN && !this.isFiring){
+    this.tanks.get(tankIndex).rotateTurret(true);
+  }
+  if(keyPressed && keyCode == UP && !this.isFiring){
+    this.tanks.get(tankIndex).rotateTurret(false);
+  }
+  if(keyPressed && key == ' ' && !this.isFiring){
+    this.tanks.get(tankIndex).fireWeapon();
+    this.isFiring = true;
+    this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
+    switchPlayer();
+  }
+  if(this.shotBar.getTime() < 1){
+    switchPlayer();
+    this.shotBar.resetTime();
+  }
+  
+  if(keyPressed && key == '=' && !this.isFiring){
+    this.tanks.get(tankIndex).increasePower();
+  }
+  if(keyPressed && key == '-' && !this.isFiring){
+    this.tanks.get(tankIndex).decreasePower();
+  }
+  //map change
+  if(mapBar.getTime() < 1 && !this.isFiring) {
+    this.terrain.setTerrainShape(random(0, 5));
+    this.mapBar.resetTime();
+    this.tanks.get(0).shufflePosition();
+    this.tanks.get(1).shufflePosition();
+    this.tanks.get(0).removeAllCraters();
+    this.tanks.get(1).removeAllCraters();
+    this.shuffleDelay = millis() + 1000;
+  }
+}
+
+public void mousePressed() {
+    if (gameState == GameState.START_MENU) {
+      gameStartScreen.mousePressed();
+    } else if(gameState == GameState.GAME_OVER) {
+      gameOverScreen.mousePressed();
+    }
+}
+
+public void setNRounds(int rounds){
+ this.nRounds = rounds; 
+}
+
+public void startNextRound() {
+    this.currentRound++;
+    this.tanks.get(0).restoreHealth();
+    this.tanks.get(1).restoreHealth();
+    this.tanks.get(0).setDead(false);
+    this.tanks.get(1).setDead(false);
+    this.terrain.setTerrainShape(random(0, 5));
+    this.mapBar.resetTime();
+    this.shotBar.resetTime();
+    this.tanks.get(0).shufflePosition();
+    this.tanks.get(1).shufflePosition();
+    this.tanks.get(0).removeAllCraters();
+    this.tanks.get(1).removeAllCraters();
+    this.endRound = millis() + 1000;
+}

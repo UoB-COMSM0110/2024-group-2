@@ -16,8 +16,8 @@ public class Tank{
   private int currentWeapon;
   private boolean isHumanControlled;
   
-  public Tank(boolean currentPlayer, boolean isHuman){
-    this.tankBody = loadShape("tankBody.svg");
+  public Tank(boolean currentPlayer, boolean isHuman, String colour){
+    this.tankBody = loadShape("tankBody" + colour + ".svg");
     this.tankTurret = loadShape("tankTurret.svg");
     this.tankX = random(width - 50);
     this.turretAngle = 180;
@@ -173,5 +173,17 @@ public class Tank{
   
   public boolean getIsHumanControlled(){
     return this.isHumanControlled;
+  }
+  
+  public void setIsHumanControlled(boolean humanControlled) {
+    this.isHumanControlled = humanControlled;
+  }
+  
+  public void restoreHealth(){
+    this.health.restore();
+  }
+  
+  public void setDead(boolean dead){
+    this.dead = dead;
   }
 }

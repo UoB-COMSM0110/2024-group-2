@@ -27,4 +27,8 @@ public class HealthBar {
   public int getValue(){
     return this.value;
   }
+  
+  public void restore(){
+    this.value = this.maxValue;
+  }
 }
