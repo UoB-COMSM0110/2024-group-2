@@ -31,9 +31,9 @@ void setup() {
  this.terrain = new Terrain(0.0);
  shape(terrain.getTerrainShape());
  //p1
- this.tanks.add(new Tank(true, true));
+ this.tanks.add(new Tank(true, true, "Blue"));
  //p2 - default cpu controlled
- this.tanks.add(new Tank(false, false));
+ this.tanks.add(new Tank(false, false, "Red"));
  smooth();
  frameRate(100);
  this.shotBar = new TimeBar(1590, 200, "Shot clock");
