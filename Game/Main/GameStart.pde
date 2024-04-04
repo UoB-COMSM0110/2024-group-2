@@ -74,12 +74,14 @@ public class GameStart {
         p.setNRounds(setNumberOfRounds());
         resetModeDefaults();
         gameState = GameState.GAME_PLAY_1;
+        p.endRound = millis() + 1000;
       } 
       // 2 Players
       else if (overRect(p.width / 2 - buttonWidth / 2, baseY + 130, buttonWidth, buttonHeight, mouseX, mouseY)) {
         p.setNRounds(setNumberOfRounds());
         resetModeDefaults();
         gameState = GameState.GAME_PLAY_2;
+        p.endRound = millis() + 1000;
       } 
       //Instructions
       else if (overRect(p.width / 2 - buttonWidth / 2, baseY + 210, buttonWidth, buttonHeight, mouseX, mouseY)) {

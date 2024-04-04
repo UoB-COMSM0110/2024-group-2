@@ -11,7 +11,8 @@ Weapon currentWeapon;
 PImage customCursor;
 int nRounds;
 int currentRound;
-int end;
+int endRound;
+int shuffleDelay;
 
 enum GameState {
   START_MENU,
@@ -54,8 +55,17 @@ void draw() {
   background(135, 206, 235);
   frameRate(100);
   
-  while(this.end > millis()) {
+  while(this.endRound > millis()) {
     displayNextRoundScreen();
+    return;
+  }
+  
+  while(this.shuffleDelay > millis()) {
+    textSize(128);
+    fill(255, 0, 0);
+    textAlign(CENTER, CENTER);
+    text("Map Shuffle!", width/2, height/2);
+    textAlign(LEFT, BASELINE);
     return;
   }
   
@@ -89,10 +99,6 @@ void switchPlayer() {
     this.tanks.get(tankIndex).setCurrentPlayer(false);
     this.tankIndex = 0;
     this.tanks.get(tankIndex).setCurrentPlayer(true);
-  }
-  
-  if(!this.tanks.get(tankIndex).getIsHumanControlled()){
-    aiTurretAdjust();
   }
 }
 
@@ -188,6 +194,7 @@ public void gameEngine() {
   
   //ai tank fire
   if(!this.tanks.get(tankIndex).getIsHumanControlled() && !this.isFiring){
+    aiTurretAdjust();
     this.tanks.get(tankIndex).fireWeapon();
     this.isFiring = true;
     this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
@@ -225,17 +232,13 @@ public void gameEngine() {
   }
   //map change
   if(mapBar.getTime() < 1 && !this.isFiring) {
-    textSize(128);
-    fill(255, 0, 0);
-    textAlign(CENTER, CENTER);
-    text("Map Shuffle!", width/2, height/2);
-    textAlign(LEFT, BASELINE);
     this.terrain.setTerrainShape(random(0, 5));
     this.mapBar.resetTime();
     this.tanks.get(0).shufflePosition();
     this.tanks.get(1).shufflePosition();
     this.tanks.get(0).removeAllCraters();
     this.tanks.get(1).removeAllCraters();
+    this.shuffleDelay = millis() + 1000;
   }
 }
 
@@ -264,5 +267,5 @@ public void startNextRound() {
     this.tanks.get(1).shufflePosition();
     this.tanks.get(0).removeAllCraters();
     this.tanks.get(1).removeAllCraters();
-    this.end = millis() + 1000;
+    this.endRound = millis() + 1000;
 }
