@@ -6,14 +6,27 @@ int tankIndex = 0;
 boolean gameOver = false;
 TimeBar shotBar;
 TimeBar mapBar;
-
 boolean isFiring = false;
 Weapon currentWeapon;
+PImage customCursor;
 
+enum GameState {
+  START_MENU,
+  GAME_PLAY,
+  GAME_OVER
+}
+
+GameState gameState = GameState.START_MENU;
+GameStart gameStartScreen;
 
 void setup() {
  size(1800, 960);
  background(135, 206, 235);
+ customCursor = loadImage("custom_cursor.png");
+ cursor(customCursor, 5, 5);
+ 
+ gameStartScreen = new GameStart(this);
+ 
  terrain = new Terrain(0.0);
  shape(terrain.getTerrainShape());
  //p1
@@ -29,16 +42,26 @@ void setup() {
 
 void draw() {
   background(135, 206, 235);
-  shape(terrain.getTerrainShape());
-
-  shotBar.display();
-  mapBar.display();
-
-  tanks.get(0).renderCraters();
-  tanks.get(1).renderCraters();
-
-  tanks.get(0).renderTank();
-  tanks.get(1).renderTank();
+  
+  //game state switcher
+  switch (gameState) {
+    case START_MENU:
+      gameStartScreen.display();
+      break;
+    case GAME_PLAY:
+      shape(terrain.getTerrainShape());
+      shotBar.display();
+      mapBar.display();
+      tanks.get(0).renderCraters();
+      tanks.get(1).renderCraters();
+      tanks.get(0).renderTank();
+      tanks.get(1).renderTank();
+      break;      
+    case GAME_OVER:
+      displayGameOverScreen();
+      break;
+  }
+  
   frameRate(100);
   if(tanks.get(0).getDead() || tanks.get(1).getDead()){
     textSize(128);
@@ -177,4 +200,22 @@ float aiCalcISpeed(float absXDist, float yDist) {
   }
   return iSpeed;
 }
- 
+
+public void displayGameOverScreen() {
+  textSize(128);
+  fill(255, 0, 0);
+  textAlign(CENTER, CENTER);
+  text("GAME OVER", width/2, height/2);
+}
+
+public void mousePressed() {
+    // 只有在开始菜单状态下才处理鼠标点击
+    if (gameState == GameState.START_MENU) {
+      gameStartScreen.mousePressed();
+    }
+    // 检查是否准备好开始游戏
+    //if (gameStartScreen.isStartGameRequested()) {
+      //gameState = GameState.GAME_PLAY; // 更新游戏状态
+      //gameStartScreen.startGameRequested = false; // 重置请求开始游戏的标志
+    //}
+}
