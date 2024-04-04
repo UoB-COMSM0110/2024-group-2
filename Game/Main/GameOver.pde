@@ -87,8 +87,10 @@ public class GameOver {
     } 
     
   private void resetModeDefaults() {
-    p.rectMode(PApplet.CORNER);
-    p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+    this.p.rectMode(PApplet.CORNER);
+    this.p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+    this.p.strokeWeight(1);
+    this.p.noStroke();
   }
   
   public void setWinner(String winner) {

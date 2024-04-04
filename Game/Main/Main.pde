@@ -18,12 +18,16 @@ enum GameState {
   START_MENU,
   GAME_PLAY_1,
   GAME_PLAY_2,
+  SHOP,
   GAME_OVER
 }
 
+
+GameState playingState;
 GameState gameState = GameState.START_MENU;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
+Shop shop;
 
 void setup() {
  size(1800, 960);
@@ -33,6 +37,7 @@ void setup() {
  
  this.gameStartScreen = new GameStart(this);
  this.gameOverScreen = new GameOver(this);
+ this.shop = new Shop(this);
  
  this.terrain = new Terrain(0.0);
  this.currentRound = 1;
@@ -75,12 +80,17 @@ void draw() {
       gameStartScreen.display();
       break;
     case GAME_PLAY_1:
+      playingState = GameState.GAME_PLAY_1;
       gameEngine();
       break;
     case GAME_PLAY_2:
+      playingState = GameState.GAME_PLAY_2;
       this.tanks.get(1).setIsHumanControlled(true);
       gameEngine();
       break;
+    case SHOP:
+        this.shop.display();
+        break;
     case GAME_OVER:
       gameOverScreen.setWinner("Blue");
       gameOverScreen.display();
@@ -169,6 +179,7 @@ public void gameEngine() {
       gameState = GameState.GAME_OVER;
     }else {
       startNextRound();
+      gameState = GameState.SHOP;
     }
     return;
   }
@@ -247,6 +258,8 @@ public void mousePressed() {
       gameStartScreen.mousePressed();
     } else if(gameState == GameState.GAME_OVER) {
       gameOverScreen.mousePressed();
+    } else if(gameState == GameState.SHOP) {
+      shop.mousePressed();
     }
 }
 
@@ -267,5 +280,6 @@ public void startNextRound() {
     this.tanks.get(1).shufflePosition();
     this.tanks.get(0).removeAllCraters();
     this.tanks.get(1).removeAllCraters();
-    this.endRound = millis() + 1000;
+    this.currentWeapon = null;
+    this.isFiring = false;
 }

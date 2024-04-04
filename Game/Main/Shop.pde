@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Shop {
   LinkedHashMap<String, Item> map;
-  PImage sm, mm, lm, hk, bg, tc;
+  PImage sm, mm, lm, hk, bg;//tc;
   Main p;
 
   int totalMoney = 300;
@@ -20,23 +20,26 @@ public class Shop {
   public Shop(Main p) {
     this.p = p;
     this.map = new LinkedHashMap<String, Item>();
-    this.bg = p.loadImage(".jpg");
+    this.bg = p.loadImage("backgroundImage.jpg");
     this.bg.resize(p.width, p.height);
-    background(bg);
   
-    this.sm = p.loadImage("small_missile.png");
-    this.mm = p.loadImage("medium_missile.png");
-    this.lm = p.loadImage("large_missile.png");
-    this.hk = p.loadImage("health_kit.png");
-    this.tc = loadImage("tank.png");
+    //this.sm = this.p.loadImage("small_missile.png");
+    //this.mm = this.p.loadImage("medium_missile.png");
+    //this.lm = this.p.loadImage("large_missile.png");
+    //this.hk = this.p.loadImage("health_kit.png");
+    
+    this.sm = this.p.loadImage("custom_cursor1.png");
+    this.mm = this.p.loadImage("custom_cursor1.png");
+    this.lm = this.p.loadImage("custom_cursor1.png");
+    this.hk = this.p.loadImage("custom_cursor1.png");
+    //this.tc = this.p.loadImage("tank.png");
   
     this.sm.resize(60, 60);
     this.mm.resize(60, 60);
     this.lm.resize(60, 60);
     this.hk.resize(60, 60);
-    this.tc.resize(25, 25);
+    //this.tc.resize(25, 25);
   
-  //shop = new Shop();
     this.itemList();
   }
   
@@ -54,9 +57,9 @@ public class Shop {
     }
     
     
-  void display() {
+  private void display() {
     p.background(this.bg);
-    p.cursor(this.tc, this.tc.width/2, this.tc.height/2);
+    //p.cursor(this.tc, this.tc.width/2, this.tc.height/2);
   
     p.fill(255);
     p.textSize(60);
@@ -105,7 +108,7 @@ public class Shop {
     }
   }
   
-  void mousePressed() {
+  public void mousePressed() {
     int x = 800;
     int y = 250;
     int lineHeight = 60;
@@ -127,15 +130,17 @@ public class Shop {
       y += lineHeight + entry.getValue().image.height + 10;
     }
     if(mouseX > width/2 - 50 && mouseX < width/2 + 50 && mouseY > height - 100 && mouseY < height - 50) {
-      exit();
+      gameState = this.p.playingState;
+      resetModeDefaults();
+      this.p.endRound = millis() + 1000;
     }
   }
 
-  boolean isMouseOverButton(float x, float y, float buttonWidth, float buttonHeight) {
+  private boolean isMouseOverButton(float x, float y, float buttonWidth, float buttonHeight) {
     return mouseX >= x && mouseX <= x + buttonWidth && mouseY >= y - buttonHeight/2 && mouseY <= y + buttonHeight/2;
   }
 
-  void drawButton(String label, float x, float y, float w, float h) {
+  private void drawButton(String label, float x, float y, float w, float h) {
     this.p.rectMode(CORNER);
     this.p.strokeWeight(2);
     this.p.stroke(200);
@@ -150,6 +155,13 @@ public class Shop {
     this.p.textSize(textSize);
     this.p.textAlign(CENTER, CENTER);
     this.p.text(label, x + w/2, y + h/2);
+  }
+  
+  private void resetModeDefaults() {
+    this.p.rectMode(PApplet.CORNER);
+    this.p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+    this.p.strokeWeight(1);
+    this.p.noStroke();
   }
       
   //item subclass
