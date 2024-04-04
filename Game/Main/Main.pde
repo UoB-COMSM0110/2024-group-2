@@ -17,9 +17,9 @@ void setup() {
  terrain = new Terrain(0.0);
  shape(terrain.getTerrainShape());
  //p1
- tanks.add(new Tank(true));
+ tanks.add(new Tank(true, true));
  //p2
- tanks.add(new Tank(false));
+ tanks.add(new Tank(false, false));
  smooth();
  frameRate(100);
  shotBar = new TimeBar(1590, 200, "Shot clock");
@@ -68,6 +68,14 @@ void draw() {
     this.isFiring = this.currentWeapon.getFire();
   }
   
+  //ai tank fire
+  if(!this.tanks.get(tankIndex).getIsHumanControlled() && !isFiring){
+    this.tanks.get(tankIndex).fireWeapon();
+    this.isFiring = true;
+    this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
+    switchPlayer();
+  }
+  
   if(keyPressed && keyCode == RIGHT && !isFiring){
     tanks.get(tankIndex).moveTank(1);
   }
@@ -84,22 +92,10 @@ void draw() {
     this.tanks.get(tankIndex).fireWeapon();
     this.isFiring = true;
     this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
-    if(tankIndex == 0){
-      this.tanks.get(tankIndex).setCurrentPlayer(false);
-      this.tankIndex = 1;
-      this.tanks.get(tankIndex).setCurrentPlayer(true);
-    }else{
-      this.tanks.get(tankIndex).setCurrentPlayer(false);
-      this.tankIndex = 0;
-      this.tanks.get(tankIndex).setCurrentPlayer(true);
-    }
+    switchPlayer();
   }
   if(shotBar.getTime() < 1){
-    if(tankIndex == 0){
-      tankIndex = 1;
-    }else{
-      tankIndex = 0;
-    }
+    switchPlayer();
     shotBar.resetTime();
   }
   
@@ -110,7 +106,7 @@ void draw() {
     this.tanks.get(tankIndex).decreasePower();
   }
   //map change
-  if(mapBar.getTime() < 1) {
+  if(mapBar.getTime() < 1 && !isFiring) {
     this.terrain.setTerrainShape(random(0, 5));
     this.mapBar.resetTime();
     this.tanks.get(0).shufflePosition();
@@ -118,5 +114,67 @@ void draw() {
     this.tanks.get(0).removeAllCraters();
     this.tanks.get(1).removeAllCraters();
   }
+}
+
+void switchPlayer() {
+  
+  if(tankIndex == 0){
+    this.tanks.get(tankIndex).setCurrentPlayer(false);
+    this.tankIndex = 1;
+    this.tanks.get(tankIndex).setCurrentPlayer(true);
+  }else{
+    this.tanks.get(tankIndex).setCurrentPlayer(false);
+    this.tankIndex = 0;
+    this.tanks.get(tankIndex).setCurrentPlayer(true);
+  }
+  
+  if(!this.tanks.get(tankIndex).getIsHumanControlled()){
+    aiTurretAdjust();
+  }
+}
+
+void aiTurretAdjust() {
+  
+  int opIndex = (tankIndex - 1) * -1;
+  
+  float opX = this.tanks.get(opIndex).getTankX();
+  float opY = this.tanks.get(opIndex).getTankY();
+  
+  
+  float xDist = this.tanks.get(tankIndex).getTurretX() - opX;
+  float yDist = this.tanks.get(tankIndex).getTurretY() - opY;
+  int turretAdjust;
+  float iSpeed;
+  
+  
+  if(xDist < 0) {
+    turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 135;
+    iSpeed = aiCalcISpeed(-xDist, yDist);
+  } else {
+    turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 45;
+    iSpeed = aiCalcISpeed(xDist, yDist);
+  }
+  
+  if(turretAdjust < 0) {
+    for(int i = turretAdjust; i < 0; i++) {
+      tanks.get(tankIndex).rotateTurret(true);
+    }
+  } else {
+    for(int i = 0; i < turretAdjust; i++) {
+      tanks.get(tankIndex).rotateTurret(false);
+    }
+  }
+  tanks.get(tankIndex).getCurrentWeapon().setISpeed(iSpeed);
+}
+
+float aiCalcISpeed(float absXDist, float yDist) {
+  
+  float iSpeed;
+  if(yDist > 0){
+    iSpeed = (0.5 + 0.25*yDist/absXDist) * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
+  }else{
+    iSpeed = 0.5 * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
+  }
+  return iSpeed;
 }
  
