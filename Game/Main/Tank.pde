@@ -174,4 +174,8 @@ public class Tank{
   public boolean getIsHumanControlled(){
     return this.isHumanControlled;
   }
+  
+  public void setIsHumanControlled(boolean humanControlled) {
+    this.isHumanControlled = humanControlled;
+  }
 }
