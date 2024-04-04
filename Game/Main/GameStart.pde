@@ -71,10 +71,12 @@ public class GameStart {
       
       // 检查1 Player按钮是否被点击
       if (overRect(p.width / 2 - buttonWidth / 2, baseY + 50, buttonWidth, buttonHeight, mouseX, mouseY)) {
+        resetModeDefaults();
         gameState = GameState.GAME_PLAY_1;
       } 
       // 检查2 Players按钮是否被点击
       else if (overRect(p.width / 2 - buttonWidth / 2, baseY + 130, buttonWidth, buttonHeight, mouseX, mouseY)) {
+        resetModeDefaults();
         gameState = GameState.GAME_PLAY_2;
       } 
       // 检查Instructions按钮是否被点击
@@ -99,5 +101,10 @@ public class GameStart {
         int y = centerY - height / 2;
         return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
     } 
+    
+  private void resetModeDefaults() {
+    p.rectMode(PApplet.CORNER);
+    p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+  }
   
  }

@@ -18,7 +18,6 @@ enum GameState {
 }
 
 GameState gameState = GameState.START_MENU;
-//GameState gameState = GameState.GAME_PLAY_1;
 GameStart gameStartScreen;
 
 void setup() {
