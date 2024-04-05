@@ -174,7 +174,16 @@ public void gameEngine() {
   this.tanks.get(0).renderTank();
   this.tanks.get(1).renderTank();
   
-  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
+  if(this.tanks.get(0).getDead() || this.tanks.get(1).getDead()){
+    if(this.tanks.get(0).getDead() && !this.tanks.get(1).getDead()){
+      this.tanks.get(1).winRound();
+    } else if (!this.tanks.get(0).getDead()) {
+      this.tanks.get(0).winRound();
+    } else {
+      this.tanks.get(0).drawRound();
+      this.tanks.get(1).drawRound();
+    }
+    
     if(this.currentRound == this.nRounds) {
       gameState = GameState.GAME_OVER;
     }else {
@@ -191,9 +200,16 @@ public void gameEngine() {
     strikeY = this.currentWeapon.getY();
     if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(0).getTankY()) < 50 ){
       this.tanks.get(0).decreaseHealth(20);
+      if(tankIndex == 1) {
+        // + $25 for successful hit
+        this.tanks.get(1).successfulHit();
+      }
     }
     if(abs(strikeX - this.tanks.get(1).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(1).getTankY()) < 50){
       this.tanks.get(1).decreaseHealth(20);
+      if(tankIndex == 0) {
+        this.tanks.get(0).successfulHit();
+      }
     }
     shotBar.resetTime();
     this.currentWeapon.display();

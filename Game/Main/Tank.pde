@@ -15,6 +15,8 @@ public class Tank{
   private ArrayList<Weapon> weapons;
   private int currentWeapon;
   private boolean isHumanControlled;
+  private int money;
+  private float roundsWon;
   
   public Tank(boolean currentPlayer, boolean isHuman, String colour){
     this.tankBody = loadShape("tankBody" + colour + ".svg");
@@ -31,6 +33,8 @@ public class Tank{
     this.weapons.add(new Weapon("small missile"));
     this.currentWeapon = 0;
     this.isHumanControlled = isHuman;
+    this.money = 0;
+    this.roundsWon = 0;
     setTankY();
   }
   
@@ -185,5 +189,19 @@ public class Tank{
   
   public void setDead(boolean dead){
     this.dead = dead;
+  }
+  
+  public void successfulHit(){
+    this.money += 25;
+  }
+  
+  public void winRound() {
+    this.money += 500;
+    this.roundsWon++;
+  }
+  
+  public void drawRound() {
+    this.money += 250;
+    this.roundsWon += 0.5;
   }
 }
