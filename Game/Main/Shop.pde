@@ -3,10 +3,10 @@ import java.util.Map;
 
 public class Shop {
   LinkedHashMap<String, Item> map;
-  PImage sm, mm, lm, hk, bg;//tc;
+  PImage sm, mm, lm, bm, bg;
   Main p;
 
-  int totalMoney = 300;
+  int totalMoney;
   int errorMessageDuration = 180;
   boolean showError = false;
 
@@ -30,12 +30,12 @@ public class Shop {
     this.sm = this.p.loadImage("small_missile.png");
     this.mm = this.p.loadImage("medium_missile.png");
     this.lm = this.p.loadImage("large_missile.png");
-    this.hk = this.p.loadImage("health_kit.png");
+    this.bm = this.p.loadImage("ballistic_missile.png");
     
     this.sm.resize(60, 60);
     this.mm.resize(60, 60);
     this.lm.resize(60, 60);
-    this.hk.resize(60, 60);
+    this.bm.resize(60, 60);
     this.currentPlayer = 0;
   
     this.itemList();
@@ -46,7 +46,7 @@ public class Shop {
     this.map.put("Small missile", new Item(this.sm, 25));
     this.map.put("Medium missile", new Item(this.mm, 100));
     this.map.put("Large missile", new Item(this.lm, 200));
-    this.map.put("Health pack", new Item(this.hk, 150));
+    this.map.put("Ballistic missile", new Item(this.bm, 750));
     }
     
   private void updateItemAmount() {
@@ -60,6 +60,7 @@ public class Shop {
     
     
   public void display() {
+    this.totalMoney = this.players.get(currentPlayer).getMoney();
     p.background(this.bg);
   
     p.fill(255);
@@ -115,7 +116,6 @@ public class Shop {
         String type = entry.getKey();
         int price = item.getPrice();
         if(price <= totalMoney) {  
-          totalMoney -= price;
           item.amount++;
           this.players.get(currentPlayer).buyWeapons(type, price);
         }
@@ -123,7 +123,7 @@ public class Shop {
           showError = true;
           errorMessageDuration = 180;
         }
-        totalMoney = Math.max(totalMoney, 0);
+        //totalMoney = Math.max(totalMoney, 0);
       }
       y += lineHeight + entry.getValue().image.height + 10;
     }
