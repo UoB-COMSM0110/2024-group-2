@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Tank{
   
@@ -12,8 +14,8 @@ public class Tank{
   private boolean dead;
   private PowerBar power;
   private boolean currentPlayer;
-  private ArrayList<Weapon> weapons;
-  private int currentWeapon;
+  private LinkedHashMap<String, Weapon> weapons;
+  private String currentWeapon;
   private boolean isHumanControlled;
   private int money;
   private float roundsWon;
@@ -29,9 +31,9 @@ public class Tank{
     this.dead = false;
     this.power = new PowerBar();
     this.currentPlayer = currentPlayer;
-    this.weapons = new ArrayList<>();
-    this.weapons.add(new Weapon("small missile"));
-    this.currentWeapon = 0;
+    this.weapons = new LinkedHashMap<>();
+    this.weapons.put("Small missile", new Weapon("Small missile", 20));
+    this.currentWeapon = "Small missile";
     this.isHumanControlled = isHuman;
     this.money = 0;
     this.roundsWon = 0;
@@ -69,8 +71,8 @@ public class Tank{
   }
   
   public void renderCraters() {
-    for(Weapon w : this.weapons) {
-      w.displayCraters();
+    for(Map.Entry<String, Weapon> w : this.weapons.entrySet()) {
+      w.getValue().displayCraters();
     }
   }
   
@@ -170,8 +172,8 @@ public class Tank{
   }
   
   public void removeAllCraters(){
-    for(Weapon w : this.weapons) {
-      w.removeCraters();
+    for(Map.Entry<String, Weapon> w : this.weapons.entrySet()) {
+      w.getValue().removeCraters();
     }
   }
   

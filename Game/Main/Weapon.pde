@@ -1,14 +1,15 @@
 public class Weapon {
   
-  //private int damage, type, count;
+  private int damage, count;
   private float x, y, speedX, speedY, iSpeed, theta;
   private boolean fire = false;
   private ArrayList<Crater> craters = new ArrayList<Crater>();
   private String type;
   
-  public Weapon(String type){
+  public Weapon(String type, int count){
     this.type = type;
-    this.iSpeed = 4;
+    this.iSpeed = 3.5;
+    this.count = count;
   }
   
   public float update(){
