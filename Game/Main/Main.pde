@@ -24,7 +24,7 @@ enum GameState {
 
 
 GameState playingState;
-GameState gameState = GameState.START_MENU;
+GameState gameState = GameState.SHOP;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
 Shop shop;

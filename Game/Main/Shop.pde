@@ -20,25 +20,18 @@ public class Shop {
   public Shop(Main p) {
     this.p = p;
     this.map = new LinkedHashMap<String, Item>();
-    this.bg = p.loadImage("backgroundImage.jpg");
+    this.bg = p.loadImage("dark_display.jpg");
     this.bg.resize(p.width, p.height);
   
-    //this.sm = this.p.loadImage("small_missile.png");
-    //this.mm = this.p.loadImage("medium_missile.png");
-    //this.lm = this.p.loadImage("large_missile.png");
-    //this.hk = this.p.loadImage("health_kit.png");
+    this.sm = this.p.loadImage("small_missile.png");
+    this.mm = this.p.loadImage("medium_missile.png");
+    this.lm = this.p.loadImage("large_missile.png");
+    this.hk = this.p.loadImage("health_kit.png");
     
-    this.sm = this.p.loadImage("custom_cursor1.png");
-    this.mm = this.p.loadImage("custom_cursor1.png");
-    this.lm = this.p.loadImage("custom_cursor1.png");
-    this.hk = this.p.loadImage("custom_cursor1.png");
-    //this.tc = this.p.loadImage("tank.png");
-  
     this.sm.resize(60, 60);
     this.mm.resize(60, 60);
     this.lm.resize(60, 60);
     this.hk.resize(60, 60);
-    //this.tc.resize(25, 25);
   
     this.itemList();
   }
