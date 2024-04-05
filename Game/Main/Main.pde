@@ -24,7 +24,7 @@ enum GameState {
 
 
 GameState playingState;
-GameState gameState = GameState.START_MENU;
+GameState gameState = GameState.SHOP;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
 Shop shop;
@@ -37,7 +37,6 @@ void setup() {
  
  this.gameStartScreen = new GameStart(this);
  this.gameOverScreen = new GameOver(this);
- this.shop = new Shop(this);
  
  this.terrain = new Terrain(0.0);
  this.currentRound = 1;
@@ -53,6 +52,8 @@ void setup() {
  frameRate(100);
  this.shotBar = new TimeBar(1590, 200, "Shot clock");
  this.mapBar = new TimeBar(10, 600, "Time to map shuffle");
+ 
+ this.shop = new Shop(this, tanks);
 }
 
 

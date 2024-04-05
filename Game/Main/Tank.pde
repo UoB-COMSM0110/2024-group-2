@@ -206,4 +206,20 @@ public class Tank{
     this.money += 250;
     this.roundsWon += 0.5;
   }
+  
+  public LinkedHashMap<String, Weapon> getWeapons() {
+    return this.weapons;
+  }
+  
+  public void buyWeapons(String type, int price) {
+    if(!this.weapons.containsKey(type)) {
+      this.weapons.put(type, new Weapon(type, 0));
+    }
+      this.weapons.get(type).buy();
+      this.money -= price;
+  }
+  
+  public int getMoney() {
+    return this.money;
+  }
 }

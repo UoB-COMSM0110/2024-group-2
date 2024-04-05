@@ -85,4 +85,12 @@ public class Weapon {
   public void removeCraters(){
     this.craters.clear();
   }
+  
+  public int getCount() {
+    return this.count;
+  }
+  
+  public void buy() {
+    this.count++;
+  }
 }
