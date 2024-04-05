@@ -18,7 +18,7 @@ public class Tank{
   private String currentWeapon;
   private boolean isHumanControlled;
   private int money;
-  private float roundsWon;
+  private int roundsWon;
   
   public Tank(boolean currentPlayer, boolean isHuman, String colour){
     this.tankBody = loadShape("tankBody" + colour + ".svg");
@@ -32,7 +32,7 @@ public class Tank{
     this.power = new PowerBar();
     this.currentPlayer = currentPlayer;
     this.weapons = new LinkedHashMap<>();
-    this.weapons.put("Small missile", new Weapon("Small missile", 50));
+    this.weapons.put("Small missile", new Weapon("Large missile", 50));
     this.currentWeapon = "Small missile";
     this.isHumanControlled = isHuman;
     this.money = 0;
@@ -204,7 +204,6 @@ public class Tank{
   
   public void drawRound() {
     this.money += 250;
-    this.roundsWon += 0.5;
   }
   
   public LinkedHashMap<String, Weapon> getWeapons() {
@@ -221,5 +220,9 @@ public class Tank{
   
   public int getMoney() {
     return this.money;
+  }
+  
+  public int getRoundsWon() {
+    return this.roundsWon;
   }
 }

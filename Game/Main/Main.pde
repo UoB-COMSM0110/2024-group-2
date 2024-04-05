@@ -23,7 +23,7 @@ enum GameState {
 }
 
 
-GameState playingState;// = GameState.GAME_PLAY_2;
+GameState playingState;
 GameState gameState = GameState.START_MENU;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
@@ -93,7 +93,6 @@ void draw() {
         this.shop.display();
         break;
     case GAME_OVER:
-      gameOverScreen.setWinner("Blue");
       gameOverScreen.display();
       break;
   }

@@ -49,7 +49,7 @@ public class Weapon {
         this.y -= this.speedY;
         this.speedY -= 0.02;
       }
-      return 0;
+      return -500;
   }
   private boolean dontUpdate(float x, float y){
     int index = int(x) + int(y) * (int)width;
