@@ -23,8 +23,8 @@ enum GameState {
 }
 
 
-GameState playingState = GameState.GAME_PLAY_2;
-GameState gameState = GameState.SHOP;
+GameState playingState;// = GameState.GAME_PLAY_2;
+GameState gameState = GameState.START_MENU;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
 Shop shop;
@@ -200,15 +200,17 @@ public void gameEngine() {
   if(isFiring){
     strikeX = this.currentWeapon.update();
     strikeY = this.currentWeapon.getY();
-    if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(0).getTankY()) < 50 ){
-      this.tanks.get(0).decreaseHealth(20);
+    int blastRadius = this.currentWeapon.getBlastRadius();
+    int damage = this.currentWeapon.getDamage();
+    if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < blastRadius  && abs(strikeY - this.tanks.get(0).getTankY()) < blastRadius){
+      this.tanks.get(0).decreaseHealth(damage);
       if(tankIndex == 0) {
         // + $25 for successful hit
         this.tanks.get(1).successfulHit();
       }
     }
-    if(abs(strikeX - this.tanks.get(1).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(1).getTankY()) < 50){
-      this.tanks.get(1).decreaseHealth(20);
+    if(abs(strikeX - this.tanks.get(1).getTankX() - 35) < blastRadius && abs(strikeY - this.tanks.get(1).getTankY()) < blastRadius){
+      this.tanks.get(1).decreaseHealth(damage);
       if(tankIndex == 1) {
         this.tanks.get(0).successfulHit();
       }

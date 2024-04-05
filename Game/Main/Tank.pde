@@ -32,7 +32,7 @@ public class Tank{
     this.power = new PowerBar();
     this.currentPlayer = currentPlayer;
     this.weapons = new LinkedHashMap<>();
-    this.weapons.put("Small missile", new Weapon("Small missile", 20));
+    this.weapons.put("Small missile", new Weapon("Small missile", 50));
     this.currentWeapon = "Small missile";
     this.isHumanControlled = isHuman;
     this.money = 0;

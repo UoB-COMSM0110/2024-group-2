@@ -1,6 +1,6 @@
 public class Weapon {
   
-  private int damage, count;
+  private int damage, count, blastRadius;
   private float x, y, speedX, speedY, iSpeed, theta;
   private boolean fire = false;
   private ArrayList<Crater> craters = new ArrayList<Crater>();
@@ -10,6 +10,27 @@ public class Weapon {
     this.type = type;
     this.iSpeed = 3.5;
     this.count = count;
+    switch(type) {
+      case "Small missile":
+        this.damage = 15;
+        this.blastRadius = 100;
+        break;
+      case "Medium missile":
+        this.damage = 25;
+        this.blastRadius = 150;
+        break;
+      case "Large missile":
+        this.damage = 35;
+        this.blastRadius = 250;
+        break;
+      case "Ballistic missile":
+        this.damage = 100;
+        this.blastRadius = 500;
+        break;
+      default:
+        break;      
+    }
+    
   }
   
   public float update(){
@@ -19,8 +40,8 @@ public class Weapon {
         fill(255, 255, 0);
         noStroke();
         frameRate(10);
-        ellipse(this.x, this.y, 100, 100);
-        this.craters.add(new Crater(this.x, this.y, 100));
+        ellipse(this.x, this.y, this.blastRadius, this.blastRadius);
+        this.craters.add(new Crater(this.x, this.y, this.blastRadius));
         return this.x;
       }
       if(this.fire){
@@ -92,5 +113,13 @@ public class Weapon {
   
   public void buy() {
     this.count++;
+  }
+  
+  public int getDamage() {
+    return this.damage;
+  }
+  
+  public int getBlastRadius() {
+    return this.blastRadius/2;
   }
 }
