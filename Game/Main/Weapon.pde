@@ -122,4 +122,8 @@ public class Weapon {
   public int getBlastRadius() {
     return this.blastRadius/2;
   }
+  
+  public void decreaseCount() {
+    this.count--;
+  }
 }

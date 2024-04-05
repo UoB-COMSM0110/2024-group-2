@@ -62,7 +62,7 @@ public class Shop {
   public void display() {
     this.totalMoney = this.players.get(currentPlayer).getMoney();
     p.background(this.bg);
-  
+    this.updateItemAmount();
     p.fill(255);
     p.textSize(60);
     p.textAlign(CENTER);

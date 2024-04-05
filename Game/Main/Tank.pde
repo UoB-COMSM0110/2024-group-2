@@ -32,7 +32,7 @@ public class Tank{
     this.power = new PowerBar();
     this.currentPlayer = currentPlayer;
     this.weapons = new LinkedHashMap<>();
-    this.weapons.put("Small missile", new Weapon("Large missile", 50));
+    this.weapons.put("Small missile", new Weapon("Small missile", 50));
     this.currentWeapon = "Small missile";
     this.isHumanControlled = isHuman;
     this.money = 0;
@@ -160,6 +160,7 @@ public class Tank{
     this.weapons.get(this.currentWeapon).setY(this.getTurretY()- sin(radians(this.getTurretAngle())) * 40);
     this.weapons.get(this.currentWeapon).setFire(true);
     this.weapons.get(this.currentWeapon).setTheta(this.getTurretAngle());
+    this.weapons.get(this.currentWeapon).decreaseCount();
   }
   
   public Weapon getCurrentWeapon(){
