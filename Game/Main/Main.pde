@@ -279,6 +279,8 @@ public void mousePressed() {
       gameOverScreen.mousePressed();
     } else if(gameState == GameState.SHOP) {
       shop.mousePressed();
+    } else {
+      this.tanks.get(tankIndex).getWDisplay().mousePressed();
     }
 }
 

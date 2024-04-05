@@ -32,7 +32,6 @@ class TimeBar{
     
     float rectHeight = 15;
     
-    //float rectX = (width - rectWidth) - 10;
     float rectY = 900;
     
     rect(rectX, rectY, this.actualWidth, rectHeight);

@@ -10,7 +10,7 @@ public class Weapon {
     this.type = type;
     this.iSpeed = 3.5;
     this.count = count;
-    switch(type) {
+    switch(this.type) {
       case "Small missile":
         this.damage = 15;
         this.blastRadius = 100;
@@ -66,6 +66,8 @@ public class Weapon {
   }
   public void display(){
     fill(0,0,0);
+    strokeWeight(2);
+    stroke(0);
     ellipse(this.x, this.y, 7, 7);
   }
   public void setX(float val){
@@ -125,5 +127,9 @@ public class Weapon {
   
   public void decreaseCount() {
     this.count--;
+  }
+  
+  public String getType() {
+    return this.type;
   }
 }

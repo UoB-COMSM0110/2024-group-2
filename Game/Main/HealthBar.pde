@@ -14,6 +14,8 @@ public class HealthBar {
     this.y = tankY + 45;
   }
   public void display(){
+    stroke(0);
+    strokeWeight(1);
     fill(255, 0, 0);
     rect(this.x, this.y, 50, 10);
     float activeWidth = map(this.value, 0, this.maxValue, 0, this.width);
