@@ -123,7 +123,6 @@ public class Shop {
           showError = true;
           errorMessageDuration = 180;
         }
-        //totalMoney = Math.max(totalMoney, 0);
       }
       y += lineHeight + entry.getValue().image.height + 10;
     }

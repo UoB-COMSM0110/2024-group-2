@@ -97,6 +97,11 @@ public class Weapon {
       ellipse(c.getX(), c.getY(), c.getSize(), c.getSize());
     }
   }
+  
+  public ArrayList<Crater> getCraters() {
+    return this.craters;
+  }
+  
   public void setISpeed(float value){
     this.iSpeed = value;
   }

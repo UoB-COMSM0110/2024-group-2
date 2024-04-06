@@ -35,6 +35,8 @@ public class Tank{
     this.weapons = new LinkedHashMap<>();
     this.weapons.put("Small missile", new Weapon("Small missile", 50));
     this.weapons.put("Medium missile", new Weapon("Medium missile", 5));
+    this.weapons.put("Large missile", new Weapon("Large missile", 0));
+    this.weapons.put("Ballistic missile", new Weapon("Ballistic missile", 0));
     this.currentWeapon = "Small missile";
     this.wDisplay = new WeaponDisplay(this);
     this.isHumanControlled = isHuman;
@@ -165,12 +167,14 @@ public class Tank{
     this.weapons.get(this.currentWeapon).setFire(true);
     this.weapons.get(this.currentWeapon).setTheta(this.getTurretAngle());
     this.weapons.get(this.currentWeapon).decreaseCount();
-    println(this.currentWeapon);
-    println(this.weapons.get(this.currentWeapon).getBlastRadius());
   }
   
   public Weapon getCurrentWeapon(){
     return this.weapons.get(this.currentWeapon);
+  }
+  
+  public String getCurrentWeaponType(){
+    return this.currentWeapon;
   }
   
   public void setCurrentWeapon(String weapon) {
@@ -222,9 +226,6 @@ public class Tank{
   }
   
   public void buyWeapons(String type, int price) {
-    if(!this.weapons.containsKey(type)) {
-      this.weapons.put(type, new Weapon(type, 0));
-    }
       this.weapons.get(type).buy();
       this.money -= price;
   }

@@ -89,8 +89,10 @@ public class GameStart {
                               "Gameplay:\n" +
                               "- Use the left and right keys to move your tank.\n" +
                               " - Use '=' to increase shot power and '-' to decrease shot power.\n" +
-                              "- Press space to shoot.\n\n" +
-                              "First to score three hits wins the match!\n\n" +
+                              "- Press space to shoot.\n" +
+                              "- Press the grey weapon button to cycle your current weapon\n" +
+                              "- Additional weapons can be bought from the shop between rounds\n\n" +
+                              "The tank which wins the most rounds wins the match!\n\n" +
                               "Good luck, and may the best tank win!";
         JOptionPane.showMessageDialog(null, gameInstructions, "Game Instructions", JOptionPane.INFORMATION_MESSAGE);
       } 
