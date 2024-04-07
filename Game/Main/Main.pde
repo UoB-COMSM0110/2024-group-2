@@ -18,12 +18,16 @@ enum GameState {
   START_MENU,
   GAME_PLAY_1,
   GAME_PLAY_2,
+  SHOP,
   GAME_OVER
 }
 
+
+GameState playingState;
 GameState gameState = GameState.START_MENU;
 GameStart gameStartScreen;
 GameOver gameOverScreen;
+Shop shop;
 
 void setup() {
  size(1800, 960);
@@ -48,6 +52,8 @@ void setup() {
  frameRate(100);
  this.shotBar = new TimeBar(1590, 200, "Shot clock");
  this.mapBar = new TimeBar(10, 600, "Time to map shuffle");
+ 
+ this.shop = new Shop(this, tanks);
 }
 
 
@@ -75,14 +81,18 @@ void draw() {
       gameStartScreen.display();
       break;
     case GAME_PLAY_1:
+      playingState = GameState.GAME_PLAY_1;
       gameEngine();
       break;
     case GAME_PLAY_2:
+      playingState = GameState.GAME_PLAY_2;
       this.tanks.get(1).setIsHumanControlled(true);
       gameEngine();
       break;
+    case SHOP:
+        this.shop.display();
+        break;
     case GAME_OVER:
-      gameOverScreen.setWinner("Blue");
       gameOverScreen.display();
       break;
   }
@@ -163,12 +173,23 @@ public void gameEngine() {
   this.tanks.get(1).renderCraters();
   this.tanks.get(0).renderTank();
   this.tanks.get(1).renderTank();
+  this.displayMoney();
   
-  if(tanks.get(0).getDead() || tanks.get(1).getDead()){
+  if(this.tanks.get(0).getDead() || this.tanks.get(1).getDead()){
+    if(this.tanks.get(0).getDead() && !this.tanks.get(1).getDead()){
+      this.tanks.get(1).winRound();
+    } else if (!this.tanks.get(0).getDead()) {
+      this.tanks.get(0).winRound();
+    } else {
+      this.tanks.get(0).drawRound();
+      this.tanks.get(1).drawRound();
+    }
+    
     if(this.currentRound == this.nRounds) {
       gameState = GameState.GAME_OVER;
     }else {
       startNextRound();
+      gameState = GameState.SHOP;
     }
     return;
   }
@@ -178,11 +199,20 @@ public void gameEngine() {
   if(isFiring){
     strikeX = this.currentWeapon.update();
     strikeY = this.currentWeapon.getY();
-    if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(0).getTankY()) < 50 ){
-      this.tanks.get(0).decreaseHealth(20);
+    int blastRadius = this.currentWeapon.getBlastRadius();
+    int damage = this.currentWeapon.getDamage();
+    if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < blastRadius  && abs(strikeY - this.tanks.get(0).getTankY()) < blastRadius){
+      this.tanks.get(0).decreaseHealth(damage);
+      if(tankIndex == 0) {
+        // + $25 for successful hit
+        this.tanks.get(1).successfulHit();
+      }
     }
-    if(abs(strikeX - this.tanks.get(1).getTankX() - 35) < 50 && abs(strikeY - this.tanks.get(1).getTankY()) < 50){
-      this.tanks.get(1).decreaseHealth(20);
+    if(abs(strikeX - this.tanks.get(1).getTankX() - 35) < blastRadius && abs(strikeY - this.tanks.get(1).getTankY()) < blastRadius){
+      this.tanks.get(1).decreaseHealth(damage);
+      if(tankIndex == 1) {
+        this.tanks.get(0).successfulHit();
+      }
     }
     shotBar.resetTime();
     this.currentWeapon.display();
@@ -247,11 +277,26 @@ public void mousePressed() {
       gameStartScreen.mousePressed();
     } else if(gameState == GameState.GAME_OVER) {
       gameOverScreen.mousePressed();
+    } else if(gameState == GameState.SHOP) {
+      shop.mousePressed();
+    } else {
+      this.tanks.get(tankIndex).getWDisplay().mousePressed();
     }
 }
 
 public void setNRounds(int rounds){
  this.nRounds = rounds; 
+}
+
+public void displayMoney() {
+  String money = "$" + this.tanks.get(tankIndex).getMoney();
+  if(tankIndex == 0) {
+    fill(0,0,255);
+  } else {
+    fill(255,0,0);
+  }
+  textSize(40);
+  text(money, 50, 50);
 }
 
 public void startNextRound() {
@@ -267,5 +312,6 @@ public void startNextRound() {
     this.tanks.get(1).shufflePosition();
     this.tanks.get(0).removeAllCraters();
     this.tanks.get(1).removeAllCraters();
-    this.endRound = millis() + 1000;
+    this.currentWeapon = null;
+    this.isFiring = false;
 }

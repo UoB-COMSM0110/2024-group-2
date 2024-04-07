@@ -1,81 +1,98 @@
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-PImage sm, mm, lm, hk, bg, tc;
+public class Shop {
+  LinkedHashMap<String, Item> map;
+  PImage sm, mm, lm, bm, bg;
+  Main p;
 
-Shop shop;
-int totalMoney = 300;
-int errorMessageDuration = 180;
-boolean showError = false;
+  int totalMoney;
+  int errorMessageDuration = 180;
+  boolean showError = false;
 
-int textSize = 30;
-int buttonWidth = 300;
-int buttonHeight = 50;
-int buttonRadius = 10;
-color buttonColour = color(255);
-color hoverColour = color(255, 204, 0);
+  int textSize = 30;
+  int buttonWidth = 300;
+  int buttonHeight = 50;
+  int buttonRadius = 10;
+  color buttonColour = color(255);
+  color hoverColour = color(255, 204, 0);
+  private int currentPlayer;
+  
+  private ArrayList<Tank> players;
+  
+  public Shop(Main p, ArrayList<Tank> tanks) {
+    this.p = p;
+    this.players = tanks;
+    this.map = new LinkedHashMap<String, Item>();
+    this.bg = p.loadImage("dark_display.jpg");
+    this.bg.resize(p.width, p.height);
+  
+    this.sm = this.p.loadImage("small_missile.png");
+    this.mm = this.p.loadImage("medium_missile.png");
+    this.lm = this.p.loadImage("large_missile.png");
+    this.bm = this.p.loadImage("ballistic_missile.png");
+    
+    this.sm.resize(60, 60);
+    this.mm.resize(60, 60);
+    this.lm.resize(60, 60);
+    this.bm.resize(60, 60);
+    this.currentPlayer = 0;
+  
+    this.itemList();
+    this.updateItemAmount();
+  }
+  
+  public void itemList() {
+    this.map.put("Small missile", new Item(this.sm, 25));
+    this.map.put("Medium missile", new Item(this.mm, 100));
+    this.map.put("Large missile", new Item(this.lm, 200));
+    this.map.put("Ballistic missile", new Item(this.bm, 750));
+    }
+    
+  private void updateItemAmount() {
+    for(Map.Entry<String, Weapon> w : this.players.get(currentPlayer).getWeapons().entrySet()) {
+      int playerAmount = w.getValue().getCount();
+      String weaponType = w.getKey();
+      
+      this.map.get(weaponType).updateAmount(playerAmount);
+    }
+  }
+    
+    
+  public void display() {
+    this.totalMoney = this.players.get(currentPlayer).getMoney();
+    p.background(this.bg);
+    this.updateItemAmount();
+    p.fill(255);
+    p.textSize(60);
+    p.textAlign(CENTER);
+    p.text("Item Shop", p.width/2, 100);
+    p.fill(255);
+    p.textSize(30);
+    p.textAlign(CENTER);
+    p.text("Select items you wish to purchase by hovering mouse above the name of the product and click left mouse button to buy the item. \n", 900, 750);
+  
+    drawButton("Next", p.width/2 - this.buttonWidth/2, p.height - 100, this.buttonWidth, this.buttonHeight);
 
-void setup() {
-  size(1800, 960);
-  bg = loadImage("dark_display.jpg");
-  bg.resize(1800, 960);
-  background(bg);
+    String money = "Money: $" + totalMoney;
+    p.fill(255);
+    p.text(money, p.width - textWidth(money) - 20, 80);
   
-  sm = loadImage("small_missile.png");
-  mm = loadImage("medium_missile.png");
-  lm = loadImage("large_missile.png");
-  hk = loadImage("health_kit.png");
-  tc = loadImage("tank.png");
-  
-  sm.resize(60, 60);
-  mm.resize(60, 60);
-  lm.resize(60, 60);
-  hk.resize(60, 60);
-  tc.resize(25, 25);
-  
-  shop = new Shop();
-}
-
-void draw() {
-  background(bg);
-  cursor(tc, tc.width/2, tc.height/2);
-  
-  fill(255);
-  textSize(60);
-  textAlign(CENTER);
-  text("Item Shop", width/2, 100);
-  fill(255);
-  textSize(30);
-  textAlign(CENTER);
-  text("Select items you wish to purchase by hovering mouse above the name of the product and click left mouse button to buy the item. \n", 900, 750);
-  
-  drawButton("Return", width/2 - buttonWidth/2, height - 100, buttonWidth, buttonHeight);
-
-  String money = "Money: $" + totalMoney;
-  fill(255);
-  text(money, width - textWidth(money) - 20, 80);
-  
-  int x = 800;
-  int y = 250;
-  int lineHeight = 60;
-  float maxTextWidth = 0;
-  if(shop != null && shop.map != null) {
-    for(Map.Entry<String, Item> entry : shop.map.entrySet()){
+    int x = 800;
+    int y = 250;
+    int lineHeight = 60;
+    float maxTextWidth = 0;
+    for(Map.Entry<String, Item> entry : this.map.entrySet()){
       Item item = entry.getValue();
       float currentTextWidth = textWidth(entry.getKey());
       if(currentTextWidth > maxTextWidth){
         maxTextWidth = currentTextWidth;
       }
-      if(isMouseOverButton(x, y, textWidth(entry.getKey()), lineHeight)) {
-        fill(hoverColour);
-      } else {
-        fill(buttonColour);
-      }
       
-      drawButton(entry.getKey(), x - buttonWidth/2, y - lineHeight/2, buttonWidth, buttonHeight);
-      image(item.image, x + 300, y - lineHeight/2);
-      fill(255);
-      text("Amount: " + item.purchaseCount, x + 450, y + 0);
+      drawButton(entry.getKey() + ": $" + entry.getValue().getPrice(), x - buttonWidth/2, y - lineHeight/2, buttonWidth, buttonHeight);
+      p.image(item.image, x + 300, y - lineHeight/2);
+      p.fill(255);
+      p.text("Current amount: " + item.amount, x + 500, y + 0);
       y += lineHeight + item.image.height + 10;
       
       if(showError && errorMessageDuration > 0) {
@@ -87,87 +104,113 @@ void draw() {
       }
     }
   }
-}
-
-void mousePressed() {
-  int x = 800;
-  int y = 250;
-  int lineHeight = 60;
   
-  if(shop != null && shop.map != null) {
-    for(Map.Entry<String, Item> entry : shop.map.entrySet()){
-      if(isMouseOverButton(x, y, textWidth(entry.getKey()), lineHeight)) {
+  public void mousePressed() {
+    int x = 800;
+    int y = 250;
+    int lineHeight = 60;
+  
+    for(Map.Entry<String, Item> entry : this.map.entrySet()){
+      if(isMouseOverButton(x - buttonWidth/2, y - lineHeight/2, buttonWidth, buttonHeight)) {
         Item item = entry.getValue();
-        int price = shop.extractPrice(entry.getKey());
+        String type = entry.getKey();
+        int price = item.getPrice();
         if(price <= totalMoney) {  
-          totalMoney -= price;
-          item.purchaseCount++;
+          item.amount++;
+          this.players.get(currentPlayer).buyWeapons(type, price);
         }
         else {
           showError = true;
           errorMessageDuration = 180;
         }
-        totalMoney = Math.max(totalMoney, 0);
       }
       y += lineHeight + entry.getValue().image.height + 10;
     }
-  }
-  if(mouseX > width/2 - 50 && mouseX < width/2 + 50 && mouseY > height - 100 && mouseY < height - 50) {
-    exit();
-  }
-}
-
-boolean isMouseOverButton(float x, float y, float buttonWidth, float buttonHeight) {
-  return mouseX >= x && mouseX <= x + buttonWidth && mouseY >= y - buttonHeight/2 && mouseY <= y + buttonHeight/2;
-}
-
-void drawButton(String label, float x, float y, float w, float h) {
-  rectMode(CORNER);
-  strokeWeight(2);
-  stroke(200);
-  if(isMouseOverButton(x, y, w, h)){
-    fill(hoverColour);
-  } else {
-    fill(buttonColour);
-  }
-  rect(x, y, w, h, buttonRadius);
-  
-  fill(0);
-  textSize(textSize);
-  textAlign(CENTER, CENTER);
-  text(label, x + w/2, y + h/2);
-}
-
-class Shop {
-  LinkedHashMap<String, Item> map;
-  
-  Shop() {
-    map = new LinkedHashMap<String, Item>();
-    itemList();
-  }
-  
-    public void itemList() {
-      map.put("Small missile: $25", new Item(sm, 25));
-      map.put("Medium missile: $100", new Item(mm, 100));
-      map.put("Large missile: $200", new Item(lm, 200));
-      map.put("Health pack: $150", new Item(hk, 150));
-    }
-    
-    int extractPrice(String item) {
-      String[] parts = item.split(": ");
-      String priceStr = parts[1].replaceAll("[^\\d]", "");
-      return Integer.parseInt(priceStr);
-    }
-}
-    
-    class Item {
-      PImage image;
-      int price;
-      int purchaseCount;
-      
-      Item(PImage image, int price) {
-        this.image = image;
-        this.price = price;
-        this.purchaseCount = 0;
+    if(isMouseOverButton(this.p.width/2 - this.buttonWidth/2, this.p.height - 100, this.buttonWidth, this.buttonHeight)) {
+      if(this.p.playingState == GameState.GAME_PLAY_1 || this.currentPlayer == 1) {
+        if(this.p.playingState == GameState.GAME_PLAY_1){
+          this.aiPurchase();
+        }
+        gameState = this.p.playingState;
+        resetModeDefaults();
+        this.p.endRound = millis() + 1000;
+      } else {
+        this.currentPlayer = 1;
+        this.resetItemAmounts();
+        this.updateItemAmount();
       }
+    }
+  }
+
+  private boolean isMouseOverButton(float x, float y, float buttonWidth, float buttonHeight) {
+    return mouseX >= x && mouseX <= x + buttonWidth && mouseY >= y - buttonHeight/2 && mouseY <= y + buttonHeight/2;
+  }
+  
+  private void aiPurchase() {
+    int budget = this.players.get(1).getMoney();
+    
+    while(budget >= 25) {
+      if(budget >= 200){
+        this.players.get(1).buyWeapons("Large missile", 200);
+        budget -= 200;
+      } else if (budget >= 100) {
+        this.players.get(1).buyWeapons("Medium missile", 100);
+        budget -= 100;
+      } else if (budget >= 25) {
+        this.players.get(1).buyWeapons("Small missile", 25);
+        budget -= 25;
+      }
+    }
+  }
+
+  private void drawButton(String label, float x, float y, float w, float h) {
+    this.p.rectMode(CORNER);
+    this.p.strokeWeight(2);
+    this.p.stroke(200);
+    if(isMouseOverButton(x, y, w, h)){
+      this.p.fill(hoverColour);
+    } else {
+      this.p.fill(buttonColour);
+    }
+    this.p.rect(x, y, w, h, buttonRadius);
+  
+    this.p.fill(0);
+    this.p.textSize(textSize);
+    this.p.textAlign(CENTER, CENTER);
+    this.p.text(label, x + w/2, y + h/2);
+  }
+  
+  private void resetModeDefaults() {
+    this.p.rectMode(PApplet.CORNER);
+    this.p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+    this.p.strokeWeight(1);
+    this.p.noStroke();
+  }
+  
+  private void resetItemAmounts() {
+    for(Map.Entry<String, Item> entry : this.map.entrySet()){
+      entry.getValue().updateAmount(0);
+    }
+  }
+      
+  //item subclass
+  public class Item {
+    PImage image;
+    int price;
+    int amount;
+      
+    public Item(PImage image, int price) {
+      this.image = image;
+      this.price = price;
+      this.amount = 0;
+    }
+    
+    public void updateAmount(int playerAmount) {
+      this.amount = playerAmount;
+    }
+    
+    public int getPrice() {
+      return this.price;
+    }
+  }  
 }

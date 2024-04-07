@@ -9,7 +9,7 @@ public class PowerBar {
     this.minValue = 1;
     this.width = 400;
     this.height = 20;
-    this.x = 850;
+    this.x = 700;
     this.y = 900;
   }
   
@@ -21,6 +21,7 @@ public class PowerBar {
     fill(0, 0, 0);
     text("Shot power", this.x + this.width/2, this.y-12);
     float activeWidth = map(this.value, this.minValue, this.maxValue, 0, this.width);
+    strokeWeight(1);
     stroke(0);
     fill(0,255,0);
     rect(this.x, this.y, activeWidth, this.height);

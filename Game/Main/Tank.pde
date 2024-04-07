@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Tank{
   
@@ -12,9 +14,12 @@ public class Tank{
   private boolean dead;
   private PowerBar power;
   private boolean currentPlayer;
-  private ArrayList<Weapon> weapons;
-  private int currentWeapon;
+  private LinkedHashMap<String, Weapon> weapons;
+  private String currentWeapon;
   private boolean isHumanControlled;
+  private int money;
+  private int roundsWon;
+  private WeaponDisplay wDisplay;
   
   public Tank(boolean currentPlayer, boolean isHuman, String colour){
     this.tankBody = loadShape("tankBody" + colour + ".svg");
@@ -27,10 +32,16 @@ public class Tank{
     this.dead = false;
     this.power = new PowerBar();
     this.currentPlayer = currentPlayer;
-    this.weapons = new ArrayList<>();
-    this.weapons.add(new Weapon("small missile"));
-    this.currentWeapon = 0;
+    this.weapons = new LinkedHashMap<>();
+    this.weapons.put("Small missile", new Weapon("Small missile", 50));
+    this.weapons.put("Medium missile", new Weapon("Medium missile", 5));
+    this.weapons.put("Large missile", new Weapon("Large missile", 0));
+    this.weapons.put("Ballistic missile", new Weapon("Ballistic missile", 0));
+    this.currentWeapon = "Small missile";
+    this.wDisplay = new WeaponDisplay(this);
     this.isHumanControlled = isHuman;
+    this.money = 0;
+    this.roundsWon = 0;
     setTankY();
   }
   
@@ -61,12 +72,13 @@ public class Tank{
     this.health.display();
     if(this.currentPlayer){
       this.power.display();
+      this.wDisplay.display();
     }
   }
   
   public void renderCraters() {
-    for(Weapon w : this.weapons) {
-      w.displayCraters();
+    for(Map.Entry<String, Weapon> w : this.weapons.entrySet()) {
+      w.getValue().displayCraters();
     }
   }
   
@@ -154,10 +166,19 @@ public class Tank{
     this.weapons.get(this.currentWeapon).setY(this.getTurretY()- sin(radians(this.getTurretAngle())) * 40);
     this.weapons.get(this.currentWeapon).setFire(true);
     this.weapons.get(this.currentWeapon).setTheta(this.getTurretAngle());
+    this.weapons.get(this.currentWeapon).decreaseCount();
   }
   
   public Weapon getCurrentWeapon(){
     return this.weapons.get(this.currentWeapon);
+  }
+  
+  public String getCurrentWeaponType(){
+    return this.currentWeapon;
+  }
+  
+  public void setCurrentWeapon(String weapon) {
+    this.currentWeapon = weapon;
   }
   
   public void shufflePosition() {
@@ -166,8 +187,8 @@ public class Tank{
   }
   
   public void removeAllCraters(){
-    for(Weapon w : this.weapons) {
-      w.removeCraters();
+    for(Map.Entry<String, Weapon> w : this.weapons.entrySet()) {
+      w.getValue().removeCraters();
     }
   }
   
@@ -185,5 +206,39 @@ public class Tank{
   
   public void setDead(boolean dead){
     this.dead = dead;
+  }
+  
+  public void successfulHit(){
+    this.money += 25;
+  }
+  
+  public void winRound() {
+    this.money += 500;
+    this.roundsWon++;
+  }
+  
+  public void drawRound() {
+    this.money += 250;
+  }
+  
+  public LinkedHashMap<String, Weapon> getWeapons() {
+    return this.weapons;
+  }
+  
+  public void buyWeapons(String type, int price) {
+      this.weapons.get(type).buy();
+      this.money -= price;
+  }
+  
+  public int getMoney() {
+    return this.money;
+  }
+  
+  public int getRoundsWon() {
+    return this.roundsWon;
+  }
+  
+  public WeaponDisplay getWDisplay() {
+    return this.wDisplay;
   }
 }

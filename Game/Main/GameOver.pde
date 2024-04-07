@@ -12,6 +12,8 @@ public class GameOver {
     PImage backgroundImage;
     int baseY = 0;
     String winner;
+    int blueRoundsWon;
+    int redRoundsWon;
     
     public GameOver(Main p) {
         this.p = p;
@@ -51,14 +53,25 @@ public class GameOver {
 
     public void drawTitle(){
       p.textFont(titleFont);
-      p.fill(0);
       p.textSize(88);
       p.textAlign(PApplet.CENTER, PApplet.CENTER);
-      p.text("Game Over: " + winner + " tank wins!", p.width / 2, 400);
+      p.fill(0,0,255);
+      p.text(this.blueRoundsWon, (p.width / 2) - 100 , 300);
+      p.fill(0);
+      p.text("vs", (p.width / 2) , 300);
+      p.fill(255,0,0);
+      p.text(this.redRoundsWon, (p.width / 2) + 100 , 300);
+      p.fill(0);
+      if(this.winner.equals("Draw")) {
+        p.text("Game Over: It's a draw!", p.width / 2, 400);
+      } else {
+        p.text("Game Over: " + winner + " tank wins!", p.width / 2, 400);
+      }
     }
     
     public void display() {
       p.background(backgroundImage);
+      setWinner();
       drawTitle();
       drawButton("Play Again", 210, true);
       drawButton("Exit", 290, true);
@@ -87,11 +100,22 @@ public class GameOver {
     } 
     
   private void resetModeDefaults() {
-    p.rectMode(PApplet.CORNER);
-    p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+    this.p.rectMode(PApplet.CORNER);
+    this.p.textAlign(PApplet.LEFT, PApplet.BASELINE);
+    this.p.strokeWeight(1);
+    this.p.noStroke();
   }
   
-  public void setWinner(String winner) {
-    this.winner = winner;
+  public void setWinner() {
+    this.blueRoundsWon = this.p.tanks.get(0).getRoundsWon();
+    this.redRoundsWon = this.p.tanks.get(1).getRoundsWon();
+    
+    if(blueRoundsWon > redRoundsWon){
+      this.winner = "Blue";
+    } else if (redRoundsWon > blueRoundsWon) {
+      this.winner = "Red";
+    } else {
+      this.winner = "Draw";
+    }
   }
  }
