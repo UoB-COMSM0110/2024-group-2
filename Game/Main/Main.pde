@@ -128,10 +128,10 @@ void aiTurretAdjust() {
   
   if(xDist < 0) {
     turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 135;
-    iSpeed = aiCalcISpeed(-xDist, yDist);
+    iSpeed = aiCalcISpeed2(-xDist - 20, yDist);
   } else {
     turretAdjust = this.tanks.get(tankIndex).getTurretAngle() - 45;
-    iSpeed = aiCalcISpeed(xDist, yDist);
+    iSpeed = aiCalcISpeed2(xDist - 20, yDist);
   }
   
   if(turretAdjust < 0) {
@@ -146,14 +146,11 @@ void aiTurretAdjust() {
   tanks.get(tankIndex).getCurrentWeapon().setISpeed(iSpeed);
 }
 
-float aiCalcISpeed(float absXDist, float yDist) {
-  
+float aiCalcISpeed2(float absXDist, float yDist) {
   float iSpeed;
-  if(yDist > 0){
-    iSpeed = (0.5 + 0.25*yDist/absXDist) * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
-  }else{
-    iSpeed = 0.5 * absXDist * 0.02 * sin(radians(45)) * sin(radians(45));
-  }
+  
+  iSpeed = sqrt((0.02 * pow(absXDist, 2) / pow(cos(radians(45)), 2)) * (1 / (absXDist * tan(radians(45)) - yDist)) * 0.5);
+  
   return iSpeed;
 }
 
