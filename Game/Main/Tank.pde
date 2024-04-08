@@ -15,7 +15,7 @@ public class Tank{
   private PowerBar power;
   private boolean currentPlayer;
   private LinkedHashMap<String, Weapon> weapons;
-  private String currentWeapon;
+  private String currentWeapon, colour;
   private boolean isHumanControlled;
   private int money;
   private int roundsWon;
@@ -24,7 +24,12 @@ public class Tank{
   public Tank(boolean currentPlayer, boolean isHuman, String colour){
     this.tankBody = loadShape("tankBody" + colour + ".svg");
     this.tankTurret = loadShape("tankTurret.svg");
-    this.tankX = random(width - 50);
+    if(colour.equals("Red")) {
+      this.tankX = random(0, width/2 - 70);
+    } else {
+      this.tankX = random(width/2, width - 70);
+    }
+    this.colour = colour;
     this.turretAngle = 180;
     this.turretAdjustX = 30;
     this.turretAdjustY = 5;
@@ -182,7 +187,12 @@ public class Tank{
   }
   
   public void shufflePosition() {
-    this.tankX = random(0, width - 70);
+    
+    if(this.colour.equals("Red")) {
+      this.tankX = random(0, width/2 - 70);
+    } else {
+      this.tankX = random(width/2, width - 70);
+    }
     this.setTankY();
   }
   
