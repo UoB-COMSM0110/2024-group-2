@@ -72,6 +72,7 @@ public class GameStart {
       // 1 Player
       if (overRect(p.width / 2 - buttonWidth / 2, baseY + 50, buttonWidth, buttonHeight, mouseX, mouseY)) {
         p.setNRounds(setNumberOfRounds());
+        p.setHard(setDifficulty());
         resetModeDefaults();
         gameState = GameState.GAME_PLAY_1;
         p.endRound = millis() + 1000;
@@ -125,6 +126,15 @@ public class GameStart {
       nRounds = setNumberOfRounds();
     }
     return nRounds;
+ }
+ 
+  private boolean setDifficulty() {
+    String[] options = new String[] {"Easy", "Hard"};
+    int option = JOptionPane.showOptionDialog(null,"Select difficulty of CPU opponent:", "Select difficulty", 
+                                  JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    if(option == 0) {
+      return false; } 
+    return true;
  }
  
 }

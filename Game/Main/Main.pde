@@ -8,11 +8,13 @@ TimeBar shotBar;
 TimeBar mapBar;
 boolean isFiring = false;
 Weapon currentWeapon;
+boolean isHard = false;
 PImage customCursor;
 int nRounds;
 int currentRound;
 int endRound;
 int shuffleDelay;
+boolean miss = false;
 
 enum GameState {
   START_MENU,
@@ -150,6 +152,16 @@ float aiCalcISpeed2(float absXDist, float yDist) {
   float iSpeed;
   
   iSpeed = sqrt((0.02 * pow(absXDist, 2) / pow(cos(radians(45)), 2)) * (1 / (absXDist * tan(radians(45)) - yDist)) * 0.5);
+  
+  // miss 50% of the time in easy mode
+  if(!this.isHard && this.miss) {
+    //change value of miss
+    this.miss = !this.miss;
+    return iSpeed * 2;
+  }
+  
+  //change value of miss
+  this.miss = !this.miss;
   
   return iSpeed;
 }
@@ -311,4 +323,8 @@ public void startNextRound() {
     this.tanks.get(1).removeAllCraters();
     this.currentWeapon = null;
     this.isFiring = false;
+}
+
+public void setHard(boolean isHard) {
+  this.isHard = isHard;
 }
