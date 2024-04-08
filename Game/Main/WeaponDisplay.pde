@@ -20,6 +20,10 @@ public class WeaponDisplay {
     if(currentWeaponAmount == 0 && !this.currentPlayer.getCurrentWeapon().getFire()) {
       this.changeWeapon();
     }
+    //ai tank should use most powerful weapon by default
+    if(!this.currentPlayer.getIsHumanControlled() && !this.currentPlayer.getCurrentWeapon().getFire()) {
+      this.selectMostPowerfulWeapon();
+    }
     String label =  this.currentPlayer.getCurrentWeaponType() + ": " + currentWeaponAmount;
     drawButton(label, buttonX, buttonY, buttonWidth, buttonHeight);
   }
@@ -85,5 +89,32 @@ public class WeaponDisplay {
           this.currentPlayer.setCurrentWeapon("Large missile");
         }
       }
+  }
+  
+  private void selectMostPowerfulWeapon() {
+    int medCount, largeCount, balCount;
+    medCount = this.weapons.get("Medium missile").getCount();
+    largeCount = this.weapons.get("Large missile").getCount();
+    balCount = this.weapons.get("Ballistic missile").getCount();
+    
+      if(this.currentPlayer.getCurrentWeaponType().equals("Small missile")) {
+        if(balCount > 0 ){
+          this.currentPlayer.setCurrentWeapon("Ballistic missile");
+        } else if(largeCount > 0) {
+          this.currentPlayer.setCurrentWeapon("Large missile");
+        } else if(medCount > 0) {
+          this.currentPlayer.setCurrentWeapon("Medium missile");
+        }
+      } else if(this.currentPlayer.getCurrentWeaponType().equals("Medium missile")) {
+        if(balCount > 0){
+          this.currentPlayer.setCurrentWeapon("Ballistic missile");
+        } else if(largeCount > 0) {
+          this.currentPlayer.setCurrentWeapon("Large missile");
+        }
+    } else if(this.currentPlayer.getCurrentWeaponType().equals("Large missile")) {
+        if(balCount > 0){
+          this.currentPlayer.setCurrentWeapon("Ballistic missile");
+        } 
+    }
   }
 }
