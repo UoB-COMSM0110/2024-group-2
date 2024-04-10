@@ -91,3 +91,8 @@ As many of our classes are aggregations of other classes in the game, we realise
 * the shop will then update its display to reflect the Tank's new item count for the purchased item and the money left to spend.
 
 ![Purchasing an item from the shop](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/shopPurchase_communication.png)
+
+We also designed a communication diagram for firing a weapon which proved to have a complex series of communications between objects. Before firing, the objects will need to communicate to determine shot power and trajectory. After impact, objects will need to communicate to determine if the shot impacted the opponent and to adjust the health and money of the respective players accordingly, as well as displaying any damage done by the weapon to the map.
+
+![Firing a shot](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/fireWeapon_communication.png)
+
