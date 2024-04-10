@@ -98,6 +98,8 @@ void draw() {
       gameOverScreen.display();
       break;
   }
+  //NEW CODE
+  displayWindFlag();
   
 }
 
@@ -327,4 +329,22 @@ public void startNextRound() {
 
 public void setHard(boolean isHard) {
   this.isHard = isHard;
+}
+
+//NEW CODE
+void displayWindFlag() {
+  if (currentWeapon != null) {
+    float windSpeed = currentWeapon.getWindSpeed();
+    stroke(0);
+    fill(255, 0, 0);
+
+    line(170, 20, 170, 100);
+
+    if (windSpeed > 0) {
+      triangle(170, 20, 170, 60, 130, 40);
+    } 
+    else {
+      triangle(170, 20, 170, 60, 210, 40);
+    }
+  }
 }
