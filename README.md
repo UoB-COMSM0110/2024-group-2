@@ -80,6 +80,14 @@ This [class diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.gi
 
 ![Class diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/Tanks_Class_Diagram.png)
 
-### Communication diagram
+### Communication diagrams
 
+As many of our classes are aggregations of other classes in the game, we realised that it would be important to model how user interactions would be communicated between those classes to achieve the desired outcomes. For what we perceived to be the more complicated communication flows, we decided to make communication diagrams to support design and implementation of these interactions. Below is a communication diagram for when an actor clicks on a button to purchase an item in the shop. The Shop class needs to initiate communications as follows:
 
+* get the price of that item from the associated Item object
+* communicate with the current player (Tank) object to see if there are enough funds to purchase this item
+* if there are send a message to the Tank object to buy this item decreasing the Tank's total money
+* the tank object will in turn send a message to weapon class object which corresponds to that item type so that the count is increased
+* the shop will then update its display to reflect the Tank's new item count for the purchased item and the money left to spend.
+
+![Purchasing an item from the shop](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/shopPurchase_communication.png)
