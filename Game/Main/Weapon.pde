@@ -5,6 +5,9 @@ public class Weapon {
   private boolean fire = false;
   private ArrayList<Crater> craters = new ArrayList<Crater>();
   private String type;
+  //NEW CODE
+  private float windSpeed = 0.2;
+  private int changeWindCallCount = 0;  
   
   public Weapon(String type, int count){
     this.type = type;
@@ -42,6 +45,10 @@ public class Weapon {
         frameRate(10);
         ellipse(this.x, this.y, this.blastRadius, this.blastRadius);
         this.craters.add(new Crater(this.x, this.y, this.blastRadius));
+        
+        //NEW CODE
+        changeWind();
+
         return this.x;
       }
       if(this.fire){
@@ -84,7 +91,10 @@ public class Weapon {
   }
   public void setTheta(int t){
     this.theta = radians(t);
-    this.speedX = this.iSpeed * cos(this.theta) ;
+    
+    //NEW CODE
+    this.speedX = this.iSpeed * cos(this.theta) + windSpeed ;
+
     this.speedY = this.iSpeed * sin(this.theta);
   }
   public float getTheta(){
@@ -137,4 +147,19 @@ public class Weapon {
   public String getType() {
     return this.type;
   }
+
+  //NEW CODE
+  public void changeWind() {
+      changeWindCallCount++;  
+
+      if (changeWindCallCount == 4) {
+          windSpeed = -windSpeed;
+          changeWindCallCount = 0;  
+      }
+  }
+
+  public float getWindSpeed() {
+      return this.windSpeed;
+  }
+
 }
