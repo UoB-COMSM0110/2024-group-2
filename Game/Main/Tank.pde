@@ -170,7 +170,7 @@ public class Tank{
     this.weapons.get(this.currentWeapon).setX(this.getTurretX() - cos(radians(this.getTurretAngle())) * 40);
     this.weapons.get(this.currentWeapon).setY(this.getTurretY()- sin(radians(this.getTurretAngle())) * 40);
     this.weapons.get(this.currentWeapon).setFire(true);
-    this.weapons.get(this.currentWeapon).setTheta(this.getTurretAngle());
+    this.weapons.get(this.currentWeapon).setTheta(this.getTurretAngle(), this.isHumanControlled);
     this.weapons.get(this.currentWeapon).decreaseCount();
   }
   

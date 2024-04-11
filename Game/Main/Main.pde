@@ -15,6 +15,8 @@ int currentRound;
 int endRound;
 int shuffleDelay;
 boolean miss = false;
+float windSpeed = 0.2;
+int changeWindCallCount = 0;
 
 enum GameState {
   START_MENU,
@@ -98,8 +100,6 @@ void draw() {
       gameOverScreen.display();
       break;
   }
-  //NEW CODE
-  displayWindFlag();
   
 }
 
@@ -185,6 +185,7 @@ public void gameEngine() {
   this.tanks.get(0).renderTank();
   this.tanks.get(1).renderTank();
   this.displayMoney();
+  this.displayWindFlag();
   
   if(this.tanks.get(0).getDead() || this.tanks.get(1).getDead()){
     if(this.tanks.get(0).getDead() && !this.tanks.get(1).getDead()){
@@ -239,6 +240,7 @@ public void gameEngine() {
     this.tanks.get(tankIndex).fireWeapon();
     this.isFiring = true;
     this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
+    changeWind();
     switchPlayer();
   }
   
@@ -258,6 +260,7 @@ public void gameEngine() {
     this.tanks.get(tankIndex).fireWeapon();
     this.isFiring = true;
     this.currentWeapon = this.tanks.get(tankIndex).getCurrentWeapon();
+    changeWind();
     switchPlayer();
   }
   if(this.shotBar.getTime() < 1){
@@ -331,20 +334,25 @@ public void setHard(boolean isHard) {
   this.isHard = isHard;
 }
 
-//NEW CODE
 void displayWindFlag() {
-  if (currentWeapon != null) {
-    float windSpeed = currentWeapon.getWindSpeed();
     stroke(0);
     fill(255, 0, 0);
 
-    line(170, 20, 170, 100);
+    line(170, 20, 170, 70);
 
     if (windSpeed > 0) {
-      triangle(170, 20, 170, 60, 130, 40);
+      triangle(170, 20, 170, 50, 130, 35);
     } 
     else {
-      triangle(170, 20, 170, 60, 210, 40);
+      triangle(170, 20, 170, 50, 210, 35);
     }
-  }
 }
+
+public void changeWind() {
+      changeWindCallCount++;  
+
+      if (changeWindCallCount == 4) {
+          windSpeed = -windSpeed;
+          changeWindCallCount = 0;  
+      }
+  }
