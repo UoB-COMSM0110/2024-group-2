@@ -92,6 +92,7 @@ public class GameStart {
                               " - Use '=' to increase shot power and '-' to decrease shot power.\n" +
                               "- Press space to shoot.\n" +
                               "- Press the grey weapon button to cycle your current weapon\n" +
+                              "- Keep an eye on the wind direction (red flag)\n" +
                               "- Additional weapons can be bought from the shop between rounds\n\n" +
                               "The tank which wins the most rounds wins the match!\n\n" +
                               "Good luck, and may the best tank win!";
@@ -121,8 +122,9 @@ public class GameStart {
     int nRounds;
     try {
       nRounds = Integer.parseInt(input);
+      if(nRounds <= 0) throw new NumberFormatException();
     } catch(NumberFormatException e) {
-      JOptionPane.showMessageDialog(null, "You must enter an integer", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, "You must enter a positive integer greater than 0", "Invalid Input", JOptionPane.ERROR_MESSAGE);
       nRounds = setNumberOfRounds();
     }
     return nRounds;

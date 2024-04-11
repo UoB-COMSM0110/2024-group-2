@@ -42,6 +42,7 @@ public class Weapon {
         frameRate(10);
         ellipse(this.x, this.y, this.blastRadius, this.blastRadius);
         this.craters.add(new Crater(this.x, this.y, this.blastRadius));
+
         return this.x;
       }
       if(this.fire){
@@ -82,9 +83,17 @@ public class Weapon {
   public boolean getFire(){
     return this.fire;
   }
-  public void setTheta(int t){
+  public void setTheta(int t, boolean isHumanControlled){
     this.theta = radians(t);
-    this.speedX = this.iSpeed * cos(this.theta) ;
+    
+    this.speedX = this.iSpeed * cos(this.theta);
+    
+    if(isHumanControlled) {
+      this.speedX += windSpeed;
+    }
+    
+    
+
     this.speedY = this.iSpeed * sin(this.theta);
   }
   public float getTheta(){
@@ -137,4 +146,5 @@ public class Weapon {
   public String getType() {
     return this.type;
   }
+
 }
