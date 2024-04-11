@@ -100,4 +100,41 @@ We also designed a communication diagram for firing a weapon; which proved to ha
 
 While the above diagram was somewhat useful in helping is to think about implementing this feature of the game, it is difficult to interpret due to the number of messages which are sent between objects. In practice it also proved not to capture the true complexity of the interactions with many more messages actually sent in the final implementation. The inability to represent control flow in communication diagrams also limits their usability.
 
+## Implementation
 
+When planning this project, the three prospective challenges we identified were:
+
+1. The physics of projectile trajectory
+2. Implementing damage to the terrain
+3. Endless map generation
+
+Ultimately, the second two of these challenges proved to be rather trivial to implement. As there are no complex textures in our game, we were able to base collisions on pixel colour detection. This meant that damage to the terrain could be implemented by drawing a sky-blue circle over the terrain where projectiles impacted. Endless map generation was also straightforward to implement. A random waveform shape could be generated using the built-in `noise()` function. This has a random component so whenever a map shuffle or new round begins, a new and different terrain shape could be easily generated. Retrospectively, we were able to identify two alternative challenges:
+
+* Game state switching and integration
+* A computer-controlled opponent for single player mode
+
+### 1. The physics of projectile trajectory
+
+### 2. Game state switching and integration
+
+Jinnan to complete.
+
+### 3. A computer controlled opponent for single-player mode
+
+A computer-controlled opponent needed to be able to carry out several tasks autonomously:
+
+* Fire at the opponent tank accurately
+* Purchase items from the shop between rounds
+* Select an appropriate weapon from its inventory
+
+Although it is possible for tanks to move over the terrain and adjust their turret angle during the game, our lead developer reasoned that this would not be necessary in order for a computer-controlled tank to operate effectively. Thus, its position was fixed and its turret angle fixed at either 45 degrees or 135 degrees depending on the direction of its opponent, with a view to these angles allowing the tank to accurately fire at most positions on the map, simply by varying the shot power. Thus, for the first task we needed to devise a way of accurately calculating the required power to hit the opponent. In the first instance, our developer reasoned that the point of the parabola at which `ySpeed` was zero should be realised at the halfway point of the parabola. Thus, he reasoned that the required power could be calculated as shown below:
+
+![CPU fire attempt 1](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/ai_attempt1.png)
+
+Although this proved relatively accurate over some distances it proved to be an over simplification so an alternative method needed to be implemented. After some research our developer found the following trajectory formula and rearranged it to solve for v:
+
+![CPU fire attempt 2](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/ai_attempt2.png)
+
+This method was almost 100% accurate. In easy mode, the power calculated was doubled every other shot to reduce the computer controlled tank's accuracy to 50%.
+
+In order to automate purchasing from the shop a simple algorithm was devised by which the computer controlled tank would purchase the most expensice weapon it could with its available funds and iterate this process until it could no longer purchase anymore weapons. Finally, to allow swithching between weapons a method was written which meant that the computer controlled tank would always used the most powerful weapon in its inventory.
