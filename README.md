@@ -135,6 +135,12 @@ Although this proved relatively accurate over some distances it proved to be an 
 
 ![CPU fire attempt 2](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/ai_attempt2.png)
 
+* y is the y position of the opponent
+* x is the x position of the oppnent
+* theta is the launch angle i.e, 45 degrees
+* g is the acceleration due to gravity
+* v is the required power
+
 This method was almost 100% accurate. In easy mode, the power calculated was doubled every other shot to reduce the computer controlled tank's accuracy to 50%.
 
 In order to automate purchasing from the shop a simple algorithm was devised by which the computer controlled tank would purchase the most expensice weapon it could with its available funds and iterate this process until it could no longer purchase anymore weapons. Finally, to allow swithching between weapons a method was written which meant that the computer controlled tank would always used the most powerful weapon in its inventory.
