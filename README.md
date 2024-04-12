@@ -49,7 +49,7 @@ https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90
 
 https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
 
-## Requirements
+### Requirements
 
 **Ideation, Use-cases and User stories**
 To start the ideation process, each team member had the task to come up with at least two game ideas. We then met together to discuss the possible game ideas. After going through the details of each idea, we decided on two games: a game similar to Pong but with a few twists and a tank-battle game where the terrain changes randomly after a certain period of time. For both games we designed the initial requirements based on a use-case diagram, use-case specifications and user stories. We then used these to create mock-up paper prototypes for both games. These paper-prototypes were then used to create videos that provide a simple demonstration of how both the Pong and the Tank games would be played. Shortly after we met again and decided to pursue the tank-battle game as our final idea.
@@ -65,7 +65,7 @@ To start the ideation process, each team member had the task to come up with at 
 * Markers
 * Us as developers
 
-### User stories
+**User stories**
 * As a single player, I want a fun, challenging game that I can improve at over time .
 * As a single player, I would like to be able to set the difficulty level so that as improve I can keep the game interesting by playing against a more challenging AI opponent.
 * As multiplayer, I want to be able to play the game with my friends (online)
@@ -76,7 +76,7 @@ To start the ideation process, each team member had the task to come up with at 
 * (As an online player, I would like to have skill-based matching so that I can player against players online who are of similar ability.)
 * As developers we want to engage with players to see what features are most important to them.
 
-### Use case diagram
+**Use case diagram**
 
 ![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/UML_diagram.png)
 
