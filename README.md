@@ -42,9 +42,9 @@ how to define the class board and add new features on it
 https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90-8d83-29755e836485
 
 
-## PINGPONG
+### PINGPONG
 
-### Paper Prototype:
+## Paper Prototype:
 
 
 https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
@@ -59,11 +59,6 @@ To start the ideation process, each team member had the task to come up with at 
 
 <br>
 
-### 
-* Singler player
-* Multiplayer player
-* Markers
-* Us as developers
 
 **User stories**
 * As a single player, I want a fun, challenging game that I can improve at over time .
@@ -76,9 +71,25 @@ To start the ideation process, each team member had the task to come up with at 
 * (As an online player, I would like to have skill-based matching so that I can player against players online who are of similar ability.)
 * As developers we want to engage with players to see what features are most important to them.
 
+<br>
+
 **Use case diagram**
 
 ![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/.github/images/UML_diagram.png)
+
+<br>
+
+**User case specifications**
+
+*No map shuffle*
+
+<img src="/ReportMaterial/UserCaseSpecNoShuffle.png"/>
+
+<br>
+
+*Map shuffle*
+
+<img src="/ReportMaterial/UserCaseSpecShuffle.png"/>
 
 <br>
 
