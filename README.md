@@ -51,6 +51,9 @@ https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813
 
 ## Requirements
 
+**Ideation, Use-cases and User stories**
+To start the ideation process, each team member had the task to come up with at least two game ideas. We then met together to discuss the possible game ideas. After going through the details of each idea, we decided on two games: a game similar to Pong but with a few twists and a tank-battle game where the terrain changes randomly after a certain period of time. For both games we designed the initial requirements based on a use-case diagram, use-case specifications and user stories. We then used these to create mock-up paper prototypes for both games. These paper-prototypes were then used to create videos that provide a simple demonstration of how both the Pong and the Tank games would be played. Shortly after we met again and decided to pursue the tank-battle game as our final idea.
+
 ### 
 * Singler player
 * Multiplayer player
