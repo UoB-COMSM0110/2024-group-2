@@ -115,6 +115,8 @@ Ultimately, the second two of these challenges proved to be rather trivial to im
 
 ### 1. The physics of projectile trajectory
 
+The trajectory of the missile needed to look realistic. To achieve this, we needed to update the x and y positions of the missile each frame after a missile has been fired until impact. In order to do this, we used trigonometry to calculate and initial `xSpeed` and `ySpeed` as a factor of shot power. After each call of `Weapon.update()` the missile's x position would update by `+xSpeed` and its y position by `+ySpeed`. `ySpeed` would also decrement by a constant value (g) each call to simulate the effect of gravity. The position of the weapon would stop upon impact, detected by monitioring the pixel colour at the missiles location, and a yellow circle would be drawn at a reduced frame rate to simulate an explosion. There were several iterations of this function before the realistic final representation was achieved.
+
 ### 2. Game state switching and integration
 
 Jinnan to complete.
@@ -137,7 +139,7 @@ Although this proved relatively accurate over some distances it proved to be an 
 
 * y is the y position of the opponent
 * x is the x position of the oppnent
-* theta is the launch angle i.e, 45 degrees
+* theta is the launch angle i.e., 45 degrees
 * g is the acceleration due to gravity
 * v is the required power
 
