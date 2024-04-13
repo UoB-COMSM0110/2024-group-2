@@ -49,6 +49,9 @@ https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90
 
 https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
 
+## Introduction
+Our team’s game is developed based on the well-known tank battle game. For the purpose of making our game more enjoyable and entertaining compared with the classic one on the Internet, we added some new twists to the game, such as one-player mode (the AI mode), map shuffle, and so on. Besides, we also made some improvements to the game's interaction design, which could be more surprising and immersive for players. These distinct features mentioned above brought us lots of challenges during the development process. Therefore, it was reasonable for us to use some development techniques throughout like agile workflow to manage the development cycle and improve our development capability. 
+
 ### Requirements
 
 **Ideation, Use-cases and User stories**
@@ -187,3 +190,10 @@ Although this proved relatively accurate over some distances it proved to be an 
 This method was almost 100% accurate. In easy mode, the power calculated was doubled every other shot to reduce the computer controlled tank's accuracy to 50%.
 
 In order to automate purchasing from the shop a simple algorithm was devised by which the computer controlled tank would purchase the most expensice weapon it could with its available funds and iterate this process until it could no longer purchase anymore weapons. Finally, to allow switching between weapons a method was written which meant that the computer controlled tank would always used the most powerful weapon in its inventory.
+
+## Conclusion
+During the development of this game, we realized that teamwork and the assistance of   professional techniques are indispensable. They helped us to manage the development cycle and improve the efficiency of the development. In the early stages of the game development, our team lagged behind other teams considering that we didn’t make good use of the agile development technique or communicate on a consistent basis. After we realized this problem, our team decided to work collectively offline to develop this game   and maintain communication online and offline, which sped up our development process and made our game more attractive. Although our requirements were changing from time to time, we were still capable of implementing them well thanks to the flexibility of the agile development technique. The problems raised in project development made us realize that completing a project requires not only strong coding skills but also teamwork and professional approaches.
+
+The game we have now is quite completed but we can go further to add some interesting features to it such as upgrades and teleportation. We can even make the game run online and players can archive it when they are offline, which will make our game more playable and make it possible to build a commercial-quality game.
+
+
