@@ -84,13 +84,13 @@ To start the ideation process, each team member had the task to come up with at 
 
 *No map shuffle*
 
-<img src="/ReportMaterial/UserCaseSpecNoShuffle.png"/>
+<img src="/ReportMaterial/UserCaseSpecNoShuffle2.png"/>
 
 <br>
 
 *Map shuffle*
 
-<img src="/ReportMaterial/UserCaseSpecShuffle.png"/>
+<img src="/ReportMaterial/UserCaseSpecShuffle2.png"/>
 
 <br>
 
