@@ -191,6 +191,44 @@ This method was almost 100% accurate. In easy mode, the power calculated was dou
 
 In order to automate purchasing from the shop a simple algorithm was devised by which the computer controlled tank would purchase the most expensice weapon it could with its available funds and iterate this process until it could no longer purchase anymore weapons. Finally, to allow switching between weapons a method was written which meant that the computer controlled tank would always used the most powerful weapon in its inventory.
 
+## Evaluation
+
+We divided the evaluation into two phases. The first phase used qualitative methods and the second phase used a combination of qualitative and quantitative methods. Through the two phases of evaluation, we found some bugs in the code and user interaction problems, and improved them to make our game more reasonable in design and more playable.
+
+**Stage 1 Qualitative Evaluations:**
+
+>*Think Aloud Evaluation 1: 11/03/2024*
+>>Positives:
+>> 1. Smoothness of the landscape seems to be good.
+>>Negatives: 
+>> 1. Player not sure what objective is nor how to play, as no instructions or start screen are presented.
+>> 2. There was no indication of which character/tank the player was controlling.
+>> 3. No indication of when the turn to play is switched to the player.
+>> 4. Accidently pressed space bar too long which led to firing for opponent, which could be explored for cheating.
+
+
+>*Think Aloud Evaluation 2: 11/03/2024*
+>>Positives:
+>>  1.	Health bars good are a good feature.
+>> Negatives:
+>>  1.	Need to implement more features that allow for strategic gameplay.
+>>  2.	Loop hole which allows cheating, specifically when firing. 
+>>  3.	Game can drag for too long, as there is no time limit, and subsequent pressure, for each player to make a move.
+>>  4.	Certain aspects can allow players to cheat.
+
+
+>*Heuristic Evaluation 1: 11/03/2024*    
+>>| Interface | Issue | Heuristic | Frequency | Impact | Persistence | Severity |
+>>|---------- |------- | --------- | --------------- | ------------ | ----------------- | -------------------- |
+>>| Game Page | Control can be hard to get used to | User control and freedom | 2 | 3 | 0 | 1.7 |
+>>| Game Page | The movement of tank can break gravity constraints | Metaphor | 2 | 4 | 4 | 3.3 |
+>>| Game Page | Shoot straight if tank barrel if completly horizontal | Metaphor | 3 | 1 | 4 | 2.6 |
+>>| Game Page | No damage to tank unless directly hit | Metaphor | 3 | 2 | 4 | 3 |
+
+
+Based on the feedbacks from our first stage think alouds and heuristic evaluation, we found that most problems come up when game was on and focused on mathematical logic and tank-player interaction. So we needed to review corresponding codes and changed them in order to make our game more grounded in reality. This will also make us more aware of this aspect in the future developmemt;
+
+
 ## Conclusion
 During the development of this game, we realized that teamwork and the assistance of   professional techniques are indispensable. They helped us to manage the development cycle and improve the efficiency of the development. In the early stages of the game development, our team lagged behind other teams considering that we didn’t make good use of the agile development technique or communicate on a consistent basis. After we realized this problem, our team decided to work collectively offline to develop this game   and maintain communication online and offline, which sped up our development process and made our game more attractive. Although our requirements were changing from time to time, we were still capable of implementing them well thanks to the flexibility of the agile development technique. The problems raised in project development made us realize that completing a project requires not only strong coding skills but also teamwork and professional approaches.
 
