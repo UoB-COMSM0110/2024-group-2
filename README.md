@@ -163,15 +163,23 @@ The trajectory of the missile needed to look realistic. To achieve this, we need
 
 ### 2. Game state switching and integration
 
-* 2.1 State Transition Logic Management *
+*2.1 State Transition Logic Management*
 
 While developing the GameStart class for the Tank Battle game's start interface, we faced the challenge of efficiently managing the transition logic between different button selections, such as moving from the start menu to single-player, two-player, or viewing the game instructions. Furthermore, to ensure the game's fluidity, multiple states needed to be seamlessly integrated, and we determined that implementing this functionality in the Main class would be more appropriate. However, we needed to ensure the accuracy and appropriateness of the timing and logic of state transitions.
 
-* Solution: *
+*Solution:*
 
 The logic for game state transitions relies directly on the `mousePressed()` method, which uses conditional checks to centrally manage user click events and directly updates the gameState variable to effect state transitions. For example, it determines whether a click is within the `1 Player` or `2 Players` button areas and, based on the result, hardcodes a state transition to `GameState.GAME_PLAY_1` or `GameState.GAME_PLAY_2`. This method centralizes all state transition logic within the event handling function, facilitating the tracking and maintenance of state flow.
 
 In the Main class, we manage different game states through a central control mechanism (gameState and playingState). Within the `draw()` function, we employ a switch-case statement based on the current gameState to decide which module of the code to execute, ensuring the proper timing of game state transitions. This setup guarantees that each state has a clear entry and exit point, enhancing the structure and manageability of state transitions.
+
+*2.2 Validating User Input*
+
+Validating user input for setting the number of game rounds presents a significant programming challenge. It is crucial to ensure that the input is a valid and reasonable number.
+
+*Solution:*
+
+The `setNumberOfRounds()` method is implemented with recursive calling to enforce the entry of a valid number of game rounds. If the user inputs an invalid number (either non-numeric or less than or equal to zero), the method recursively calls itself until valid input is received. This approach simplifies the error-handling logic and ensures the accuracy of the input.
 
 ### 3. A computer controlled opponent for single-player mode
 
