@@ -275,8 +275,8 @@ During the second phase of our Think Aloud evaluation, our user interface design
 It is noteworthy that in this phase of game development, we not only programmed but also stayed abreast of technological trends and engaged with relevant mathematical concepts. We developed a more precise auto-targeting AI for the single-player mode and addressed the physics calculations for missile trajectories. While many issues identified in the first-phase evaluation have been substantially resolved, feedback from the second phase suggests there is still room for improvement in optimizing the gaming experience, particularly in reducing the stress players may feel during gameplay. This will be the primary focus of our team's efforts moving forward.
 
 **Quantitative evaluation - NASA TLX**
->Evaluating one player's game
->>*Evaluation 1 - 'Easy' mode*
+>**Evaluating one player's game**
+>>**Evaluation 1 - 'Easy' mode**
 >>
 >>*Scores*
 >>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
@@ -304,21 +304,36 @@ It is noteworthy that in this phase of game development, we not only programmed 
 >>| Raw        | 42 | 48 | 46 | 43 | 50 | 43 | 46 | 45 | 48 | 44 |
 >>| Weighted   | 48 | 55 | 60 | 52 | 62 | 51 | 57 | 46 | 59 | 57 |
 >>
->>*Evaluation 2 - 'Hard' mode*
+>>**Evaluation 2 - 'Hard' mode**
 >>
 >>*Scores*
->>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
->>|-----------|----|----|----|----|----|----|----|----|----|----|
->>| Mental demand   | 16 | 15 | 15 | 16 | 17 | 16 | 14 | 15 | 15 | 17 |
->>| Physical demand | 2  | 2  | 1  | 2  | 1  | 2  | 2  | 2  | 1  | 1  |
->>| Temporal demand | 12 | 11 | 10 | 11 | 12 | 12 | 11 | 10 | 12 | 11 |
->>| Performance     | 10 | 15 | 12 | 13 | 13 | 11 | 15 | 13 | 12 | 11 |
->>| Effort          | 14 | 16 | 15 | 14 | 16 | 14 | 15 | 14 | 15 | 13 |
->>| Frustration     | 12 | 11 | 14 | 13 | 12 | 11 | 14 | 12 | 13 | 11 |
+>>| Tester ID     | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|---------------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand | 75 | 70 | 70 | 75 | 80 | 75 | 65 | 70 | 70 | 80 |
+>>| Physical demand| 5  | 5  | 0  | 5  | 0  | 5  | 5  | 5  | 0  | 0  |
+>>| Temporal demand| 55 | 50 | 45 | 50 | 55 | 55 | 50 | 45 | 55 | 50 |
+>>| Performance   | 45 | 70 | 55 | 60 | 60 | 50 | 70 | 60 | 55 | 50 |
+>>| Effort        | 65 | 75 | 70 | 65 | 75 | 65 | 70 | 65 | 70 | 60 |
+>>| Frustration   | 55 | 50 | 65 | 60 | 55 | 50 | 65 | 55 | 60 | 50 |
 >>
 >>*Dimension weighting*
+>>|   Tester ID   | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|---------------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand | 5  | 5  | 4  | 4  | 4  | 3  | 5  | 4  | 4  | 3  |
+>>| Physical demand | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 |
+>>| Temporal demand | 4 | 4 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 4 |
+>>| Performance     | 2 | 3 | 4 | 3 | 1 | 2 | 1 | 2 | 2 | 3 |
+>>| Effort          | 1 | 0 | 1 | 0 | 1 | 3 | 1 | 0 | 2 | 1 |
+>>| Frustration     | 3 | 3 | 3 | 4 | 5 | 3 | 4 | 4 | 2 | 3 |
 >>
 >>*Final Scores*
+>>| Score Type | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|------------|----|----|----|----|----|----|----|----|----|----|
+>>| Raw        | 50 | 53 | 51 | 53 | 54 | 50 | 54 | 50 | 52 | 48 |
+>>| Weighted   | 61 | 61 | 60 | 58 | 60 | 59 | 62 | 58 | 62 | 53 |
+>>
+>**Statistical analysis of different difficulties**
+>
 
 **Quantitative evaluation - SUS**
 >>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
