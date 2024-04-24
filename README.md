@@ -276,8 +276,8 @@ It is noteworthy that in this phase of game development, we not only programmed 
 
 **Quantitative evaluation - NASA TLX**
 >Evaluating one player's game
->>Evaluation 1 - 'Easy' mode
->>Scores
+>>*Evaluation 1 - 'Easy' mode*
+>>*Scores*
 >>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
 >>|-----------|----|----|----|----|----|----|----|----|----|----|
 >>| Mental demand   | 16 | 14 | 14 | 15 | 16 | 14 | 13 | 13 | 14 | 15 |
@@ -287,7 +287,30 @@ It is noteworthy that in this phase of game development, we not only programmed 
 >>| Effort          | 14 | 14 | 14 | 13 | 14 | 12 | 14 | 12 | 13 | 13 |
 >>| Frustration     | 6  | 8  | 6  | 6  | 9  | 7  | 8  | 9  | 10 | 6  |
 
+>>*Evaluation 2 - 'Hard' mode*
+>>*Scores*
+>>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|-----------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand   | 16 | 15 | 15 | 16 | 17 | 16 | 14 | 15 | 15 | 17 |
+>>| Physical demand | 2  | 2  | 1  | 2  | 1  | 2  | 2  | 2  | 1  | 1  |
+>>| Temporal demand | 12 | 11 | 10 | 11 | 12 | 12 | 11 | 10 | 12 | 11 |
+>>| Performance     | 10 | 15 | 12 | 13 | 13 | 11 | 15 | 13 | 12 | 11 |
+>>| Effort          | 14 | 16 | 15 | 14 | 16 | 14 | 15 | 14 | 15 | 13 |
+>>| Frustration     | 12 | 11 | 14 | 13 | 12 | 11 | 14 | 12 | 13 | 11 |
 
+**Quantitative evaluation - SUS**
+>>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+>>|-----------|---|---|---|---|---|---|---|---|---|----|
+>>| I think that I would like to use this system frequently | 4 | 4 | 4 | 4 | 3 | 4 | 4 | 4 | 3 | 4 |
+>>| I found the system unnecessarily complex | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 3 | 2 | 3 |
+>>| I thought the system was easy to use | 4 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 3 | 3 |
+>>| I think that I would need the support of a technical person to use the system | 2 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 2 |
+>>| I found the various functions in the system were well integrated | 5 | 4 | 4 | 4 | 5 | 4 | 5 | 5 | 4 | 4 |
+>>| I thought there was too much inconsistency in the system | 1 | 2 | 2 | 1 | 1 | 2 | 1 | 1 | 2 | 2 |
+>>| I would imagine that most people would learn to use this system very quickly | 4 | 5 | 5 | 3 | 3 | 5 | 5 | 3 | 3 | 4 |
+>>| I found the system very cumbersome to use | 3 | 3 | 2 | 2 | 3 | 3 | 2 | 3 | 3 | 2 |
+>>| I felt very confident using the system | 4 | 3 | 3 | 2 | 4 | 3 | 4 | 3 | 3 | 2 |
+>>| I needed to learn a lot of things before getting going with the system | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 3 |
 
 
 ## Conclusion
