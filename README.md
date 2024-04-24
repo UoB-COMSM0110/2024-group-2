@@ -274,6 +274,22 @@ During the second phase of our Think Aloud evaluation, our user interface design
 
 It is noteworthy that in this phase of game development, we not only programmed but also stayed abreast of technological trends and engaged with relevant mathematical concepts. We developed a more precise auto-targeting AI for the single-player mode and addressed the physics calculations for missile trajectories. While many issues identified in the first-phase evaluation have been substantially resolved, feedback from the second phase suggests there is still room for improvement in optimizing the gaming experience, particularly in reducing the stress players may feel during gameplay. This will be the primary focus of our team's efforts moving forward.
 
+**Quantitative evaluation - NASA TLX**
+>Evaluating one player's game
+>>Evaluation 1 - 'Easy' mode
+>>Scores
+>>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|-----------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand   | 16 | 14 | 14 | 15 | 16 | 14 | 13 | 13 | 14 | 15 |
+>>| Physical demand | 2  | 2  | 1  | 2  | 1  | 2  | 2  | 2  | 1  | 1  |
+>>| Temporal demand | 12 | 13 | 12 | 12 | 13 | 13 | 13 | 12 | 13 | 12 |
+>>| Performance     | 6  | 13 | 14 | 9  | 13 | 10 | 11 | 12 | 13 | 12 |
+>>| Effort          | 14 | 14 | 14 | 13 | 14 | 12 | 14 | 12 | 13 | 13 |
+>>| Frustration     | 6  | 8  | 6  | 6  | 9  | 7  | 8  | 9  | 10 | 6  |
+
+
+
+
 ## Conclusion
 During the development of this game, we realized that teamwork and the assistance of   professional techniques are indispensable. They helped us to manage the development cycle and improve the efficiency of the development. In the early stages of the game development, our team lagged behind other teams considering that we didn’t make good use of the agile development technique or communicate on a consistent basis. After we realized this problem, our team decided to work collectively offline to develop this game   and maintain communication online and offline, which sped up our development process and made our game more attractive. Although our requirements were changing from time to time, we were still capable of implementing them well thanks to the flexibility of the agile development technique. The problems raised in project development made us realize that completing a project requires not only strong coding skills but also teamwork and professional approaches.
 
