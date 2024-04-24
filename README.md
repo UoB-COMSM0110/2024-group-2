@@ -216,19 +216,20 @@ We divided the evaluation into two phases. The first phase used qualitative meth
 **Stage 1 Qualitative Evaluations:**
 
 >*Think Aloud Evaluation 1: 11/03/2024*
->>Positives:
+>>Positives:  
 >> 1. Smoothness of the landscape seems to be good.
+>>
 >>Negatives: 
 >> 1. Player not sure what objective is nor how to play, as no instructions or start screen are presented.
 >> 2. There was no indication of which character/tank the player was controlling.
 >> 3. No indication of when the turn to play is switched to the player.
 >> 4. Accidently pressed space bar too long which led to firing for opponent, which could be explored for cheating.
 
-
 >*Think Aloud Evaluation 2: 11/03/2024*
->>Positives:
+>>Positives:  
 >>  1.	Health bars good are a good feature.
->> Negatives:
+>>
+>>Negatives:
 >>  1.	Need to implement more features that allow for strategic gameplay.
 >>  2.	Loop hole which allows cheating, specifically when firing. 
 >>  3.	Game can drag for too long, as there is no time limit, and subsequent pressure, for each player to make a move.
@@ -246,6 +247,28 @@ We divided the evaluation into two phases. The first phase used qualitative meth
 
 Based on the feedbacks from our first stage think alouds and heuristic evaluation, we found that most problems come up when game was on and focused on mathematical logic and tank-player interaction. So we needed to review corresponding codes and changed them in order to make our game more grounded in reality. This will also make us more aware of this aspect in the future developmemt;
 
+**Stage 2 Qualitative Evaluations:**
+
+>*Think Aloud Evaluation 3: 15/04/2024*
+>>Positives:
+>>  1.  The start screen's button layout is clearly designed, facilitating user navigation and smooth entry into the game.
+>>  2.  The weapon purchasing feature in the shop effectively extends player engagement time.
+>>  3.  Earning coins by hitting enemy tanks enhances players' sense of achievement.
+>>
+>>Negatives:
+>>  1.  The rules of the game are unclear, especially regarding which player starts first.
+>>  2.  The cursor design, while thematically consistent with tanks, resembles the tanks used in gameplay, which can confuse players.
+>>  3.   here is little distinction between Easy and Hard modes, making the Easy mode challenging for players.
+
+>*Think Aloud Evaluation 4: 15/04/2024*
+>>Positives:
+>>  1.  When the map shuffle bar is empty, updating the terrain and resetting coins and weapons provide new opportunities for gameplay.
+>>  2.  Using the "-" and "=" keys to adjust missile size and shooting power enhances the game's flexibility and efficiency.
+>>
+>>Negatives:
+>>  1.  The background styles of the start screen and the shop are inconsistent.
+>>  2.  After pressing the space bar, there is a significant delay before the projectile hits the target.
+>>  3.  If the health bar is not depleted, the game may enter an infinite loop state, with no option for players to pause the game.
 
 ## Conclusion
 During the development of this game, we realized that teamwork and the assistance of   professional techniques are indispensable. They helped us to manage the development cycle and improve the efficiency of the development. In the early stages of the game development, our team lagged behind other teams considering that we didn’t make good use of the agile development technique or communicate on a consistent basis. After we realized this problem, our team decided to work collectively offline to develop this game   and maintain communication online and offline, which sped up our development process and made our game more attractive. Although our requirements were changing from time to time, we were still capable of implementing them well thanks to the flexibility of the agile development technique. The problems raised in project development made us realize that completing a project requires not only strong coding skills but also teamwork and professional approaches.
