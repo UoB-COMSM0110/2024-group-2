@@ -277,17 +277,35 @@ It is noteworthy that in this phase of game development, we not only programmed 
 **Quantitative evaluation - NASA TLX**
 >Evaluating one player's game
 >>*Evaluation 1 - 'Easy' mode*
+>>
 >>*Scores*
 >>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
 >>|-----------|----|----|----|----|----|----|----|----|----|----|
->>| Mental demand   | 16 | 14 | 14 | 15 | 16 | 14 | 13 | 13 | 14 | 15 |
->>| Physical demand | 2  | 2  | 1  | 2  | 1  | 2  | 2  | 2  | 1  | 1  |
->>| Temporal demand | 12 | 13 | 12 | 12 | 13 | 13 | 13 | 12 | 13 | 12 |
->>| Performance     | 6  | 13 | 14 | 9  | 13 | 10 | 11 | 12 | 13 | 12 |
->>| Effort          | 14 | 14 | 14 | 13 | 14 | 12 | 14 | 12 | 13 | 13 |
->>| Frustration     | 6  | 8  | 6  | 6  | 9  | 7  | 8  | 9  | 10 | 6  |
-
+>>| Mental demand   | 75 | 65 | 65 | 70 | 75 | 65 | 60 | 60 | 65 | 70 |
+>>| Physical demand | 5  | 5  | 0  | 5  | 0  | 5  | 5  | 5  | 0  | 0  |
+>>| Temporal demand | 55 | 60 | 55 | 55 | 60 | 60 | 60 | 55 | 60 | 55 |
+>>| Performance     | 25  | 60 | 65 | 40  | 60 | 45 | 50 | 55 | 60 | 55 |
+>>| Effort          | 65 | 65 | 65 | 60 | 65 | 55 | 65 | 55 | 60 | 60 |
+>>| Frustration     | 25  | 35  | 25  | 25  | 40  | 30  | 35  | 40  | 45 | 25  |
+>>
+>>*Dimension weighting*
+>>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+>>|-----------|---|---|---|---|---|---|---|---|---|----|
+>>| Mental demand   | 4 | 3 | 4 | 3 | 4 | 4 | 2 | 1 | 3 | 4 |
+>>| Physical demand | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | 1 |
+>>| Temporal demand | 2 | 3 | 4 | 2 | 3 | 2 | 4 | 3 | 3 | 2 |
+>>| Performance     | 4 | 3 | 3 | 5 | 3 | 4 | 4 | 4 | 4 | 4 |
+>>| Effort          | 2 | 3 | 3 | 4 | 3 | 3 | 4 | 2 | 3 | 3 |
+>>| Frustration     | 3 | 2 | 1 | 1 | 2 | 1 | 1 | 3 | 2 | 0 |
+>>
+>>*Final Scores*
+>>| Score Type | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|------------|----|----|----|----|----|----|----|----|----|----|
+>>| Raw        | 42 | 48 | 46 | 43 | 50 | 43 | 46 | 45 | 48 | 44 |
+>>| Weighted   | 48 | 55 | 60 | 52 | 62 | 51 | 57 | 46 | 59 | 57 |
+>>
 >>*Evaluation 2 - 'Hard' mode*
+>>
 >>*Scores*
 >>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
 >>|-----------|----|----|----|----|----|----|----|----|----|----|
@@ -297,6 +315,10 @@ It is noteworthy that in this phase of game development, we not only programmed 
 >>| Performance     | 10 | 15 | 12 | 13 | 13 | 11 | 15 | 13 | 12 | 11 |
 >>| Effort          | 14 | 16 | 15 | 14 | 16 | 14 | 15 | 14 | 15 | 13 |
 >>| Frustration     | 12 | 11 | 14 | 13 | 12 | 11 | 14 | 12 | 13 | 11 |
+>>
+>>*Dimension weighting*
+>>
+>>*Final Scores*
 
 **Quantitative evaluation - SUS**
 >>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
