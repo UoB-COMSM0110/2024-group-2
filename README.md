@@ -1,7 +1,7 @@
 ## Game video
-[<img src="/ReportMaterial/TitleScreen.png" />](https://youtu.be/l-HIOPnelG4)
+[<img src="/ReportMaterial/TitleScreen.png" />](https://youtu.be/UvxcvMR0Fco)
 
-Click here [here](https://youtu.be/l-HIOPnelG4) or on the image above to watch our game video!
+Click here [here](https://youtu.be/UvxcvMR0Fco) or on the image above to watch our game video!
 
 ## group photo
 ![WechatIMG376](https://p.ipic.vip/zxwuml.jpg)
