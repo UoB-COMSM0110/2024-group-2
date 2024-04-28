@@ -10,6 +10,14 @@ Click here [here](https://youtu.be/UvxcvMR0Fco) or on the image above to watch o
 
 ![WechatIMG376](https://p.ipic.vip/zxwuml.jpg)
 
+From left to right:
+
+* **Hamish Partington**, fw23740@bristol.ac.uk, hamishpartington
+* **Dominic Barros**, mq23630@bristol.ac.uk, domgb19
+* **Jinnan Lu**, wi23748@bristol.ac.uk, JinnanLu
+* **Jianzhao Mai**, ou23341@bristol.ac.uk, StrongMak
+* **Hanyang Lin**, xf23024@bristol.ac.uk, huiyuanaidianxfx
+
 ## Introduction
 
 Our team’s game is developed based on the well-known tank battle game. For the purpose of making our game more enjoyable and entertaining compared with the classic one on the Internet, we added some new twists to the game, such as one-player mode (the AI mode), map shuffle, and so on. Besides, we also made some improvements to the game's interaction design, which could be more surprising and immersive for players. These distinct features mentioned above brought us lots of challenges during the development process. Therefore, it was reasonable for us to use some development techniques throughout like agile workflow to manage the development cycle and improve our development capability.
