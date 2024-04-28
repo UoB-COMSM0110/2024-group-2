@@ -427,6 +427,10 @@ To investigate the system usability of two player modes, we selected the System 
 >>
 >>Based on the statistics in the table above, the average total score for the 10 users was calculated to be 69, which is slightly higher than the usability threshold of 68, inidcating that our game is usable.
 
+### Testing
+
+Throughout game development we carried out whitebox testing. This took the form of play testing the game to identify any bugs. When identified, an issue was created on GitHub for each bug and a task was added to TODO on the Kanban board.
+
 ## Process
 
 In this course, our team worked together to develop a game based on tank versus tank combat. During our team's game development, the application of Agile development principles greatly improved the flexibility and efficiency of the project. This not only enabled us to acquire the necessary software development skills, but also allowed us to gain valuable experience in team management and project collaboration, laying a solid foundation for our future careers.
