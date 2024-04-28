@@ -390,7 +390,7 @@ It is noteworthy that in this phase of game development, we not only programmed 
 >>  
 >> With n=10 paired samples and a critical W value of 5 at an α=0.025 significance level, our calculated W value of 4.5 (rounded down to 4) is less than 5. This indicates that at the α=0.025 level, there is a statistically significant difference in the medians between the two sets of data. Therefore, we can reject the null hypothesis, concluding that there is a significant difference in workload between the "Easy" and "Hard" modes.
 >>  
-**Quantitative evaluation - SUS**
+**Quantitative evaluation - SUS**  
 To investigate the system usability of two player modes, we selected the System Usability Scale (SUS) as the measurement tool. This approach required users to rate 10 items using a 5-point Likert scale, ranging from "strongly disagree" to "strongly agree," corresponding to scores from 1 to 5. Below are the final statistical results of the survey:
 
 >>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
@@ -410,7 +410,7 @@ To investigate the system usability of two player modes, we selected the System 
 >>-For odd-numbered items (1, 3, 5, 7, and 9), the scores are calculated by subtracting 1 from the scale position. For even-numbered items (2, 4, 6, 8, and 10), the scores are obtained by subtracting the scale position from 5. Each item's score ranges from 0 to 4.
 >>-To calculate the SUS score, sum the scores of all items and then multiply by 2.5 to derive the total score.
 >>
->>*System Usability Scale (SUS) Survey Results*
+>>**System Usability Scale (SUS) Survey Results**
 >>| Questions    | Tester 1 | Tester 2 | Tester 3 | Tester 4 | Tester 5 | Tester 6 | Tester 7 | Tester 8 | Tester 9 | Tester 10 |
 >>|--------------|----------|----------|----------|----------|----------|----------|----------|----------|----------|-----------|
 >>| Question 1   | 3        | 3        | 3        | 4        | 2        | 2        | 3        | 3        | 3        | 3         |
