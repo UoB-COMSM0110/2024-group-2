@@ -20,7 +20,7 @@ From left to right:
 
 ## Introduction
 
-Our team’s game is developed based on the well-known tank battle game. For the purpose of making our game more enjoyable and entertaining compared with the classic one on the Internet, we added some new twists to the game, such as one-player mode (the AI mode), map shuffle, and so on. Besides, we also made some improvements to the game's interaction design, which could be more surprising and immersive for players. These distinct features mentioned above brought us lots of challenges during the development process. Therefore, it was reasonable for us to use some development techniques throughout like agile workflow to manage the development cycle and improve our development capability.
+Our team's game is developed based on the well-known tank battle game [Tanks](https://www.crazygames.com/game/tanks). For the purpose of making our game more enjoyable and entertaining compared with the classic one on the Internet, we added some twists icluding a map shuffle feature and a shot clock. We also made some improvements to the game's interaction design, which could be more surprising and immersive for players. These distinct features mentioned above brought us lots of challenges during the development process. Therefore, it was reasonable for us to use some development techniques throughout like agile workflow to manage the development cycle and improve our development capability.
 
 ## Requirements
 
@@ -43,13 +43,7 @@ Challenge:
 
 ##### Pong Paper Prototype
 
-https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
-
-<br>
-
-<img src="/ReportMaterial/paperProtoGif.gif">
-
-<br>
+![Pong PP](https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c)
 
 #### Tanks
 
@@ -78,7 +72,7 @@ Potential challenges:
 
 ##### Tanks Paper Prototype
 
-https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90-8d83-29755e836485
+![Tanks PP](https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90-8d83-29755e836485)
 
 ### User stories
 
