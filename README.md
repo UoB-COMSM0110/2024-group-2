@@ -337,14 +337,14 @@ It is noteworthy that in this phase of game development, we not only programmed 
 >>| Raw        | 50 | 53 | 51 | 53 | 54 | 50 | 54 | 50 | 52 | 48 |
 >>| Weighted   | 61 | 61 | 60 | 58 | 60 | 59 | 62 | 58 | 62 | 53 |
 >>
->**Statistical testing**
->Utilizing the data from users' evaluations for two disparate designs of the NASA Task Load Index, the Wilcoxon Signed-Rank Test was selected as the methodological instrument, tailored for the analysis of dual assessments conducted by an individual participant. The aim is to ascertain the presence of a statistically significant variance in the perceived workload across two levels of difficulty within a single-player mode of the game 'Tank Battle'. This investigation seeks to establish whether the differing designs manifestly alter the user experience.
->
->>**Wilcoxon sign-ranked test**
->>We choose the NASA LTX data with weights to manually find the W value for the Wilcoxon signed rank test, as detailed in the following steps:
->>
->>*1. Data and Calculation Steps*
->>Weighted NASA TLX data pairs:
+> **Statistical testing**  
+> Utilizing the data from users' evaluations for two disparate designs of the NASA Task Load Index, the Wilcoxon Signed-Rank Test was selected as the methodological instrument, tailored for the analysis of dual assessments conducted by an individual participant. The aim is to ascertain the presence of a statistically significant variance in the perceived workload across two levels of difficulty within a single-player mode of the game 'Tank Battle'. This investigation seeks to establish whether the differing designs manifestly alter the user experience.  
+>>  
+>> **Wilcoxon sign-ranked test**  
+>> We choose the NASA LTX data with weights to manually find the W value for the Wilcoxon signed rank test, as detailed in the following steps:  
+>>  
+>> *1. Data and Calculation Steps*  
+>> Weighted NASA TLX data pairs:  
 >>| Easy | Hard |
 >>|------|------|
 >>| 48   | 61   |
@@ -357,38 +357,39 @@ It is noteworthy that in this phase of game development, we not only programmed 
 >>| 46   | 58   |
 >>| 59   | 62   |
 >>| 57   | 53   |
->>-Calculate Differences: For each pair of data (x,y), compute x−y.
->>-Rank the Differences: Rank the absolute values of the differences, assigning ranks to each. In cases of ties—identical difference values (e.g., -6 and -6)—average >>-ranks are assigned (a standard method for handling ties in rankings).
->>-Assign Signs to Ranks: Assign signs to the ranks based on the positive or negative nature of the differences.
->>-Compute the W Value: The W value is the sum of the smaller rank totals (i.e., the sum of either all the positive ranks or all the negative ranks, whichever is less).
+>> * Calculate Differences: For each pair of data (x,y), compute x−y.  
+>> * Rank the Differences: Rank the absolute values of the differences, assigning ranks to each. In cases of ties—identical difference values (e.g., -6 and -6)—average >>-ranks are assigned (a standard method for handling ties in rankings).  
+>> * Assign Signs to Ranks: Assign signs to the ranks based on the positive or negative nature of the differences.  
+>> * Compute the W Value: The W value is the sum of the smaller rank totals (i.e., the sum of either all the positive ranks or all the negative ranks, whichever is less).  
+>>  
+>> *2. Manual Example Calculation*  
+>>| Data Pair (x, y) | x - y (Difference) | Abs Difference | Rank | Signed Rank |
+>>|------------------|--------------------|----------------|------|-------------|
+>>| (48, 61)         | -13                | 13             | 5.5  | -5.5        |
+>>| (55, 61)         | -6                 | 6              | 4    | -4          |
+>>| (60, 60)         | 0                  | 0              | -    | 0           |
+>>| (52, 58)         | -6                 | 6              | 4    | -4          |
+>>| (62, 60)         | 2                  | 2              | 2    | 2           |
+>>| (51, 59)         | -8                 | 8              | 7    | -7          |
+>>| (57, 62)         | -5                 | 5              | 3    | -3          |
+>>| (46, 58)         | -12                | 12             | 5.5  | -5.5        |
+>>| (59, 62)         | -3                 | 3              | 1    | -1          |
+>>| (57, 53)         | 4                  | 4              | 2.5  | 2.5         |
 >>
->>*2. Manual Example Calculation*
->>| Data Pair (x, y) | x - y (Difference) | |Abs Difference| | Rank | Signed Rank |
->>|------------------|---------------------|------------------|------|-------------|
->>| (48, 61) | -13 | 13 | 5.5 | -5.5 |
->>| (55, 61) | -6 | 6 | 4 | -4 |
->>| (60, 60) | 0 | 0 | - | 0 |
->>| (52, 58) | -6 | 6 | 4 | -4 |
->>| (62, 60) | 2 | 2 | 2 | 2 |
->>| (51, 59) | -8 | 8 | 7 | -7 |
->>| (57, 62) | -5 | 5 | 3 | -3 |
->>| (46, 58) | -12 | 12 | 5.5 | -5.5 |
->>| (59, 62) | -3 | 3 | 1 | -1 |
->>| (57, 53) | 4 | 4 | 2.5 | 2.5 |
->>-Rank Assignment: Note that the ranking here is based on the absolute value of the differences, with ties in absolute value (like -6 and -6) sharing the same average rank (4). Differences of zero are typically excluded from the rank assignment.
->>
->>-Calculate the W Value:
->>Positive rank sum = 2 + 2.5 = 4.5
->>Negative rank sum = |−5.5| + |−4| + |−4| + |−7| + |−3| + |−5.5| + |−1| = 30
->>In the Wilcoxon Signed-Rank Test, we typically take the smaller of the positive or negative rank sums as the W value. In this instance, W = 4.5.
->>
->>-Look up the calculated W test statistic in the table of critical values
->>load  table...
->>
->>Given that the sample size is n=10, the table does not display a value directly corresponding to a W value of 4.5. This is because the table typically lists only integer W values, and our W value is 4.5. In practice, we commonly round down the W value to the nearest whole number for p-value determination, thus we use W = 4.
->>
->>With n=10 paired samples and a critical W value of 5 at an α=0.025 significance level, our calculated W value of 4.5 (rounded down to 4) is less than 5. This indicates that at the α=0.025 level, there is a statistically significant difference in the medians between the two sets of data. Therefore, we can reject the null hypothesis, concluding that there is a significant difference in workload between the "Easy" and "Hard" modes.
->>
+>> * Rank Assignment: Note that the ranking here is based on the absolute value of the differences, with ties in absolute value (like -6 and -6) sharing the same average rank (4). Differences of zero are typically excluded from the rank assignment.  
+>>  
+>> * Calculate the W Value:  
+>> Positive rank sum = 2 + 2.5 = 4.5  
+>> Negative rank sum = |−5.5| + |−4| + |−4| + |−7| + |−3| + |−5.5| + |−1| = 30  
+>> In the Wilcoxon Signed-Rank Test, we typically take the smaller of the positive or negative rank sums as the W value. In this instance, W = 4.5.  
+>>  
+>> * Look up the calculated W test statistic in the table of critical values  
+>>  ![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/ReportMaterial/TableofCriticalValues.png)
+>>  
+>> Given that the sample size is n=10, the table does not display a value directly corresponding to a W value of 4.5. This is because the table typically lists only integer W values, and our W value is 4.5. In practice, we commonly round down the W value to the nearest whole number for p-value determination, thus we use W = 4.
+>>  
+>> With n=10 paired samples and a critical W value of 5 at an α=0.025 significance level, our calculated W value of 4.5 (rounded down to 4) is less than 5. This indicates that at the α=0.025 level, there is a statistically significant difference in the medians between the two sets of data. Therefore, we can reject the null hypothesis, concluding that there is a significant difference in workload between the "Easy" and "Hard" modes.
+>>  
 **Quantitative evaluation - SUS**
 To investigate the system usability of two player modes, we selected the System Usability Scale (SUS) as the measurement tool. This approach required users to rate 10 items using a 5-point Likert scale, ranging from "strongly disagree" to "strongly agree," corresponding to scores from 1 to 5. Below are the final statistical results of the survey:
 
@@ -410,20 +411,22 @@ To investigate the system usability of two player modes, we selected the System 
 >>-To calculate the SUS score, sum the scores of all items and then multiply by 2.5 to derive the total score.
 >>
 >>*System Usability Scale (SUS) Survey Results*
->>| Tester ID | Question 1 | Question 2 | Question 3 | Question 4 | Question 5 | Question 6 | Question 7 | Question 8 | Question 9 | Question 10 | Sum | Scores |
->>|-----------|------------|------------|------------|------------|------------|------------|------------|------------|------------|-------------|-----|--------|
->>| 1         | 3          | 2          | 3          | 3          | 4          | 4          | 3          | 2          | 3          | 2           | 29  | 72.5   |
->>| 2         | 3          | 3          | 2          | 3          | 3          | 3          | 4          | 2          | 1          | 2           | 27  | 67.5   |
->>| 3         | 3          | 2          | 2          | 3          | 3          | 3          | 3          | 3          | 2          | 2           | 25  | 62.5   |
->>| 4         | 2          | 3          | 3          | 3          | 3          | 4          | 3          | 2          | 3          | 3           | 27  | 67.5   |
->>| 5         | 3          | 3          | 2          | 3          | 4          | 4          | 3          | 3          | 3          | 2           | 30  | 75     |
->>| 6         | 2          | 2          | 3          | 3          | 3          | 3          | 3          | 3          | 3          | 2           | 27  | 67.5   |
->>| 7         | 3          | 2          | 3          | 4          | 4          | 3          | 4          | 3          | 2          | 2           | 30  | 75     |
->>| 8         | 3          | 2          | 3          | 3          | 3          | 4          | 3          | 2          | 3          | 3           | 29  | 72.5   |
->>| 9         | 3          | 3          | 2          | 3          | 3          | 3          | 4          | 2          | 2          | 2           | 27  | 67.5   |
->>| 10        | 3          | 2          | 2          | 3          | 3          | 3          | 3          | 3          | 1          | 2           | 25  | 62.5   |
+>>| Questions    | Tester 1 | Tester 2 | Tester 3 | Tester 4 | Tester 5 | Tester 6 | Tester 7 | Tester 8 | Tester 9 | Tester 10 |
+>>|--------------|----------|----------|----------|----------|----------|----------|----------|----------|----------|-----------|
+>>| Question 1   | 3        | 3        | 3        | 4        | 2        | 2        | 3        | 3        | 3        | 3         |
+>>| Question 2   | 2        | 3        | 2        | 3        | 3        | 2        | 2        | 2        | 3        | 2         |
+>>| Question 3   | 3        | 2        | 2        | 2        | 2        | 3        | 3        | 3        | 2        | 2         |
+>>| Question 4   | 3        | 3        | 3        | 3        | 3        | 3        | 4        | 3        | 3        | 3         |
+>>| Question 5   | 4        | 3        | 3        | 4        | 4        | 3        | 4        | 3        | 3        | 3         |
+>>| Question 6   | 4        | 3        | 3        | 4        | 4        | 3        | 3        | 4        | 3        | 3         |
+>>| Question 7   | 3        | 4        | 3        | 3        | 3        | 3        | 4        | 3        | 4        | 3         |
+>>| Question 8   | 2        | 2        | 3        | 2        | 3        | 3        | 3        | 2        | 2        | 3         |
+>>| Question 9   | 3        | 2        | 2        | 2        | 3        | 3        | 2        | 3        | 2        | 1         |
+>>| Question 10  | 2        | 2        | 2        | 3        | 2        | 2        | 2        | 3        | 2        | 2         |
+>>| Sum          | 29       | 27       | 25       | 27       | 30       | 27       | 30       | 29       | 27       | 25        |
+>>| Scores       | 72.5     | 67.5     | 62.5     | 67.5     | 75       | 67.5     | 75       | 72.5     | 67.5     | 62.5      |
 >>
->>The table presents the scores obtained from a NASA TLX assessment, which are used to compute the SUS scores for evaluating system usability between two player modes.
+>>Based on the statistics in the table above, the average total score for the 10 users was calculated to be 69, which is slightly higher than the SUS measurement of 68. The game of Tank Battle still has a lot of room for improvement in terms of user perception and other aspects.
 >>
 ## Conclusion
 During the development of this game, we realized that teamwork and the assistance of   professional techniques are indispensable. They helped us to manage the development cycle and improve the efficiency of the development. In the early stages of the game development, our team lagged behind other teams considering that we didn’t make good use of the agile development technique or communicate on a consistent basis. After we realized this problem, our team decided to work collectively offline to develop this game   and maintain communication online and offline, which sped up our development process and made our game more attractive. Although our requirements were changing from time to time, we were still capable of implementing them well thanks to the flexibility of the agile development technique. The problems raised in project development made us realize that completing a project requires not only strong coding skills but also teamwork and professional approaches.
