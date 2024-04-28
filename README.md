@@ -463,6 +463,6 @@ The game we have now is quite complete but we can go further to add some interes
 |------------|--------------------|----------------------------------------------|--------------------|
 | Hamish       | Lead Developer and Project Manager    | Developed the core game engine and was responsible for reviewing and integrating all the features developed by other team members. Edited the report and wrote the design and implementation sections. Also took on most of the project management responsibilities        |         1.5          |
 | Dom       | Videographer and associate developer| Designed and implemented the shop. Made the game video. Wrote the requirements section of the report  |         TBC          |
-| Jianzhao      | Associate developer and analyst | Implemented the shot clock feature and helped reconstruct state switch framework. Wrote the introduction and conclusion of the report, and was responsible for stage 1 of analysis section     |            TBC       |
+| Jianzhao      | Associate developer and analyst | Implemented the shot clock feature and helped reconstruct state switch. Wrote the introduction and conclusion of the report, and was responsible for stage 1 of analysis section     |            TBC       |
 | Jinnan    | Associate developer and analyst     | Developed the start screen and implemented state switching. Wrote the analysis section of the report and contributed to the implementation section   |          TBC         |
-| Hanyang       | Associate developer      | Implemented wind in the game. Wrote the process section of the report     |         0.75          |
+| Hanyang       | Associate developer      | Implemented wind in the game. Wrote the process section of the report     |         TBC          |
