@@ -465,4 +465,4 @@ The game we have now is quite complete but we can go further to add some interes
 | Dom       | Videographer and associate developer| Designed and implemented the shop. Made the game video. Wrote the requirements section of the report  |         TBC          |
 | Jianzhao      | Associate developer and analyst | Implemented the shot clock feature and helped reconstruct state switch framework. Wrote the introduction and conclusion of the report, and was responsible for stage 1 of analysis section     |            TBC       |
 | Jinnan    | Associate developer and analyst     | Developed the start screen and implemented state switching. Wrote the analysis section of the report and contributed to the implementation section   |          TBC         |
-| Hanyang       | Associate developer      | Implemented wind in the game. Wrote the process section of the report     |         TBC          |
+| Hanyang       | Associate developer      | Implemented wind in the game. Wrote the process section of the report     |         0.75          |
