@@ -43,7 +43,7 @@ Challenge:
 
 ##### Pong Paper Prototype
 
-![Pong PP](https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c)
+https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/45da8ef0-ad25-4813-b634-399775141c4c
 
 #### Tanks
 
@@ -72,7 +72,7 @@ Potential challenges:
 
 ##### Tanks Paper Prototype
 
-![Tanks PP](https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90-8d83-29755e836485)
+https://github.com/UoB-COMSM0110/2024-group-2/assets/97231049/cf039080-044a-4d90-8d83-29755e836485
 
 ### User stories
 
