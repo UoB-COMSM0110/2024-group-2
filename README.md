@@ -1,3 +1,8 @@
+## Game video
+[<img src="/ReportMaterial/TitleScreen.png" />](https://youtu.be/UvxcvMR0Fco)
+
+Click here [here](https://youtu.be/UvxcvMR0Fco) or on the image above to watch our game video!
+
 ## group photo
 ![WechatIMG376](https://p.ipic.vip/zxwuml.jpg)
 
@@ -163,7 +168,25 @@ The trajectory of the missile needed to look realistic. To achieve this, we need
 
 ### 2. Game state switching and integration
 
-Jinnan to complete.
+#### 2.1. State Transition Logic Management
+While developing the GameStart class for the Tank Battle game's start interface, we faced the challenge of efficiently managing the transition logic between different button selections, such as moving from the start menu to single-player, two-player, or viewing the game instructions. Furthermore, to ensure the game's fluidity, multiple states needed to be seamlessly integrated, and we determined that implementing this functionality in the Main class would be more appropriate. However, we needed to ensure the accuracy and appropriateness of the timing and logic of state transitions.
+
+*Solution:*
+The logic for game state transitions relies directly on the `mousePressed()` method, which uses conditional checks to centrally manage user click events and directly updates the gameState variable to effect state transitions. For example, it determines whether a click is within the `1 Player` or `2 Players` button areas and, based on the result, hardcodes a state transition to `GameState.GAME_PLAY_1` or `GameState.GAME_PLAY_2`. This method centralizes all state transition logic within the event handling function, facilitating the tracking and maintenance of state flow.
+
+In the Main class, we manage different game states through a central control mechanism (gameState and playingState). Within the `draw()` function, we employ a switch-case statement based on the current gameState to decide which module of the code to execute, ensuring the proper timing of game state transitions. This setup guarantees that each state has a clear entry and exit point, enhancing the structure and manageability of state transitions.
+
+#### 2.2. Validating User Input
+Validating user input for setting the number of game rounds presents a significant programming challenge. It is crucial to ensure that the input is a valid and reasonable number.
+
+*Solution:*
+The `setNumberOfRounds()` method is implemented with recursive calling to enforce the entry of a valid number of game rounds. If the user inputs an invalid number (either non-numeric or less than or equal to zero), the method recursively calls itself until valid input is received. This approach simplifies the error-handling logic and ensures the accuracy of the input.
+
+#### 2.3. Asynchronous Operations and State Consistency
+In the game, certain operations such as AI calculations and resource loading may require asynchronous processing. These asynchronous operations must be synchronized with the game's main state mechanism to prevent issues where operations are not completed before a state transition occurs.
+
+*Solution:*
+Time control variables such as `endRound` and `shuffleDelay` are used to manage the timing of state transitions, ensuring that all necessary preliminary operations are completed before any critical state changes are made.
 
 ### 3. A computer controlled opponent for single-player mode
 
@@ -198,19 +221,20 @@ We divided the evaluation into two phases. The first phase used qualitative meth
 **Stage 1 Qualitative Evaluations:**
 
 >*Think Aloud Evaluation 1: 11/03/2024*
->>Positives:
+>>Positives:  
 >> 1. Smoothness of the landscape seems to be good.
+>>
 >>Negatives: 
 >> 1. Player not sure what objective is nor how to play, as no instructions or start screen are presented.
 >> 2. There was no indication of which character/tank the player was controlling.
 >> 3. No indication of when the turn to play is switched to the player.
 >> 4. Accidently pressed space bar too long which led to firing for opponent, which could be explored for cheating.
 
-
 >*Think Aloud Evaluation 2: 11/03/2024*
->>Positives:
+>>Positives:  
 >>  1.	Health bars good are a good feature.
->> Negatives:
+>>
+>>Negatives:
 >>  1.	Need to implement more features that allow for strategic gameplay.
 >>  2.	Loop hole which allows cheating, specifically when firing. 
 >>  3.	Game can drag for too long, as there is no time limit, and subsequent pressure, for each player to make a move.
@@ -227,6 +251,182 @@ We divided the evaluation into two phases. The first phase used qualitative meth
 
 
 Based on the feedbacks from our first stage think alouds and heuristic evaluation, we found that most problems come up when game was on and focused on mathematical logic and tank-player interaction. So we needed to review corresponding codes and changed them in order to make our game more grounded in reality. This will also make us more aware of this aspect in the future developmemt;
+
+**Stage 2 Qualitative Evaluations:**
+
+>*Think Aloud Evaluation 3: 15/04/2024*
+>>Positives:
+>>  1.  The start screen's button layout is clearly designed, facilitating user navigation and smooth entry into the game.
+>>  2.  The weapon purchasing feature in the shop effectively extends player engagement time.
+>>  3.  Earning coins by hitting enemy tanks enhances players' sense of achievement.
+>>
+>>Negatives:
+>>  1.  The rules of the game are unclear, especially regarding which player starts first.
+>>  2.  The cursor design, while thematically consistent with tanks, resembles the tanks used in gameplay, which can confuse players.
+>>  3.   here is little distinction between Easy and Hard modes, making the Easy mode challenging for players.
+
+>*Think Aloud Evaluation 4: 15/04/2024*
+>>Positives:
+>>  1.  When the map shuffle bar is empty, updating the terrain and resetting coins and weapons provide new opportunities for gameplay.
+>>  2.  Using the "-" and "=" keys to adjust missile size and shooting power enhances the game's flexibility and efficiency.
+>>
+>>Negatives:
+>>  1.  The background styles of the start screen and the shop are inconsistent.
+>>  2.  After pressing the space bar, there is a significant delay before the projectile hits the target.
+>>  3.  If the health bar is not depleted, the game may enter an infinite loop state, with no option for players to pause the game.
+
+During the second phase of our Think Aloud evaluation, our user interface design and feature expansion received numerous positive reviews. One month after our initial assessment, we have thoroughly addressed user requirements and anticipated functional features based on use cases and story points, achieving the desired experience for our Tank Battle game.
+
+It is noteworthy that in this phase of game development, we not only programmed but also stayed abreast of technological trends and engaged with relevant mathematical concepts. We developed a more precise auto-targeting AI for the single-player mode and addressed the physics calculations for missile trajectories. While many issues identified in the first-phase evaluation have been substantially resolved, feedback from the second phase suggests there is still room for improvement in optimizing the gaming experience, particularly in reducing the stress players may feel during gameplay. This will be the primary focus of our team's efforts moving forward.
+
+**Quantitative evaluation - NASA TLX**
+>**Evaluating one player's game**
+>>**Evaluation 1 - 'Easy' mode**
+>>
+>>*Scores*
+>>| Tester ID | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|-----------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand   | 75 | 65 | 65 | 70 | 75 | 65 | 60 | 60 | 65 | 70 |
+>>| Physical demand | 5  | 5  | 0  | 5  | 0  | 5  | 5  | 5  | 0  | 0  |
+>>| Temporal demand | 55 | 60 | 55 | 55 | 60 | 60 | 60 | 55 | 60 | 55 |
+>>| Performance     | 25  | 60 | 65 | 40  | 60 | 45 | 50 | 55 | 60 | 55 |
+>>| Effort          | 65 | 65 | 65 | 60 | 65 | 55 | 65 | 55 | 60 | 60 |
+>>| Frustration     | 25  | 35  | 25  | 25  | 40  | 30  | 35  | 40  | 45 | 25  |
+>>
+>>*Dimension weighting*
+>>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+>>|-----------|---|---|---|---|---|---|---|---|---|----|
+>>| Mental demand   | 4 | 3 | 4 | 3 | 4 | 4 | 2 | 1 | 3 | 4 |
+>>| Physical demand | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | 1 |
+>>| Temporal demand | 2 | 3 | 4 | 2 | 3 | 2 | 4 | 3 | 3 | 2 |
+>>| Performance     | 4 | 3 | 3 | 5 | 3 | 4 | 4 | 4 | 4 | 4 |
+>>| Effort          | 2 | 3 | 3 | 4 | 3 | 3 | 4 | 2 | 3 | 3 |
+>>| Frustration     | 3 | 2 | 1 | 1 | 2 | 1 | 1 | 3 | 2 | 0 |
+>>
+>>*Final Scores*
+>>| Score Type | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|------------|----|----|----|----|----|----|----|----|----|----|
+>>| Raw        | 42 | 48 | 46 | 43 | 50 | 43 | 46 | 45 | 48 | 44 |
+>>| Weighted   | 48 | 55 | 60 | 52 | 62 | 51 | 57 | 46 | 59 | 57 |
+>>
+>>**Evaluation 2 - 'Hard' mode**
+>>
+>>*Scores*
+>>| Tester ID     | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|---------------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand | 75 | 70 | 70 | 75 | 80 | 75 | 65 | 70 | 70 | 80 |
+>>| Physical demand| 5  | 5  | 0  | 5  | 0  | 5  | 5  | 5  | 0  | 0  |
+>>| Temporal demand| 55 | 50 | 45 | 50 | 55 | 55 | 50 | 45 | 55 | 50 |
+>>| Performance   | 45 | 70 | 55 | 60 | 60 | 50 | 70 | 60 | 55 | 50 |
+>>| Effort        | 65 | 75 | 70 | 65 | 75 | 65 | 70 | 65 | 70 | 60 |
+>>| Frustration   | 55 | 50 | 65 | 60 | 55 | 50 | 65 | 55 | 60 | 50 |
+>>
+>>*Dimension weighting*
+>>|   Tester ID   | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|---------------|----|----|----|----|----|----|----|----|----|----|
+>>| Mental demand | 5  | 5  | 4  | 4  | 4  | 3  | 5  | 4  | 4  | 3  |
+>>| Physical demand | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 |
+>>| Temporal demand | 4 | 4 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 4 |
+>>| Performance     | 2 | 3 | 4 | 3 | 1 | 2 | 1 | 2 | 2 | 3 |
+>>| Effort          | 1 | 0 | 1 | 0 | 1 | 3 | 1 | 0 | 2 | 1 |
+>>| Frustration     | 3 | 3 | 3 | 4 | 5 | 3 | 4 | 4 | 2 | 3 |
+>>
+>>*Final Scores*
+>>| Score Type | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+>>|------------|----|----|----|----|----|----|----|----|----|----|
+>>| Raw        | 50 | 53 | 51 | 53 | 54 | 50 | 54 | 50 | 52 | 48 |
+>>| Weighted   | 61 | 61 | 60 | 58 | 60 | 59 | 62 | 58 | 62 | 53 |
+>>
+> **Statistical testing**  
+> Utilizing the data from users' evaluations for two disparate designs of the NASA Task Load Index, the Wilcoxon Signed-Rank Test was selected as the methodological instrument, tailored for the analysis of dual assessments conducted by an individual participant. The aim is to ascertain the presence of a statistically significant variance in the perceived workload across two levels of difficulty within a single-player mode of the game 'Tank Battle'. This investigation seeks to establish whether the differing designs manifestly alter the user experience.  
+>>  
+>> **Wilcoxon sign-ranked test**  
+>> We choose the NASA LTX data with weights to manually find the W value for the Wilcoxon signed rank test, as detailed in the following steps:  
+>>  
+>> *1. Data and Calculation Steps*  
+>> Weighted NASA TLX data pairs:  
+>>| Easy | Hard |
+>>|------|------|
+>>| 48   | 61   |
+>>| 55   | 61   |
+>>| 60   | 60   |
+>>| 52   | 58   |
+>>| 62   | 60   |
+>>| 51   | 59   |
+>>| 57   | 62   |
+>>| 46   | 58   |
+>>| 59   | 62   |
+>>| 57   | 53   |
+>> * Calculate Differences: For each pair of data (x,y), compute x−y.  
+>> * Rank the Differences: Rank the absolute values of the differences, assigning ranks to each. In cases of ties—identical difference values (e.g., -6 and -6)—average >>-ranks are assigned (a standard method for handling ties in rankings).  
+>> * Assign Signs to Ranks: Assign signs to the ranks based on the positive or negative nature of the differences.  
+>> * Compute the W Value: The W value is the sum of the smaller rank totals (i.e., the sum of either all the positive ranks or all the negative ranks, whichever is less).  
+>>  
+>> *2. Manual Example Calculation*  
+>>| Data Pair (x, y) | x - y (Difference) | Abs Difference | Rank | Signed Rank |
+>>|------------------|--------------------|----------------|------|-------------|
+>>| (48, 61)         | -13                | 13             | 5.5  | -5.5        |
+>>| (55, 61)         | -6                 | 6              | 4    | -4          |
+>>| (60, 60)         | 0                  | 0              | -    | 0           |
+>>| (52, 58)         | -6                 | 6              | 4    | -4          |
+>>| (62, 60)         | 2                  | 2              | 2    | 2           |
+>>| (51, 59)         | -8                 | 8              | 7    | -7          |
+>>| (57, 62)         | -5                 | 5              | 3    | -3          |
+>>| (46, 58)         | -12                | 12             | 5.5  | -5.5        |
+>>| (59, 62)         | -3                 | 3              | 1    | -1          |
+>>| (57, 53)         | 4                  | 4              | 2.5  | 2.5         |
+>>
+>> * Rank Assignment: Note that the ranking here is based on the absolute value of the differences, with ties in absolute value (like -6 and -6) sharing the same average rank (4). Differences of zero are typically excluded from the rank assignment.  
+>>  
+>> * Calculate the W Value:  
+>> Positive rank sum = 2 + 2.5 = 4.5  
+>> Negative rank sum = |−5.5| + |−4| + |−4| + |−7| + |−3| + |−5.5| + |−1| = 30  
+>> In the Wilcoxon Signed-Rank Test, we typically take the smaller of the positive or negative rank sums as the W value. In this instance, W = 4.5.  
+>>  
+>> * Look up the calculated W test statistic in the table of critical values  
+>>  ![UML diagram](https://github.com/UoB-COMSM0110/2024-group-2/blob/main/ReportMaterial/TableofCriticalValues.png)
+>>  
+>> Given that the sample size is n=10, the table does not display a value directly corresponding to a W value of 4.5. This is because the table typically lists only integer W values, and our W value is 4.5. In practice, we commonly round down the W value to the nearest whole number for p-value determination, thus we use W = 4.
+>>  
+>> With n=10 paired samples and a critical W value of 5 at an α=0.025 significance level, our calculated W value of 4.5 (rounded down to 4) is less than 5. This indicates that at the α=0.025 level, there is a statistically significant difference in the medians between the two sets of data. Therefore, we can reject the null hypothesis, concluding that there is a significant difference in workload between the "Easy" and "Hard" modes.
+>>  
+**Quantitative evaluation - SUS**  
+To investigate the system usability of two player modes, we selected the System Usability Scale (SUS) as the measurement tool. This approach required users to rate 10 items using a 5-point Likert scale, ranging from "strongly disagree" to "strongly agree," corresponding to scores from 1 to 5. Below are the final statistical results of the survey:
+
+>>| Tester ID | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+>>|-----------|---|---|---|---|---|---|---|---|---|----|
+>>| I think that I would like to use this system frequently | 4 | 4 | 4 | 4 | 3 | 4 | 4 | 4 | 3 | 4 |
+>>| I found the system unnecessarily complex | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 3 | 2 | 3 |
+>>| I thought the system was easy to use | 4 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 3 | 3 |
+>>| I think that I would need the support of a technical person to use the system | 2 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 2 |
+>>| I found the various functions in the system were well integrated | 5 | 4 | 4 | 4 | 5 | 4 | 5 | 5 | 4 | 4 |
+>>| I thought there was too much inconsistency in the system | 1 | 2 | 2 | 1 | 1 | 2 | 1 | 1 | 2 | 2 |
+>>| I would imagine that most people would learn to use this system very quickly | 4 | 5 | 5 | 3 | 3 | 5 | 5 | 3 | 3 | 4 |
+>>| I found the system very cumbersome to use | 3 | 3 | 2 | 2 | 3 | 3 | 2 | 3 | 3 | 2 |
+>>| I felt very confident using the system | 4 | 3 | 3 | 2 | 4 | 3 | 4 | 3 | 3 | 2 |
+>>| I needed to learn a lot of things before getting going with the system | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 3 |
+>>
+>>Since the score of individual items alone is not meaningful for research purposes, it is necessary to holistically assess the overall system usability.
+>>-For odd-numbered items (1, 3, 5, 7, and 9), the scores are calculated by subtracting 1 from the scale position. For even-numbered items (2, 4, 6, 8, and 10), the scores are obtained by subtracting the scale position from 5. Each item's score ranges from 0 to 4.
+>>-To calculate the SUS score, sum the scores of all items and then multiply by 2.5 to derive the total score.
+>>
+>>**System Usability Scale (SUS) Survey Results**
+>>| Questions    | Tester 1 | Tester 2 | Tester 3 | Tester 4 | Tester 5 | Tester 6 | Tester 7 | Tester 8 | Tester 9 | Tester 10 |
+>>|--------------|----------|----------|----------|----------|----------|----------|----------|----------|----------|-----------|
+>>| Question 1   | 3        | 3        | 3        | 4        | 2        | 2        | 3        | 3        | 3        | 3         |
+>>| Question 2   | 2        | 3        | 2        | 3        | 3        | 2        | 2        | 2        | 3        | 2         |
+>>| Question 3   | 3        | 2        | 2        | 2        | 2        | 3        | 3        | 3        | 2        | 2         |
+>>| Question 4   | 3        | 3        | 3        | 3        | 3        | 3        | 4        | 3        | 3        | 3         |
+>>| Question 5   | 4        | 3        | 3        | 4        | 4        | 3        | 4        | 3        | 3        | 3         |
+>>| Question 6   | 4        | 3        | 3        | 4        | 4        | 3        | 3        | 4        | 3        | 3         |
+>>| Question 7   | 3        | 4        | 3        | 3        | 3        | 3        | 4        | 3        | 4        | 3         |
+>>| Question 8   | 2        | 2        | 3        | 2        | 3        | 3        | 3        | 2        | 2        | 3         |
+>>| Question 9   | 3        | 2        | 2        | 2        | 3        | 3        | 2        | 3        | 2        | 1         |
+>>| Question 10  | 2        | 2        | 2        | 3        | 2        | 2        | 2        | 3        | 2        | 2         |
+>>| Sum          | 29       | 27       | 25       | 27       | 30       | 27       | 30       | 29       | 27       | 25        |
+>>| Scores       | 72.5     | 67.5     | 62.5     | 67.5     | 75       | 67.5     | 75       | 72.5     | 67.5     | 62.5      |
+>>
+>>Based on the statistics in the table above, the average total score for the 10 users was calculated to be 69, which is slightly higher than the SUS measurement of 68. The game of Tank Battle still has a lot of room for improvement in terms of user perception and other aspects.
 
 ## Process
 
