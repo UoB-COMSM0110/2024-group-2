@@ -387,7 +387,7 @@ During the second phase of our Think Aloud evaluation, our user interface design
 >>  
 >> Given that the sample size is n=10, the table does not display a value directly corresponding to a W value of 4.5. This is because the table typically lists only integer W values, and our W value is 4.5. In practice, we commonly round down the W value to the nearest whole number for p-value determination, thus we use W = 4.
 >>
->> With n=10 paired samples and a critical W value of 5 at an α=0.025 significance level, our calculated W value of 4.5 (rounded down to 4) is less than 5. This indicates that at the α=0.025 level, there is a statistically significant difference in the medians between the two sets of data. Therefore, we can reject the null hypothesis, concluding that there is a significant difference in workload between the "Easy" and "Hard" modes.
+>> With n=10 paired samples and a critical W value of 8 at an α=0.05 significance level, our calculated W value of 4.5 (rounded down to 4) is less than 8. This indicates that at the α=0.05 level, there is a statistically significant difference in the medians between the two sets of data. Therefore, we can reject the null hypothesis, concluding that there is a significant difference in workload between the "Easy" and "Hard" modes.
 >>
 **Quantitative evaluation - SUS**  
 To investigate the system usability of two player modes, we selected the System Usability Scale (SUS) as the measurement tool. This approach required users to rate 10 items using a 5-point Likert scale, ranging from "strongly disagree" to "strongly agree," corresponding to scores from 1 to 5. Below are the final statistical results of the survey:
