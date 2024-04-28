@@ -1,3 +1,4 @@
+// health bar of each tank
 public class HealthBar {
   float x, y;
   int maxValue, value, height, width;

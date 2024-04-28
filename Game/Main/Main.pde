@@ -1,3 +1,5 @@
+// main game engine
+
 Terrain terrain;
 ArrayList<Tank> tanks = new ArrayList<Tank>();
 float time = 0;
@@ -65,11 +67,13 @@ void draw() {
   background(135, 206, 235);
   frameRate(100);
   
+  // shows round number when new round starts
   while(this.endRound > millis()) {
     displayNextRoundScreen();
     return;
   }
   
+  // displays map shuffle text so players know what is happening
   while(this.shuffleDelay > millis()) {
     textSize(128);
     fill(255, 0, 0);
@@ -116,6 +120,7 @@ void switchPlayer() {
   }
 }
 
+// will adjust the cpu turret angle based on where the player is relative to it (i.e. to the left or right)
 void aiTurretAdjust() {
   
   int opIndex = (tankIndex - 1) * -1;
@@ -150,6 +155,8 @@ void aiTurretAdjust() {
   tanks.get(tankIndex).getCurrentWeapon().setISpeed(iSpeed);
 }
 
+// updated fuction based on formula found online. This allows the correct power to be calculated to hit the opponent tank based on the 
+// opponents position with a constant turrent angle and g
 float aiCalcISpeed2(float absXDist, float yDist) {
   float iSpeed;
   
@@ -168,6 +175,7 @@ float aiCalcISpeed2(float absXDist, float yDist) {
   return iSpeed;
 }
 
+// called between rounds so players know how many rounds are left
 public void displayNextRoundScreen() {
     textSize(128);
     fill(255, 0, 0);
@@ -187,16 +195,20 @@ public void gameEngine() {
   this.displayMoney();
   this.displayWindFlag();
   
+  // round result logic
+  // p1 wins if alive and p0 dead
   if(this.tanks.get(0).getDead() || this.tanks.get(1).getDead()){
     if(this.tanks.get(0).getDead() && !this.tanks.get(1).getDead()){
       this.tanks.get(1).winRound();
+      //p0 wins if alive and p dead
     } else if (!this.tanks.get(0).getDead()) {
       this.tanks.get(0).winRound();
+      //draw if both dead (mutual destruction)
     } else {
       this.tanks.get(0).drawRound();
       this.tanks.get(1).drawRound();
     }
-    
+    // end game if all rounds played
     if(this.currentRound == this.nRounds) {
       gameState = GameState.GAME_OVER;
     }else {
@@ -213,6 +225,7 @@ public void gameEngine() {
     strikeY = this.currentWeapon.getY();
     int blastRadius = this.currentWeapon.getBlastRadius();
     int damage = this.currentWeapon.getDamage();
+    // determine if missile hit target
     if(abs(strikeX - this.tanks.get(0).getTankX() - 35) < blastRadius  && abs(strikeY - this.tanks.get(0).getTankY()) < blastRadius){
       this.tanks.get(0).decreaseHealth(damage);
       if(tankIndex == 0) {
@@ -226,6 +239,7 @@ public void gameEngine() {
         this.tanks.get(0).successfulHit();
       }
     }
+    // reset shot clock after end of turn
     shotBar.resetTime();
     this.currentWeapon.display();
   }
@@ -244,6 +258,7 @@ public void gameEngine() {
     switchPlayer();
   }
   
+  // handles behaviour of user inputs, not allowed if missile in the air to stop players moving out of the way
   if(keyPressed && keyCode == RIGHT && !this.isFiring){
     this.tanks.get(tankIndex).moveTank(1);
   }
@@ -263,6 +278,7 @@ public void gameEngine() {
     changeWind();
     switchPlayer();
   }
+  // miss go if too slow
   if(this.shotBar.getTime() < 1){
     switchPlayer();
     this.shotBar.resetTime();
@@ -286,6 +302,7 @@ public void gameEngine() {
   }
 }
 
+// determines which mouse pressed funtion is called based on game state
 public void mousePressed() {
     if (gameState == GameState.START_MENU) {
       gameStartScreen.mousePressed();
@@ -302,6 +319,7 @@ public void setNRounds(int rounds){
  this.nRounds = rounds; 
 }
 
+// display the money of the current player
 public void displayMoney() {
   String money = "$" + this.tanks.get(tankIndex).getMoney();
   if(tankIndex == 0) {
@@ -313,6 +331,7 @@ public void displayMoney() {
   text(money, 50, 50);
 }
 
+//resets tank health and terrain between rounds
 public void startNextRound() {
     this.currentRound++;
     this.tanks.get(0).restoreHealth();
@@ -334,6 +353,7 @@ public void setHard(boolean isHard) {
   this.isHard = isHard;
 }
 
+// displays wind direction
 void displayWindFlag() {
     stroke(0);
     fill(255, 0, 0);
@@ -348,6 +368,7 @@ void displayWindFlag() {
     }
 }
 
+// wind changes direction every 4 turns
 public void changeWind() {
       changeWindCallCount++;  
 

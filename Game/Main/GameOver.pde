@@ -1,3 +1,5 @@
+// Class which defines the behaviour of the game over screen
+
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;

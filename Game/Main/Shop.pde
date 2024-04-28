@@ -1,3 +1,5 @@
+// class responsible for behaviour of the shop game state
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -146,6 +148,7 @@ public class Shop {
     return mouseX >= x && mouseX <= x + buttonWidth && mouseY >= y - buttonHeight/2 && mouseY <= y + buttonHeight/2;
   }
   
+  // in single player mode the cpu controlled tank will iteratively buy the most expensive weapon it can
   private void aiPurchase() {
     int budget = this.players.get(1).getMoney();
     
@@ -180,6 +183,7 @@ public class Shop {
     this.p.text(label, x + w/2, y + h/2);
   }
   
+  // to ensure display of game play is not affected after returning from the shop
   private void resetModeDefaults() {
     this.p.rectMode(PApplet.CORNER);
     this.p.textAlign(PApplet.LEFT, PApplet.BASELINE);

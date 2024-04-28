@@ -1,3 +1,5 @@
+// reponsible for behviour of weapons
+
 public class Weapon {
   
   private int damage, count, blastRadius;
@@ -10,6 +12,7 @@ public class Weapon {
     this.type = type;
     this.iSpeed = 3.5;
     this.count = count;
+    //different weapons have different damage and blast radius i.e. crater size
     switch(this.type) {
       case "Small missile":
         this.damage = 15;
@@ -34,6 +37,7 @@ public class Weapon {
   }
   
   public float update(){
+    // draw explosion and crater on impact
       if(dontUpdate(this.x, this.y)){
         this.fire = false;
         this.speedY = this.speedX;
@@ -45,6 +49,7 @@ public class Weapon {
 
         return this.x;
       }
+      // update x a y position each frame to display trajectory of missile
       if(this.fire){
         this.x -= this.speedX;  
         this.y -= this.speedY;
@@ -59,7 +64,9 @@ public class Weapon {
       return false;
     }
     loadPixels();
+    // impact detection if missile not in the sky
     boolean stop = (pixels[index] != color(135, 206, 235)) && (pixels[index] != color(0, 0, 0));
+    // or off edge of screen
     if(x <= 0 || x >= width || y >= height || stop){
       return true;
     }
@@ -85,9 +92,10 @@ public class Weapon {
   }
   public void setTheta(int t, boolean isHumanControlled){
     this.theta = radians(t);
-    
+    // x speed is based on theta and power
     this.speedX = this.iSpeed * cos(this.theta);
     
+    // so that wind doesn't mess with ai calculation leading to inaccuracy
     if(isHumanControlled) {
       this.speedX += windSpeed;
     }

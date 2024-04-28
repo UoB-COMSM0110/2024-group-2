@@ -1,3 +1,5 @@
+// used for mapshuffle and shot clock time bars
+
 class TimeBar{
   private float actualWidth;
   private float gapWidth;

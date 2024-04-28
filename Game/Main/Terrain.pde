@@ -1,3 +1,5 @@
+//class responsible for storing the terrain
+
 public class Terrain {
   private PShape terrainShape;  
   

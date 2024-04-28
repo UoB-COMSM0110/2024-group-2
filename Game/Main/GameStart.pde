@@ -1,3 +1,5 @@
+// class responsible for defining behaviour of the start screen
+
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;

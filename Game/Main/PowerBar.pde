@@ -1,3 +1,5 @@
+// responsible for displaying and updating a players shot power
+
 public class PowerBar {
   float x, y;
   int height, width;

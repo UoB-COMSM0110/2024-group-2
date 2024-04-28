@@ -1,3 +1,5 @@
+// class which defines behaviour of the tanks
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -50,6 +52,7 @@ public class Tank{
     setTankY();
   }
   
+  // uses a pixel based method to determine tanks Y position based on its x position by keeping track of the terrain sky boundary
   public void setTankY(){
     int index1 = int(this.tankX) + int(height - 1) * (int)width;
     int index2 = int(this.tankX) + 70 + int(height - 1) * (int)width;
@@ -67,6 +70,7 @@ public class Tank{
     
   
   public void renderTank(){
+    // don't display a dead tank
     if(this.dead){
       return;
     }
@@ -81,12 +85,14 @@ public class Tank{
     }
   }
   
+  // render all the craters associated with each weapon
   public void renderCraters() {
     for(Map.Entry<String, Weapon> w : this.weapons.entrySet()) {
       w.getValue().displayCraters();
     }
   }
   
+  // updates tanks position based on user input
   public void moveTank(float moveDist){
     
     float oldTankX = this.tankX;
@@ -126,6 +132,7 @@ public class Tank{
     if(clockwise && this.turretAngle < 180){
       this.tankTurret.rotate(radians(1));
       this.turretAngle +=1;
+      // needed this adjustment as processing doesn't let you pick origin of rotation
       this.turretAdjustY -= 0.053;
       this.turretAdjustX -= 0.03;
     }
@@ -187,7 +194,7 @@ public class Tank{
   }
   
   public void shufflePosition() {
-    
+    // to make sure tanks are always on different sides of the map
     if(this.colour.equals("Red")) {
       this.tankX = random(0, width/2 - 70);
     } else {
